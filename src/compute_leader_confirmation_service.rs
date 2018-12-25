@@ -43,25 +43,21 @@ impl ComputeLeaderConfirmationService {
             // process_transaction(), case VoteInstruction::RegisterAccount), this will be more accurate.
             // See github issue 1654.
             bank_accounts
-                .accounts
-                .values()
+                .get_filtered_accounts(&vote_program::check_id)
+                .iter()
                 .filter_map(|account| {
-                    // Filter out any accounts that don't belong to the VoteProgram
-                    // by returning None
-                    if vote_program::check_id(&account.owner) {
-                        if let Ok(vote_state) = VoteProgram::deserialize(&account.userdata) {
-                            if leader_id == vote_state.node_id {
-                                return None;
-                            }
-                            let validator_stake = bank.get_stake(&vote_state.node_id);
-                            total_stake += validator_stake;
-                            // Filter out any validators that don't have at least one vote
-                            // by returning None
-                            return vote_state
-                                .votes
-                                .back()
-                                .map(|vote| (vote.tick_height, validator_stake));
+                    if let Ok(vote_state) = VoteProgram::deserialize(&account.userdata) {
+                        if leader_id == vote_state.node_id {
+                            return None;
                         }
+                        let validator_stake = bank.get_stake(&vote_state.node_id);
+                        total_stake += validator_stake;
+                        // Filter out any validators that don't have at least one vote
+                        // by returning None
+                        return vote_state
+                            .votes
+                            .back()
+                            .map(|vote| (vote.tick_height, validator_stake));
                     }
 
                     None

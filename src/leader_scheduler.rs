@@ -322,20 +322,17 @@ impl LeaderScheduler {
 
             // TODO: iterate through checkpoints, too
             accounts
-                .accounts
-                .values()
+                .get_filtered_accounts(&vote_program::check_id)
+                .iter()
                 .filter_map(|account| {
-                    if vote_program::check_id(&account.owner) {
-                        if let Ok(vote_state) = VoteProgram::deserialize(&account.userdata) {
-                            return vote_state
-                                .votes
-                                .back()
-                                .filter(|vote| {
-                                    vote.tick_height > lower_bound
-                                        && vote.tick_height <= upper_bound
-                                })
-                                .map(|_| vote_state.node_id);
-                        }
+                    if let Ok(vote_state) = VoteProgram::deserialize(&account.userdata) {
+                        return vote_state
+                            .votes
+                            .back()
+                            .filter(|vote| {
+                                vote.tick_height > lower_bound && vote.tick_height <= upper_bound
+                            })
+                            .map(|_| vote_state.node_id);
                     }
 
                     None
