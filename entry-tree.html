@@ -1,0 +1,314 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Entry Tree - Solana: Blockchain Rebuilt for Scale</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400|Poppins:300,400" rel="stylesheet">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">var path_to_root = "";</script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <img 
+                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3NTQiIGhlaWdodD0iMTUxIiB2aWV3Qm94PSIwIDAgNzU0IDE1MSI+PGcgZmlsbD0iI0ZGRiIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMjY4IDMxaDE2LjQxOXY3NC4yNTVIMzQ5TDMzNS41NjYgMTIwSDI2OHpNNjQuMDAyIDg0LjExM0gyOC4xMjV2LS4wMWMtLjIzNC4wMDctLjQ2OC4wMS0uNzAzLjAxLTE0LjM2OCAwLTI2LjAxNi0xMS44OS0yNi4wMTYtMjYuNTU3QzEuNDA2IDQyLjg5IDEzLjA1NCAzMSAyNy40MjIgMzFjLjIzNSAwIC40Ny4wMDMuNzAzLjAxVjMxSDkwTDcxLjcxOSA0OC4yMjZIMjcuNDA1Yy01LjAzOSAwLTkuMTI0IDQuMTc3LTkuMTI0IDkuMzMgMCA1LjE1NCA0LjA4NSA5LjMzMSA5LjEyNCA5LjMzMWgzOC42ODl2LjA4NkM3OS40NzUgNjguMDcgOTAgNzkuNTAyIDkwIDkzLjQ0MyA5MCAxMDguMTEgNzguMzUyIDEyMCA2My45ODQgMTIwYy0uNzEgMC0xLjQxMy0uMDI5LTIuMTA5LS4wODZWMTIwSDBsMTkuNjg4LTE3LjIyNmg0NC4zMTRjNS4wMzggMCA5LjEyMy00LjE3NyA5LjEyMy05LjMzIDAtNS4xNTQtNC4wODUtOS4zMzEtOS4xMjMtOS4zMzF6TTE1MC40NjkgMzEuMDE1VjMxaDU5LjA2MnYuMDE1YzguMzcyLjM2NiAxNS4wOTYgNy4yMyAxNS40NTQgMTUuNzc1SDIyNXY1NS45ODRoLS4wMTVjLjAxLjIzOC4wMTUuNDc3LjAxNS43MTggMCA4Ljg3Ny02Ljg2MyAxNi4xMTctMTUuNDY5IDE2LjQ5M1YxMjBIMTUwLjQ3di0uMDE1Yy04LjYwNi0uMzc2LTE1LjQ2OS03LjYxNi0xNS40NjktMTYuNDkzIDAtLjI0LjAwNS0uNDguMDE1LS43MThIMTM1VjQ2Ljc5aC4wMTVjLjM1OC04LjU0NiA3LjA4Mi0xNS40MSAxNS40NTQtMTUuNzc1ek0xNjEuNTQzIDQ2LjhjLTUuMjMzLjIzLTkuNDM1IDQuNTQ3LTkuNjU5IDkuOTIzaC0uMDA5djM1LjIxNmguMDFjLS4wMDcuMTUtLjAxLjMtLjAxLjQ1MSAwIDUuNTg0IDQuMjkgMTAuMTM4IDkuNjY4IDEwLjM3NXYuMDFoMzYuOTE0di0uMDFjNS4zNzgtLjIzNyA5LjY2OC00Ljc5MSA5LjY2OC0xMC4zNzUgMC0uMTUxLS4wMDMtLjMwMi0uMDEtLjQ1MWguMDFWNTYuNzIzaC0uMDFjLS4yMjMtNS4zNzYtNC40MjUtOS42OTMtOS42NTgtOS45MjN2LS4wMWgtMzYuOTE0di4wMXpNNDA5Ljg3NSA1NS40MDNWNzIuNjNoNTYuMjVWNTUuNDAzYzAtNS41NS00LjQwNy0xMC4wNDgtOS44NDQtMTAuMDQ4SDQxOS43MmMtNS40MzcgMC05Ljg0NCA0LjQ5OS05Ljg0NCAxMC4wNDh6TTQ2Ni4xMjUgMTIwVjg1LjU0OGgtNTYuMjVWMTIwSDM5M1Y0OC4yMjZoLjAxNWExNy4xNCAxNy4xNCAwIDAgMS0uMDE1LS43MThDMzkzIDM4LjM5MSA0MDAuMjQgMzEgNDA5LjE3MiAzMWMuMjM1IDAgLjQ3LjAwNS43MDMuMDE1VjMxaDU3LjY1NnYuMDE1YzguNjA2LjM3NiAxNS40NjkgNy42MTYgMTUuNDY5IDE2LjQ5MyAwIC4yNC0uMDA1LjQ4LS4wMTUuNzE4SDQ4M1YxMjBoLTE2Ljg3NXpNNjc3Ljg3NSA1NS40MDNWNzIuNjNoNTYuMjVWNTUuNDAzYzAtNS41NS00LjQwNy0xMC4wNDgtOS44NDQtMTAuMDQ4SDY4Ny43MmMtNS40MzcgMC05Ljg0NCA0LjQ5OS05Ljg0NCAxMC4wNDh6TTczNC4xMjUgMTIwVjg1LjU0OGgtNTYuMjVWMTIwSDY2MVY0OC4yMjZoLjAxNWExNy4xNCAxNy4xNCAwIDAgMS0uMDE1LS43MThDNjYxIDM4LjM5MSA2NjguMjQgMzEgNjc3LjE3MiAzMWMuMjM1IDAgLjQ3LjAwNS43MDMuMDE1VjMxaDU3LjY1NnYuMDE1YzguNjA2LjM3NiAxNS40NjkgNy42MTYgMTUuNDY5IDE2LjQ5MyAwIC4yNC0uMDA1LjQ4LS4wMTUuNzE4SDc1MVYxMjBoLTE2Ljg3NXpNNjAxLjEyNSA5OC40NTdWMzFINjE4djg5aC0xNi44NzV2LS4xNDlsLTU2LjI1LTY1Ljg4M1YxMjBINTI4VjMxaDE2Ljg3NXoiLz48L2c+PC9zdmc+" width="150" height="30" alt="Solana">
+            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="terminology.html"><strong aria-hidden="true">2.</strong> Terminology</a></li><li><a href="getting-started.html"><strong aria-hidden="true">3.</strong> Getting Started</a></li><li><ol class="section"><li><a href="webwallet.html"><strong aria-hidden="true">3.1.</strong> Example: Web Wallet</a></li></ol></li><li><a href="programs.html"><strong aria-hidden="true">4.</strong> Programming Model</a></li><li><ol class="section"><li><a href="tictactoe.html"><strong aria-hidden="true">4.1.</strong> Example: Tic-Tac-Toe</a></li><li><a href="drones.html"><strong aria-hidden="true">4.2.</strong> Drones</a></li></ol></li><li><a href="cluster.html"><strong aria-hidden="true">5.</strong> A Solana Cluster</a></li><li><ol class="section"><li><a href="synchronization.html"><strong aria-hidden="true">5.1.</strong> Synchronization</a></li><li><a href="leader-rotation.html"><strong aria-hidden="true">5.2.</strong> Leader Rotation</a></li><li><a href="fork-generation.html"><strong aria-hidden="true">5.3.</strong> Fork Generation</a></li></ol></li><li><a href="fullnode.html"><strong aria-hidden="true">6.</strong> Anatomy of a Fullnode</a></li><li><ol class="section"><li><a href="tpu.html"><strong aria-hidden="true">6.1.</strong> TPU</a></li><li><a href="tvu.html"><strong aria-hidden="true">6.2.</strong> TVU</a></li><li><a href="gossip.html"><strong aria-hidden="true">6.3.</strong> Gossip Service</a></li><li><a href="runtime.html"><strong aria-hidden="true">6.4.</strong> The Runtime</a></li></ol></li><li><a href="proposals.html"><strong aria-hidden="true">7.</strong> Proposed Architectural Changes</a></li><li><ol class="section"><li><a href="ledger-replication.html"><strong aria-hidden="true">7.1.</strong> Ledger Replication</a></li><li><a href="enclave.html"><strong aria-hidden="true">7.2.</strong> Secure Enclave</a></li><li><a href="staking-rewards.html"><strong aria-hidden="true">7.3.</strong> Staking Rewards</a></li><li><a href="fork-selection.html"><strong aria-hidden="true">7.4.</strong> Fork Selection</a></li><li><a href="entry-tree.html" class="active"><strong aria-hidden="true">7.5.</strong> Entry Tree</a></li></ol></li><li><a href="appendix.html"><strong aria-hidden="true">8.</strong> Appendix</a></li><li><ol class="section"><li><a href="jsonrpc-api.html"><strong aria-hidden="true">8.1.</strong> JSON RPC API</a></li><li><a href="javascript-api.html"><strong aria-hidden="true">8.2.</strong> JavaScript API</a></li><li><a href="wallet.html"><strong aria-hidden="true">8.3.</strong> solana-wallet CLI</a></li></ol></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            
+                            
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Solana: Blockchain Rebuilt for Scale</h1> 
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <a class="header" href="#entry-tree" id="entry-tree"><h1>Entry Tree</h1></a>
+<p>This document proposes a change to ledger and window to support Solana's <a href="fork-generation.html">fork
+generation</a> behavior.</p>
+<a class="header" href="#current-design" id="current-design"><h2>Current Design</h2></a>
+<a class="header" href="#functionality-of-window-and-ledger" id="functionality-of-window-and-ledger"><h3>Functionality of Window And Ledger</h3></a>
+<p>The basic responsibilities of the window and the ledger in a Solana fullnode
+are:</p>
+<ol>
+<li>Window: serve as a temporary, RAM-backed store of blobs of the PoH chain
+for reordering and assembly into contiguous blocks to be sent to the bank
+for verification.</li>
+<li>Window: serve as a RAM-backed repair facility for other validator nodes,
+which may query the network for as-yet unreceived blobs.</li>
+<li>Ledger: provide disk-based storage of the PoH chain in case of node
+restart.</li>
+<li>Ledger: provide disk-backed repair facility for when the (smaller)
+RAM-backed window doesn't cover the repair request.</li>
+</ol>
+<p>The window is at the front of a validator node's processing pipeline, blobs are
+received, cached, re-ordered before being deserialized into Entries, passed to
+the bank for verification, and finally on to the ledger, which is at the back
+of a validator node's pipeline.</p>
+<p>The window holds blobs (the over-the-air format, serialized Entries,
+one-per-blob).  The ledger holds serialized Entries without any blob
+information.</p>
+<a class="header" href="#limitations" id="limitations"><h3>Limitations</h3></a>
+<a class="header" href="#one-dimensional-key-space" id="one-dimensional-key-space"><h4>One-dimensional key space</h4></a>
+<p>The window and the ledger are indexed by ledger height, which is number of
+Entries ever generated in the PoH chain until the current blob.  This
+limitation prevents the window and the ledger from storing the overlapping
+histories possible in Solana's consensus protocol.</p>
+<a class="header" href="#limited-caching" id="limited-caching"><h4>Limited caching</h4></a>
+<p>The window is a circular buffer.  It cannot accept blobs that are farther in
+the future than the window is currently working.  If a blob arrives that is too
+far ahead, it is dropped and will subsequently need to be repaired, incurring
+further delay for the node.</p>
+<a class="header" href="#loss-of-blob-signatures" id="loss-of-blob-signatures"><h4>Loss of blob signatures</h4></a>
+<p>Because the blob signatures are stripped before being stored by the ledger,
+repair requests served from the ledger can't be verified to the original
+leader.</p>
+<a class="header" href="#rollback-and-checkpoint-switching-forks-separate-functions" id="rollback-and-checkpoint-switching-forks-separate-functions"><h4>Rollback and checkpoint, switching forks, separate functions</h4></a>
+<p>The window and the ledger can't handle replay of alternate forks.  Once a Blob
+has passed through the window, it's in the past.  The replay stage of a
+validator will need to roll back to a previous checkpoint and decode an
+alternate set of Blobs to the Bank.  The separated and one-way nature of window
+and ledger makes this hard.</p>
+<a class="header" href="#new-design" id="new-design"><h2>New Design</h2></a>
+<p>A unified window and ledger allows a validator to record every blob it observes
+on the network, in any order, as long as the blob is consistent with the
+network's leader schedule.</p>
+<p>Blobs are moved to a fork-able key space the tuple of <code>leader slot</code> + <code>blob index</code> (within the slot).  This permits the skip-list structure of the Solana
+protocol to be stored in its entirety, without a-priori choosing which fork to
+follow, which Entries to persist or when to persist them.</p>
+<p>Repair requests for recent blobs are served out of RAM or recent files and out
+of deeper storage for less recent blobs, as implemented by the store backing
+EntryTree.</p>
+<a class="header" href="#functionalities-of-entrytree" id="functionalities-of-entrytree"><h3>Functionalities of EntryTree</h3></a>
+<ol>
+<li>Persistence: the EntryTree lives in the front of the nodes verification
+pipeline, right behind network receive and signature verification.  If the
+blob received is consistent with the leader schedule (i.e. was signed by the
+leader for the indicated slot), it is immediately stored.</li>
+<li>Repair: repair is the same as window repair above, but able to serve any
+blob that's been received. EntryTree stores blobs with signatures,
+preserving the chain of origination.</li>
+<li>Forks: EntryTree supports random access of blobs, so can support a
+validator's need to rollback and replay from a Bank checkpoint.</li>
+<li>Restart: with proper pruning/culling, the EntryTree can be replayed by
+ordered enumeration of entries from slot 0.  The logic of the replay stage
+(i.e. dealing with forks) will have to be used for the most recent entries in
+the EntryTree.</li>
+</ol>
+<a class="header" href="#entrytree-design" id="entrytree-design"><h3>EntryTree Design</h3></a>
+<ol>
+<li>
+<p>Entries in the EntryTree are stored as key-value pairs, where the key is the concatenated
+slot index and blob index for an entry, and the value is the entry data. Note blob indexes are zero-based for each slot (i.e. they're slot-relative).</p>
+</li>
+<li>
+<p>The EntryTree maintains metadata for each slot, in the <code>SlotMeta</code> struct containing:</p>
+<ul>
+<li><code>slot_index</code> - The index of this slot</li>
+<li><code>num_blocks</code> - The number of blocks in the slot (used for chaining to a previous slot)</li>
+<li><code>consumed</code> - The highest blob index <code>n</code>, such that for all <code>m &lt; n</code>, there exists a blob in this slot with blob index equal to <code>n</code> (i.e. the highest consecutive blob index).</li>
+<li><code>received</code> - The highest received blob index for the slot</li>
+<li><code>next_slots</code> - A list of future slots this slot could chain to. Used when rebuilding
+the ledger to find possible fork points.</li>
+<li><code>consumed_ticks</code> - Tick height of the highest received blob (used to identify when a slot is full)</li>
+<li><code>is_trunk</code> - True iff every block from 0...slot forms a full sequence without any holes. We can derive is_trunk for each slot with the following rules. Let slot(n) be the slot with index <code>n</code>, and slot(n).contains_all_ticks() is true if the slot with index <code>n</code> has all the ticks expected for that slot. Let is_trunk(n) be the statement that &quot;the slot(n).is_trunk is true&quot;. Then:</li>
+</ul>
+<p>is_trunk(0)
+is_trunk(n+1) iff (is_trunk(n) and slot(n).contains_all_ticks()</p>
+</li>
+<li>
+<p>Chaining - When a blob for a new slot <code>x</code> arrives, we check the number of blocks (<code>num_blocks</code>) for that new slot (this information is encoded in the blob). We then know that this new slot chains to slot <code>x - num_blocks</code>.</p>
+</li>
+<li>
+<p>Subscriptions - The EntryTree records a set of slots that have been &quot;subscribed&quot; to. This means entries that chain to these slots will be sent on the EntryTree channel for consumption by the ReplayStage. See the <code>EntryTree APIs</code> for details.</p>
+</li>
+<li>
+<p>Update notifications - The EntryTree notifies listeners when slot(n).is_trunk is flipped from false to true for any <code>n</code>.</p>
+</li>
+</ol>
+<a class="header" href="#entrytree-apis" id="entrytree-apis"><h3>EntryTree APIs</h3></a>
+<p>The EntryTree offers a subscription based API that ReplayStage uses to ask for entries it's interested in. The entries will be sent on a channel exposed by the EntryTree. These subscription API's are as follows:</p>
+<ol>
+<li>
+<p><code>fn get_slots_since(slot_indexes: &amp;[u64]) -&gt; Vec&lt;SlotMeta&gt;</code>: Returns new slots connecting to any element of the list <code>slot_indexes</code>.</p>
+</li>
+<li>
+<p><code>fn get_slot_entries(slot_index: u64, entry_start_index: usize, max_entries: Option&lt;u64&gt;) -&gt; Vec&lt;Entry&gt;</code>: Returns the entry vector for the slot starting with <code>entry_start_index</code>, capping the result at <code>max</code> if <code>max_entries == Some(max)</code>, otherwise, no upper limit on the length of the return vector is imposed.</p>
+</li>
+</ol>
+<p>Note: Cumulatively, this means that the replay stage will now have to know when a slot is finished, and subscribe to the next slot it's interested in to get the next set of entries. Previously, the burden of chaining slots fell on the EntryTree.</p>
+<a class="header" href="#interfacing-with-bank" id="interfacing-with-bank"><h3>Interfacing with Bank</h3></a>
+<p>The bank exposes to replay stage:</p>
+<ol>
+<li>
+<p><code>prev_id</code>: which PoH chain it's working on as indicated by the id of the last
+entry it processed</p>
+</li>
+<li>
+<p><code>tick_height</code>: the ticks in the PoH chain currently being verified by this
+bank</p>
+</li>
+<li>
+<p><code>votes</code>: a stack of records that contain:</p>
+<ol>
+<li><code>prev_ids</code>: what anything after this vote must chain to in PoH</li>
+<li><code>tick_height</code>: the tick height at which this vote was cast</li>
+<li><code>lockout period</code>: how long a chain must be observed to be in the ledger to
+be able to be chained below this vote</li>
+</ol>
+</li>
+</ol>
+<p>Replay stage uses EntryTree APIs to find the longest chain of entries it can
+hang off a previous vote.  If that chain of entries does not hang off the
+latest vote, the replay stage rolls back the bank to that vote and replays the
+chain from there.</p>
+<a class="header" href="#pruning-entrytree" id="pruning-entrytree"><h3>Pruning EntryTree</h3></a>
+<p>Once EntryTree entries are old enough, representing all the possible forks
+becomes less useful, perhaps even problematic for replay upon restart.  Once a
+validator's votes have reached max lockout, however, any EntryTree contents
+that are not on the PoH chain for that vote for can be pruned, expunged.</p>
+<p>Replicator nodes will be responsible for storing really old ledger contents,
+and validators need only persist their bank periodically.</p>
+
+                    </main>
+                </div>
+            </div>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

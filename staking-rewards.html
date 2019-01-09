@@ -1,0 +1,314 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Staking Rewards - Solana: Blockchain Rebuilt for Scale</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400|Poppins:300,400" rel="stylesheet">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">var path_to_root = "";</script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <img 
+                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3NTQiIGhlaWdodD0iMTUxIiB2aWV3Qm94PSIwIDAgNzU0IDE1MSI+PGcgZmlsbD0iI0ZGRiIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMjY4IDMxaDE2LjQxOXY3NC4yNTVIMzQ5TDMzNS41NjYgMTIwSDI2OHpNNjQuMDAyIDg0LjExM0gyOC4xMjV2LS4wMWMtLjIzNC4wMDctLjQ2OC4wMS0uNzAzLjAxLTE0LjM2OCAwLTI2LjAxNi0xMS44OS0yNi4wMTYtMjYuNTU3QzEuNDA2IDQyLjg5IDEzLjA1NCAzMSAyNy40MjIgMzFjLjIzNSAwIC40Ny4wMDMuNzAzLjAxVjMxSDkwTDcxLjcxOSA0OC4yMjZIMjcuNDA1Yy01LjAzOSAwLTkuMTI0IDQuMTc3LTkuMTI0IDkuMzMgMCA1LjE1NCA0LjA4NSA5LjMzMSA5LjEyNCA5LjMzMWgzOC42ODl2LjA4NkM3OS40NzUgNjguMDcgOTAgNzkuNTAyIDkwIDkzLjQ0MyA5MCAxMDguMTEgNzguMzUyIDEyMCA2My45ODQgMTIwYy0uNzEgMC0xLjQxMy0uMDI5LTIuMTA5LS4wODZWMTIwSDBsMTkuNjg4LTE3LjIyNmg0NC4zMTRjNS4wMzggMCA5LjEyMy00LjE3NyA5LjEyMy05LjMzIDAtNS4xNTQtNC4wODUtOS4zMzEtOS4xMjMtOS4zMzF6TTE1MC40NjkgMzEuMDE1VjMxaDU5LjA2MnYuMDE1YzguMzcyLjM2NiAxNS4wOTYgNy4yMyAxNS40NTQgMTUuNzc1SDIyNXY1NS45ODRoLS4wMTVjLjAxLjIzOC4wMTUuNDc3LjAxNS43MTggMCA4Ljg3Ny02Ljg2MyAxNi4xMTctMTUuNDY5IDE2LjQ5M1YxMjBIMTUwLjQ3di0uMDE1Yy04LjYwNi0uMzc2LTE1LjQ2OS03LjYxNi0xNS40NjktMTYuNDkzIDAtLjI0LjAwNS0uNDguMDE1LS43MThIMTM1VjQ2Ljc5aC4wMTVjLjM1OC04LjU0NiA3LjA4Mi0xNS40MSAxNS40NTQtMTUuNzc1ek0xNjEuNTQzIDQ2LjhjLTUuMjMzLjIzLTkuNDM1IDQuNTQ3LTkuNjU5IDkuOTIzaC0uMDA5djM1LjIxNmguMDFjLS4wMDcuMTUtLjAxLjMtLjAxLjQ1MSAwIDUuNTg0IDQuMjkgMTAuMTM4IDkuNjY4IDEwLjM3NXYuMDFoMzYuOTE0di0uMDFjNS4zNzgtLjIzNyA5LjY2OC00Ljc5MSA5LjY2OC0xMC4zNzUgMC0uMTUxLS4wMDMtLjMwMi0uMDEtLjQ1MWguMDFWNTYuNzIzaC0uMDFjLS4yMjMtNS4zNzYtNC40MjUtOS42OTMtOS42NTgtOS45MjN2LS4wMWgtMzYuOTE0di4wMXpNNDA5Ljg3NSA1NS40MDNWNzIuNjNoNTYuMjVWNTUuNDAzYzAtNS41NS00LjQwNy0xMC4wNDgtOS44NDQtMTAuMDQ4SDQxOS43MmMtNS40MzcgMC05Ljg0NCA0LjQ5OS05Ljg0NCAxMC4wNDh6TTQ2Ni4xMjUgMTIwVjg1LjU0OGgtNTYuMjVWMTIwSDM5M1Y0OC4yMjZoLjAxNWExNy4xNCAxNy4xNCAwIDAgMS0uMDE1LS43MThDMzkzIDM4LjM5MSA0MDAuMjQgMzEgNDA5LjE3MiAzMWMuMjM1IDAgLjQ3LjAwNS43MDMuMDE1VjMxaDU3LjY1NnYuMDE1YzguNjA2LjM3NiAxNS40NjkgNy42MTYgMTUuNDY5IDE2LjQ5MyAwIC4yNC0uMDA1LjQ4LS4wMTUuNzE4SDQ4M1YxMjBoLTE2Ljg3NXpNNjc3Ljg3NSA1NS40MDNWNzIuNjNoNTYuMjVWNTUuNDAzYzAtNS41NS00LjQwNy0xMC4wNDgtOS44NDQtMTAuMDQ4SDY4Ny43MmMtNS40MzcgMC05Ljg0NCA0LjQ5OS05Ljg0NCAxMC4wNDh6TTczNC4xMjUgMTIwVjg1LjU0OGgtNTYuMjVWMTIwSDY2MVY0OC4yMjZoLjAxNWExNy4xNCAxNy4xNCAwIDAgMS0uMDE1LS43MThDNjYxIDM4LjM5MSA2NjguMjQgMzEgNjc3LjE3MiAzMWMuMjM1IDAgLjQ3LjAwNS43MDMuMDE1VjMxaDU3LjY1NnYuMDE1YzguNjA2LjM3NiAxNS40NjkgNy42MTYgMTUuNDY5IDE2LjQ5MyAwIC4yNC0uMDA1LjQ4LS4wMTUuNzE4SDc1MVYxMjBoLTE2Ljg3NXpNNjAxLjEyNSA5OC40NTdWMzFINjE4djg5aC0xNi44NzV2LS4xNDlsLTU2LjI1LTY1Ljg4M1YxMjBINTI4VjMxaDE2Ljg3NXoiLz48L2c+PC9zdmc+" width="150" height="30" alt="Solana">
+            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="terminology.html"><strong aria-hidden="true">2.</strong> Terminology</a></li><li><a href="getting-started.html"><strong aria-hidden="true">3.</strong> Getting Started</a></li><li><ol class="section"><li><a href="webwallet.html"><strong aria-hidden="true">3.1.</strong> Example: Web Wallet</a></li></ol></li><li><a href="programs.html"><strong aria-hidden="true">4.</strong> Programming Model</a></li><li><ol class="section"><li><a href="tictactoe.html"><strong aria-hidden="true">4.1.</strong> Example: Tic-Tac-Toe</a></li><li><a href="drones.html"><strong aria-hidden="true">4.2.</strong> Drones</a></li></ol></li><li><a href="cluster.html"><strong aria-hidden="true">5.</strong> A Solana Cluster</a></li><li><ol class="section"><li><a href="synchronization.html"><strong aria-hidden="true">5.1.</strong> Synchronization</a></li><li><a href="leader-rotation.html"><strong aria-hidden="true">5.2.</strong> Leader Rotation</a></li><li><a href="fork-generation.html"><strong aria-hidden="true">5.3.</strong> Fork Generation</a></li></ol></li><li><a href="fullnode.html"><strong aria-hidden="true">6.</strong> Anatomy of a Fullnode</a></li><li><ol class="section"><li><a href="tpu.html"><strong aria-hidden="true">6.1.</strong> TPU</a></li><li><a href="tvu.html"><strong aria-hidden="true">6.2.</strong> TVU</a></li><li><a href="gossip.html"><strong aria-hidden="true">6.3.</strong> Gossip Service</a></li><li><a href="runtime.html"><strong aria-hidden="true">6.4.</strong> The Runtime</a></li></ol></li><li><a href="proposals.html"><strong aria-hidden="true">7.</strong> Proposed Architectural Changes</a></li><li><ol class="section"><li><a href="ledger-replication.html"><strong aria-hidden="true">7.1.</strong> Ledger Replication</a></li><li><a href="enclave.html"><strong aria-hidden="true">7.2.</strong> Secure Enclave</a></li><li><a href="staking-rewards.html" class="active"><strong aria-hidden="true">7.3.</strong> Staking Rewards</a></li><li><a href="fork-selection.html"><strong aria-hidden="true">7.4.</strong> Fork Selection</a></li><li><a href="entry-tree.html"><strong aria-hidden="true">7.5.</strong> Entry Tree</a></li></ol></li><li><a href="appendix.html"><strong aria-hidden="true">8.</strong> Appendix</a></li><li><ol class="section"><li><a href="jsonrpc-api.html"><strong aria-hidden="true">8.1.</strong> JSON RPC API</a></li><li><a href="javascript-api.html"><strong aria-hidden="true">8.2.</strong> JavaScript API</a></li><li><a href="wallet.html"><strong aria-hidden="true">8.3.</strong> solana-wallet CLI</a></li></ol></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            
+                            
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Solana: Blockchain Rebuilt for Scale</h1> 
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <a class="header" href="#staking-rewards" id="staking-rewards"><h1>Staking Rewards</h1></a>
+<p>Initial Proof of Stake (PoS) (i.e. using in-protocol asset, SOL, to provide
+secure consensus) design ideas outlined here. Solana will implement a proof of
+stake reward/security scheme for node validators in the cluster. The purpose is
+threefold:</p>
+<ul>
+<li>Align validator incentives with that of the greater cluster through
+skin-in-the-game deposits at risk</li>
+<li>Avoid 'nothing at stake' fork voting issues by implementing slashing rules
+aimed at promoting fork convergence</li>
+<li>Provide an avenue for validator rewards provided as a function of validator
+participation in the cluster.</li>
+</ul>
+<p>While many of the details of the specific implementation are currently under
+consideration and are expected to come into focus through specific modeling
+studies and parameter exploration on the Solana testnet, we outline here our
+current thinking on the main components of the PoS system. Much of this
+thinking is based on the current status of Casper FFG, with optimizations and
+specific attributes to be modified as is allowed by Solana's Proof of History
+(PoH) blockchain data structure.</p>
+<a class="header" href="#general-overview" id="general-overview"><h3>General Overview</h3></a>
+<p>Solana's ledger validation design is based on a rotating, stake-weighted
+randomly selected leader broadcasting transactions in a PoH data
+structure to validating nodes. These nodes, upon receiving the leader's
+broadcast, have the opportunity to vote on the current state and PoH height by
+signing a transaction into the PoH stream.</p>
+<p>To become a Solana validator, a fullnode must deposit/lock-up some amount
+of SOL in a contract. This SOL will not be accessible for a specific time
+period. The precise duration of the staking lockup period has not been
+determined. However we can consider three phases of this time for which
+specific parameters will be necessary:</p>
+<ul>
+<li><em>Warm-up period</em>: which SOL is deposited and inaccessible to the node,
+however PoH transaction validation has not begun. Most likely on the order of
+days to weeks</li>
+<li><em>Validation period</em>: a minimum duration for which the deposited SOL will be
+inaccessible, at risk of slashing (see slashing rules below) and earning
+rewards for the validator participation. Likely duration of months to a
+year.</li>
+<li><em>Cool-down period</em>: a duration of time following the submission of a
+'withdrawal' transaction. During this period validation responsibilities have
+been removed and the funds continue to be inaccessible. Accumulated rewards
+should be delivered at the end of this period, along with the return of the
+initial deposit.</li>
+</ul>
+<p>Solana's trustless sense of time and ordering provided by its PoH data
+structure, along with its
+<a href="https://www.youtube.com/watch?v=qt_gDRXHrHQ&amp;t=1s">avalanche</a> data broadcast
+and transmission design, should provide subsecond confirmation times that scale
+with the log of the number of nodes in the cluster. This means we shouldn't
+have to restrict the number of validating nodes with a prohibitive 'minimum
+deposits' and expect nodes to be able to become validators with nominal amounts
+of SOL staked. This should also render validation pools, a proposed solution
+for economic censorship imposed by minimum staking amounts currently described
+in Casper, unnecessary and remove the concern for needing to put slashable
+stake at risk while relying on others to play by the rules.</p>
+<a class="header" href="#stake-weighted-rewards" id="stake-weighted-rewards"><h3>Stake-weighted Rewards</h3></a>
+<p>Rewards are expected to be paid out to active validators as a function of
+validator activity and as a proportion of the percentage of SOL they have at
+stake out of the entirety of the staking pool.</p>
+<p>We expect to define a baseline annual validator payout/inflation rate based on
+the total SOL deposited. E.g. 10% annual interest on SOL deposited with X total
+SOL deposited as slashable on the cluster. This is the same design as currently
+proposed in Casper FFG which has additionally specifies how inflation rates
+adjust as a function of total ETH deposited. Specifically, Casper validator
+returns are proportional to the inverse square root of the total deposits and
+initial annual rates are estimated as:</p>
+<table><thead><tr><th align="right"> Deposit Size </th><th align="right"> Annual Validator Interest </th></tr></thead><tbody>
+<tr><td align="right"> 2.5M ETH     </td><td align="right"> 10.12%                    </td></tr>
+<tr><td align="right"> 10M ETH      </td><td align="right"> 5.00%                     </td></tr>
+<tr><td align="right"> 20M ETH      </td><td align="right"> 3.52%                     </td></tr>
+<tr><td align="right"> 40M ETH      </td><td align="right"> 2.48%                     </td></tr>
+</tbody></table>
+<p>This has the nice property of potentially incentivizing participation around a
+target deposit size. Incentivisation of specific participation rates more
+directly (rather than deposit size) may something also worth exploring.</p>
+<p>The specifics of the Solana validator reward scheme are to be worked out in
+parallel with a design for transaction fee assignment as well as our storage
+mining reward scheme.</p>
+<a class="header" href="#slashing-rules" id="slashing-rules"><h3>Slashing rules</h3></a>
+<p>Unlike Proof of Work (PoW) where off-chain capital expenses are already
+deployed at the time of block construction/voting, PoS systems require
+capital-at-risk to prevent a logical/optimal strategy of multiple chain voting.
+We intend to implement slashing rules which, if broken, result some amount of
+the offending validator's deposited stake to be removed from circulation. Given
+the ordering properties of the PoH data structure, we believe we can simplify
+our slashing rules to the level of a voting lockout time assigned per vote.</p>
+<p>I.e. Each vote has an associated lockout time (PoH duration) that represents a
+duration by any additional vote from that validator must be in a PoH that
+contains the original vote, or a portion of that validator's stake is
+slashable. This duration time is a function of the initial vote PoH count and
+all additional vote PoH counts.  It will likely take the form:</p>
+<p>Lockout<sub>i</sub>(PoH<sub>i</sub>, PoH<sub>j</sub>) = PoH<sub>j</sub> + K *
+exp((PoH<sub>j</sub> - PoH<sub>i</sub>) / K)</p>
+<p>Where PoH<sub>i</sub> is the height of the vote that the lockout is to be
+applied to and PoH<sub>j</sub> is the height of the current vote on the same
+fork. If the validator submits a vote on a different PoH fork on any
+PoH<sub>k</sub> where k &gt; j &gt; i and PoH<sub>k</sub> &lt; Lockout(PoH<sub>i</sub>,
+PoH<sub>j</sub>), then a portion of that validator's stake is at risk of being
+slashed.</p>
+<p>In addition to the functional form lockout described above, early
+implementation may be a numerical approximation based on a First In, First Out
+(FIFO) data structure and the following logic:</p>
+<ul>
+<li>FIFO queue holding 32 votes per active validator</li>
+<li>new votes are pushed on top of queue (<code>push_front</code>)</li>
+<li>expired votes are popped off top (<code>pop_front</code>)</li>
+<li>as votes are pushed into the queue, the lockout of each queued vote doubles</li>
+<li>votes are removed from back of queue if <code>queue.len() &gt; 32</code></li>
+<li>the earliest and latest height that has been removed from the back of the
+queue should be stored</li>
+</ul>
+<p>It is likely that a reward will be offered as a % of the slashed amount to any
+node that submits proof of this slashing condition being violated to the PoH.</p>
+<a class="header" href="#partial-slashing" id="partial-slashing"><h4>Partial Slashing</h4></a>
+<p>In the schema described so far, when a validator votes on a given PoH stream,
+they are committing themselves to that fork for a time determined by the vote
+lockout. An open question is whether validators will be hesitant to begin
+voting on an available fork if the penalties are perceived too harsh for an
+honest mistake or flipped bit.</p>
+<p>One way to address this concern would be a partial slashing design that results
+in a slashable amount as a function of either:</p>
+<ol>
+<li>the fraction of validators, out of the total validator pool, that were also
+slashed during the same time period (ala Casper)</li>
+<li>the amount of time since the vote was cast (e.g. a linearly increasing % of
+total deposited as slashable amount over time), or both.</li>
+</ol>
+<p>This is an area currently under exploration</p>
+<a class="header" href="#penalties" id="penalties"><h3>Penalties</h3></a>
+<p>As previously discussed, annual validator reward rates are to be specified as a
+function of total amount staked. The cluster rewards validators who are online
+and actively participating in the validation process throughout the entirety of
+their <em>validation period</em>. For validators that go offline/fail to validate
+transactions during this period, their annual reward is effectively reduced.</p>
+<p>Similarly, we may consider an algorithmic reduction in a validator's active
+amount staked amount in the case that they are offline. I.e. if a validator is
+inactive for some amount of time, either due to a partition or otherwise, the
+amount of their stake that is considered ‘active’ (eligible to earn rewards)
+may be reduced. This design would be structured to help long-lived partitions
+to eventually reach finality on their respective chains as the % of non-voting
+total stake is reduced over time until a super-majority can be achieved by the
+active validators in each partition. Similarly, upon re-engaging, the ‘active’
+amount staked will come back online at some defined rate. Different rates of
+stake reduction may be considered depending on the size of the partition/active
+set.</p>
+
+                    </main>
+                </div>
+            </div>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

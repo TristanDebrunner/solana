@@ -1,0 +1,408 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Ledger Replication - Solana: Blockchain Rebuilt for Scale</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400|Poppins:300,400" rel="stylesheet">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">var path_to_root = "";</script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <img 
+                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3NTQiIGhlaWdodD0iMTUxIiB2aWV3Qm94PSIwIDAgNzU0IDE1MSI+PGcgZmlsbD0iI0ZGRiIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMjY4IDMxaDE2LjQxOXY3NC4yNTVIMzQ5TDMzNS41NjYgMTIwSDI2OHpNNjQuMDAyIDg0LjExM0gyOC4xMjV2LS4wMWMtLjIzNC4wMDctLjQ2OC4wMS0uNzAzLjAxLTE0LjM2OCAwLTI2LjAxNi0xMS44OS0yNi4wMTYtMjYuNTU3QzEuNDA2IDQyLjg5IDEzLjA1NCAzMSAyNy40MjIgMzFjLjIzNSAwIC40Ny4wMDMuNzAzLjAxVjMxSDkwTDcxLjcxOSA0OC4yMjZIMjcuNDA1Yy01LjAzOSAwLTkuMTI0IDQuMTc3LTkuMTI0IDkuMzMgMCA1LjE1NCA0LjA4NSA5LjMzMSA5LjEyNCA5LjMzMWgzOC42ODl2LjA4NkM3OS40NzUgNjguMDcgOTAgNzkuNTAyIDkwIDkzLjQ0MyA5MCAxMDguMTEgNzguMzUyIDEyMCA2My45ODQgMTIwYy0uNzEgMC0xLjQxMy0uMDI5LTIuMTA5LS4wODZWMTIwSDBsMTkuNjg4LTE3LjIyNmg0NC4zMTRjNS4wMzggMCA5LjEyMy00LjE3NyA5LjEyMy05LjMzIDAtNS4xNTQtNC4wODUtOS4zMzEtOS4xMjMtOS4zMzF6TTE1MC40NjkgMzEuMDE1VjMxaDU5LjA2MnYuMDE1YzguMzcyLjM2NiAxNS4wOTYgNy4yMyAxNS40NTQgMTUuNzc1SDIyNXY1NS45ODRoLS4wMTVjLjAxLjIzOC4wMTUuNDc3LjAxNS43MTggMCA4Ljg3Ny02Ljg2MyAxNi4xMTctMTUuNDY5IDE2LjQ5M1YxMjBIMTUwLjQ3di0uMDE1Yy04LjYwNi0uMzc2LTE1LjQ2OS03LjYxNi0xNS40NjktMTYuNDkzIDAtLjI0LjAwNS0uNDguMDE1LS43MThIMTM1VjQ2Ljc5aC4wMTVjLjM1OC04LjU0NiA3LjA4Mi0xNS40MSAxNS40NTQtMTUuNzc1ek0xNjEuNTQzIDQ2LjhjLTUuMjMzLjIzLTkuNDM1IDQuNTQ3LTkuNjU5IDkuOTIzaC0uMDA5djM1LjIxNmguMDFjLS4wMDcuMTUtLjAxLjMtLjAxLjQ1MSAwIDUuNTg0IDQuMjkgMTAuMTM4IDkuNjY4IDEwLjM3NXYuMDFoMzYuOTE0di0uMDFjNS4zNzgtLjIzNyA5LjY2OC00Ljc5MSA5LjY2OC0xMC4zNzUgMC0uMTUxLS4wMDMtLjMwMi0uMDEtLjQ1MWguMDFWNTYuNzIzaC0uMDFjLS4yMjMtNS4zNzYtNC40MjUtOS42OTMtOS42NTgtOS45MjN2LS4wMWgtMzYuOTE0di4wMXpNNDA5Ljg3NSA1NS40MDNWNzIuNjNoNTYuMjVWNTUuNDAzYzAtNS41NS00LjQwNy0xMC4wNDgtOS44NDQtMTAuMDQ4SDQxOS43MmMtNS40MzcgMC05Ljg0NCA0LjQ5OS05Ljg0NCAxMC4wNDh6TTQ2Ni4xMjUgMTIwVjg1LjU0OGgtNTYuMjVWMTIwSDM5M1Y0OC4yMjZoLjAxNWExNy4xNCAxNy4xNCAwIDAgMS0uMDE1LS43MThDMzkzIDM4LjM5MSA0MDAuMjQgMzEgNDA5LjE3MiAzMWMuMjM1IDAgLjQ3LjAwNS43MDMuMDE1VjMxaDU3LjY1NnYuMDE1YzguNjA2LjM3NiAxNS40NjkgNy42MTYgMTUuNDY5IDE2LjQ5MyAwIC4yNC0uMDA1LjQ4LS4wMTUuNzE4SDQ4M1YxMjBoLTE2Ljg3NXpNNjc3Ljg3NSA1NS40MDNWNzIuNjNoNTYuMjVWNTUuNDAzYzAtNS41NS00LjQwNy0xMC4wNDgtOS44NDQtMTAuMDQ4SDY4Ny43MmMtNS40MzcgMC05Ljg0NCA0LjQ5OS05Ljg0NCAxMC4wNDh6TTczNC4xMjUgMTIwVjg1LjU0OGgtNTYuMjVWMTIwSDY2MVY0OC4yMjZoLjAxNWExNy4xNCAxNy4xNCAwIDAgMS0uMDE1LS43MThDNjYxIDM4LjM5MSA2NjguMjQgMzEgNjc3LjE3MiAzMWMuMjM1IDAgLjQ3LjAwNS43MDMuMDE1VjMxaDU3LjY1NnYuMDE1YzguNjA2LjM3NiAxNS40NjkgNy42MTYgMTUuNDY5IDE2LjQ5MyAwIC4yNC0uMDA1LjQ4LS4wMTUuNzE4SDc1MVYxMjBoLTE2Ljg3NXpNNjAxLjEyNSA5OC40NTdWMzFINjE4djg5aC0xNi44NzV2LS4xNDlsLTU2LjI1LTY1Ljg4M1YxMjBINTI4VjMxaDE2Ljg3NXoiLz48L2c+PC9zdmc+" width="150" height="30" alt="Solana">
+            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="terminology.html"><strong aria-hidden="true">2.</strong> Terminology</a></li><li><a href="getting-started.html"><strong aria-hidden="true">3.</strong> Getting Started</a></li><li><ol class="section"><li><a href="webwallet.html"><strong aria-hidden="true">3.1.</strong> Example: Web Wallet</a></li></ol></li><li><a href="programs.html"><strong aria-hidden="true">4.</strong> Programming Model</a></li><li><ol class="section"><li><a href="tictactoe.html"><strong aria-hidden="true">4.1.</strong> Example: Tic-Tac-Toe</a></li><li><a href="drones.html"><strong aria-hidden="true">4.2.</strong> Drones</a></li></ol></li><li><a href="cluster.html"><strong aria-hidden="true">5.</strong> A Solana Cluster</a></li><li><ol class="section"><li><a href="synchronization.html"><strong aria-hidden="true">5.1.</strong> Synchronization</a></li><li><a href="leader-rotation.html"><strong aria-hidden="true">5.2.</strong> Leader Rotation</a></li><li><a href="fork-generation.html"><strong aria-hidden="true">5.3.</strong> Fork Generation</a></li></ol></li><li><a href="fullnode.html"><strong aria-hidden="true">6.</strong> Anatomy of a Fullnode</a></li><li><ol class="section"><li><a href="tpu.html"><strong aria-hidden="true">6.1.</strong> TPU</a></li><li><a href="tvu.html"><strong aria-hidden="true">6.2.</strong> TVU</a></li><li><a href="gossip.html"><strong aria-hidden="true">6.3.</strong> Gossip Service</a></li><li><a href="runtime.html"><strong aria-hidden="true">6.4.</strong> The Runtime</a></li></ol></li><li><a href="proposals.html"><strong aria-hidden="true">7.</strong> Proposed Architectural Changes</a></li><li><ol class="section"><li><a href="ledger-replication.html" class="active"><strong aria-hidden="true">7.1.</strong> Ledger Replication</a></li><li><a href="enclave.html"><strong aria-hidden="true">7.2.</strong> Secure Enclave</a></li><li><a href="staking-rewards.html"><strong aria-hidden="true">7.3.</strong> Staking Rewards</a></li><li><a href="fork-selection.html"><strong aria-hidden="true">7.4.</strong> Fork Selection</a></li><li><a href="entry-tree.html"><strong aria-hidden="true">7.5.</strong> Entry Tree</a></li></ol></li><li><a href="appendix.html"><strong aria-hidden="true">8.</strong> Appendix</a></li><li><ol class="section"><li><a href="jsonrpc-api.html"><strong aria-hidden="true">8.1.</strong> JSON RPC API</a></li><li><a href="javascript-api.html"><strong aria-hidden="true">8.2.</strong> JavaScript API</a></li><li><a href="wallet.html"><strong aria-hidden="true">8.3.</strong> solana-wallet CLI</a></li></ol></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            
+                            
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Solana: Blockchain Rebuilt for Scale</h1> 
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <a class="header" href="#ledger-replication" id="ledger-replication"><h1>Ledger Replication</h1></a>
+<p>At full capacity on a 1gbps network solana will generate 4 petabytes of data
+per year.  To prevent the network from centralizing around full nodes that have
+to store the full data set this protocol proposes a way for mining nodes to
+provide storage capacity for pieces of the network.</p>
+<p>The basic idea to Proof of Replication is encrypting a dataset with a public
+symmetric key using CBC encryption, then hash the encrypted dataset. The main
+problem with the naive approach is that a dishonest storage node can stream the
+encryption and delete the data as its hashed. The simple solution is to force
+the hash to be done on the reverse of the encryption, or perhaps with a random
+order. This ensures that all the data is present during the generation of the
+proof and it also requires the validator to have the entirety of the encrypted
+data present for verification of every proof of every identity. So the space
+required to validate is <code>number_of_proofs * data_size</code></p>
+<a class="header" href="#terminology" id="terminology"><h2>Terminology</h2></a>
+<a class="header" href="#replicator" id="replicator"><h4>replicator</h4></a>
+<p>Storage mining client, stores some part of the ledger enumerated in blocks and
+submits storage proofs to the chain. Not a full-node.</p>
+<a class="header" href="#ledger-segment" id="ledger-segment"><h4>ledger segment</h4></a>
+<p>Portion of the ledger which is downloaded by the replicator where storage proof
+data is derived.</p>
+<a class="header" href="#cbc-block" id="cbc-block"><h4>CBC block</h4></a>
+<p>Smallest encrypted chunk of ledger, an encrypted ledger segment would be made of
+many CBC blocks. <code>ledger_segment_size / cbc_block_size</code> to be exact.</p>
+<a class="header" href="#storage-proof" id="storage-proof"><h4>storage proof</h4></a>
+<p>A set of sha hash state which is constructed by sampling the encrypted version
+of the stored ledger segment at certain offsets.</p>
+<a class="header" href="#fake-storage-proof" id="fake-storage-proof"><h4>fake storage proof</h4></a>
+<p>A proof which has the same format as a storage proof, but the sha state is
+actually from hashing a known ledger value which the storage client can reveal
+and is also easily verifiable by the network on-chain.</p>
+<a class="header" href="#storage-proof-confirmation" id="storage-proof-confirmation"><h4>storage proof confirmation</h4></a>
+<p>A transaction by a validator which indicates the set of real and fake proofs
+submitted by a storage miner. The transaction would contain a list of proof
+hash values and a bit which says if this hash is valid or fake.</p>
+<a class="header" href="#storage-proof-challenge" id="storage-proof-challenge"><h4>storage proof challenge</h4></a>
+<p>A transaction from a replicator that verifiably proves that a validator
+confirmed a fake proof.</p>
+<a class="header" href="#storage-proof-claim" id="storage-proof-claim"><h4>storage proof claim</h4></a>
+<p>A transaction from a validator which is after the timeout period given from the
+storage proof confirmation and which no successful challenges have been
+observed which rewards the parties of the storage proofs and confirmations.</p>
+<a class="header" href="#storage-validation-capacity" id="storage-validation-capacity"><h4>storage validation capacity</h4></a>
+<p>The number of keys and samples that a validator can verify each storage epoch.</p>
+<a class="header" href="#optimization-with-poh" id="optimization-with-poh"><h2>Optimization with PoH</h2></a>
+<p>Our improvement on this approach is to randomly sample the encrypted segments
+faster than it takes to encrypt, and record the hash of those samples into the
+PoH ledger. Thus the segments stay in the exact same order for every PoRep and
+verification can stream the data and verify all the proofs in a single batch.
+This way we can verify multiple proofs concurrently, each one on its own CUDA
+core. The total space required for verification is <code>1_ledger_segment + 2_cbc_blocks * number_of_identities</code> with core count of equal to
+<code>number_of_identities</code>. We use a 64-byte chacha CBC block size.</p>
+<a class="header" href="#network" id="network"><h2>Network</h2></a>
+<p>Validators for PoRep are the same validators that are verifying transactions.
+They have some stake that they have put up as collateral that ensures that
+their work is honest. If you can prove that a validator verified a fake PoRep,
+then the validators stake can be slashed.</p>
+<p>Replicators are specialized <em>light clients</em>. They download a part of the ledger
+and store it, and provide PoReps of storing the ledger. For each verified PoRep
+replicators earn a reward of sol from the mining pool.</p>
+<a class="header" href="#constraints" id="constraints"><h2>Constraints</h2></a>
+<p>We have the following constraints:</p>
+<ul>
+<li>Verification requires generating the CBC blocks. That requires space of 2
+blocks per identity, and 1 CUDA core per identity for the same dataset. So as
+many identities at once should be batched with as many proofs for those
+identities verified concurrently for the same dataset.</li>
+<li>Validators will randomly sample the set of storage proofs to the set that
+they can handle, and only the creators of those chosen proofs will be
+rewarded. The validator can run a benchmark whenever its hardware configuration
+changes to determine what rate it can validate storage proofs.</li>
+</ul>
+<a class="header" href="#validation-and-replication-protocol" id="validation-and-replication-protocol"><h2>Validation and Replication Protocol</h2></a>
+<a class="header" href="#constants" id="constants"><h3>Constants</h3></a>
+<ol>
+<li>NUM_STORAGE_ENTRIES: Number of entries in a segment of ledger data. The
+unit of storage for a replicator.</li>
+<li>NUM_KEY_ROTATION_TICKS: Number of ticks to save a PoH value and cause a
+key generation for the section of ledger just generated and the rotation of
+another key in the set.</li>
+<li>NUM_STORAGE_PROOFS: Number of storage proofs required for a storage proof
+claim to be successfully rewarded.</li>
+<li>RATIO_OF_FAKE_PROOFS: Ratio of fake proofs to real proofs that a storage
+mining proof claim has to contain to be valid for a reward.</li>
+<li>NUM_STORAGE_SAMPLES: Number of samples required for a storage mining
+proof.</li>
+<li>NUM_CHACHA_ROUNDS: Number of encryption rounds performed to generate
+encrypted state.</li>
+</ol>
+<a class="header" href="#validator-behavior" id="validator-behavior"><h3>Validator behavior</h3></a>
+<ol>
+<li>Validator joins the network and submits a storage validation capacity
+transaction which tells the network how many proofs it can process in a given
+period defined by NUM_KEY_ROTATION_TICKS.</li>
+<li>Every NUM_KEY_ROTATION_TICKS the validator stores the PoH value at that
+height.</li>
+<li>Every NUM_KEY_ROTATION_TICKS it also validates samples received from
+replicators. It signs the PoH hash at that point and uses the following
+algorithm with the signature as the input:
+<ul>
+<li>The low 5 bits of the first byte of the signature creates an index into
+another starting byte of the signature.</li>
+<li>The validator then looks at the set of storage proofs where the byte of
+the proof's sha state vector starting from the low byte matches exactly
+with the chosen byte(s) of the signature.</li>
+<li>If the set of proofs is larger than the validator can handle, then it
+increases to matching 2 bytes in the signature.</li>
+<li>Validator continues to increase the number of matching bytes until a
+workable set is found.</li>
+<li>It then creates a mask of valid proofs and fake proofs and sends it to
+the leader. This is a storage proof confirmation transaction.</li>
+</ul>
+</li>
+<li>The storage proof confirmation transaction is integrated into the ledger.</li>
+<li>After a lockout period of NUM_SECONDS_STORAGE_LOCKOUT seconds, the
+validator then submits a storage proof claim transaction which then causes the
+distribution of the storage reward if no challenges were seen for the proof to
+the validators and replicators party to the proofs.</li>
+<li>Validator responds to RPC interfaces for what the last storage epoch PoH
+value is and its entry_height.</li>
+</ol>
+<a class="header" href="#replicator-behavior" id="replicator-behavior"><h3>Replicator behavior</h3></a>
+<ol>
+<li>Since a replicator is somewhat of a light client and not downloading all the
+ledger data, they have to rely on other full nodes (validators) for
+information. Any given validator may or may not be malicious and give incorrect
+information, although there are not any obvious attack vectors that this could
+accomplish besides having the replicator do extra wasted work.  For many of the
+operations there are number of options depending on how paranoid a replicator
+is:
+<ul>
+<li>(a) replicator can ask a validator</li>
+<li>(b) replicator can ask multiple validators</li>
+<li>(c) replicator can subscribe to the full transaction stream and generate
+the information itself</li>
+<li>(d) replicator can subscribe to an abbreviated transaction stream to
+generate the information itself</li>
+</ul>
+</li>
+<li>A replicator obtains the PoH hash corresponding to the last key rotation
+along with its entry_height.</li>
+<li>The replicator signs the PoH hash with its keypair. That signature is the
+seed used to pick the segment to replicate and also the encryption key. The
+replicator mods the signature with the entry_height to get which segment to
+replicate.</li>
+<li>The replicator retrives the ledger by asking peer validators and
+replicators. See 6.5.</li>
+<li>The replicator then encrypts that segment with the key with chacha algorithm
+in CBC mode with NUM_CHACHA_ROUNDS of encryption.</li>
+<li>The replicator initializes a chacha rng with the signature from step 2 as
+the seed.</li>
+<li>The replicator generates NUM_STORAGE_SAMPLES samples in the range of the
+entry size and samples the encrypted segment with sha256 for 32-bytes at each
+offset value. Sampling the state should be faster than generating the encrypted
+segment.</li>
+<li>The replicator sends a PoRep proof transaction which contains its sha state
+at the end of the sampling operation, its seed and the samples it used to the
+current leader and it is put onto the ledger.</li>
+<li>The replicator then generates another set of offsets which it submits a fake
+proof with an incorrect sha state. It can be proven to be fake by providing the
+seed for the hash result.
+<ul>
+<li>A fake proof should consist of a replicator hash of a signature of a PoH
+value. That way when the replicator reveals the fake proof, it can be
+verified on chain.</li>
+</ul>
+</li>
+<li>The replicator monitors the ledger, if it sees a fake proof integrated, it
+creates a challenge transaction and submits it to the current leader. The
+transacation proves the validator incorrectly validated a fake storage proof.
+The replicator is rewarded and the validator's staking balance is slashed or
+frozen.</li>
+</ol>
+<a class="header" href="#finding-who-has-a-given-block-of-ledger" id="finding-who-has-a-given-block-of-ledger"><h3>Finding who has a given block of ledger</h3></a>
+<ol>
+<li>Validators monitor the transaction stream for storage mining proofs, and
+keep a mapping of ledger segments by entry_height to public keys. When it sees
+a storage mining proof it updates this mapping and provides an RPC interface
+which takes an entry_height and hands back a list of public keys.  The client
+then looks up in their cluster_info table to see which network address that
+corresponds to and sends a repair request to retrieve the necessary blocks of
+ledger.</li>
+<li>Validators would need to prune this list which it could do by periodically
+looking at the oldest entries in its mappings and doing a network query to see
+if the storage host is still serving the first entry.</li>
+</ol>
+<a class="header" href="#sybil-attacks" id="sybil-attacks"><h2>Sybil attacks</h2></a>
+<p>For any random seed, we force everyone to use a signature that is derived from
+a PoH hash. Everyone must use the same count, so the same PoH hash is signed by
+every participant. The signatures are then each cryptographically tied to the
+keypair, which prevents a leader from grinding on the resulting value for more
+than 1 identity.</p>
+<p>Since there are many more client identities then encryption identities, we need
+to split the reward for multiple clients, and prevent Sybil attacks from
+generating many clients to acquire the same block of data. To remain BFT we
+want to avoid a single human entity from storing all the replications of a
+single chunk of the ledger.</p>
+<p>Our solution to this is to force the clients to continue using the same
+identity. If the first round is used to acquire the same block for many client
+identities, the second round for the same client identities will force a
+redistribution of the signatures, and therefore PoRep identities and blocks.
+Thus to get a reward for replicators need to store the first block for free and
+the network can reward long lived client identities more than new ones.</p>
+<a class="header" href="#validator-attacks" id="validator-attacks"><h2>Validator attacks</h2></a>
+<ul>
+<li>If a validator approves fake proofs, replicator can easily out them by
+showing the initial state for the hash.</li>
+<li>If a validator marks real proofs as fake, no on-chain computation can be done
+to distinguish who is correct. Rewards would have to rely on the results from
+multiple validators in a stake-weighted fashion to catch bad actors and
+replicators from being locked out of the network.</li>
+<li>Validator stealing mining proof results for itself. The proofs are derived
+from a signature from a replicator, since the validator does not know the
+private key used to generate the encryption key, it cannot be the generator of
+the proof.</li>
+</ul>
+<a class="header" href="#reward-incentives" id="reward-incentives"><h2>Reward incentives</h2></a>
+<p>Fake proofs are easy to generate but difficult to verify. For this reason,
+PoRep proof transactions generated by replicators may require a higher fee than
+a normal transaction to represent the computational cost required by
+validators.</p>
+<p>Some percentage of fake proofs are also necessary to receive a reward from
+storage mining.</p>
+<a class="header" href="#notes" id="notes"><h2>Notes</h2></a>
+<ul>
+<li>We can reduce the costs of verification of PoRep by using PoH, and actually
+make it feasible to verify a large number of proofs for a global dataset.</li>
+<li>We can eliminate grinding by forcing everyone to sign the same PoH hash and
+use the signatures as the seed</li>
+<li>The game between validators and replicators is over random blocks and random
+encryption identities and random data samples. The goal of randomization is
+to prevent colluding groups from having overlap on data or validation.</li>
+<li>Replicator clients fish for lazy validators by submitting fake proofs that
+they can prove are fake.</li>
+<li>To defend against Sybil client identities that try to store the same block we
+force the clients to store for multiple rounds before receiving a reward.</li>
+<li>Validators should also get rewarded for validating submitted storage proofs
+as incentive for storing the ledger. They can only validate proofs if they
+are storing that slice of the ledger.</li>
+</ul>
+
+                    </main>
+                </div>
+            </div>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

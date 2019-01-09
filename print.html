@@ -1,0 +1,2687 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Solana: Blockchain Rebuilt for Scale</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400|Poppins:300,400" rel="stylesheet">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">var path_to_root = "";</script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <img 
+                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3NTQiIGhlaWdodD0iMTUxIiB2aWV3Qm94PSIwIDAgNzU0IDE1MSI+PGcgZmlsbD0iI0ZGRiIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMjY4IDMxaDE2LjQxOXY3NC4yNTVIMzQ5TDMzNS41NjYgMTIwSDI2OHpNNjQuMDAyIDg0LjExM0gyOC4xMjV2LS4wMWMtLjIzNC4wMDctLjQ2OC4wMS0uNzAzLjAxLTE0LjM2OCAwLTI2LjAxNi0xMS44OS0yNi4wMTYtMjYuNTU3QzEuNDA2IDQyLjg5IDEzLjA1NCAzMSAyNy40MjIgMzFjLjIzNSAwIC40Ny4wMDMuNzAzLjAxVjMxSDkwTDcxLjcxOSA0OC4yMjZIMjcuNDA1Yy01LjAzOSAwLTkuMTI0IDQuMTc3LTkuMTI0IDkuMzMgMCA1LjE1NCA0LjA4NSA5LjMzMSA5LjEyNCA5LjMzMWgzOC42ODl2LjA4NkM3OS40NzUgNjguMDcgOTAgNzkuNTAyIDkwIDkzLjQ0MyA5MCAxMDguMTEgNzguMzUyIDEyMCA2My45ODQgMTIwYy0uNzEgMC0xLjQxMy0uMDI5LTIuMTA5LS4wODZWMTIwSDBsMTkuNjg4LTE3LjIyNmg0NC4zMTRjNS4wMzggMCA5LjEyMy00LjE3NyA5LjEyMy05LjMzIDAtNS4xNTQtNC4wODUtOS4zMzEtOS4xMjMtOS4zMzF6TTE1MC40NjkgMzEuMDE1VjMxaDU5LjA2MnYuMDE1YzguMzcyLjM2NiAxNS4wOTYgNy4yMyAxNS40NTQgMTUuNzc1SDIyNXY1NS45ODRoLS4wMTVjLjAxLjIzOC4wMTUuNDc3LjAxNS43MTggMCA4Ljg3Ny02Ljg2MyAxNi4xMTctMTUuNDY5IDE2LjQ5M1YxMjBIMTUwLjQ3di0uMDE1Yy04LjYwNi0uMzc2LTE1LjQ2OS03LjYxNi0xNS40NjktMTYuNDkzIDAtLjI0LjAwNS0uNDguMDE1LS43MThIMTM1VjQ2Ljc5aC4wMTVjLjM1OC04LjU0NiA3LjA4Mi0xNS40MSAxNS40NTQtMTUuNzc1ek0xNjEuNTQzIDQ2LjhjLTUuMjMzLjIzLTkuNDM1IDQuNTQ3LTkuNjU5IDkuOTIzaC0uMDA5djM1LjIxNmguMDFjLS4wMDcuMTUtLjAxLjMtLjAxLjQ1MSAwIDUuNTg0IDQuMjkgMTAuMTM4IDkuNjY4IDEwLjM3NXYuMDFoMzYuOTE0di0uMDFjNS4zNzgtLjIzNyA5LjY2OC00Ljc5MSA5LjY2OC0xMC4zNzUgMC0uMTUxLS4wMDMtLjMwMi0uMDEtLjQ1MWguMDFWNTYuNzIzaC0uMDFjLS4yMjMtNS4zNzYtNC40MjUtOS42OTMtOS42NTgtOS45MjN2LS4wMWgtMzYuOTE0di4wMXpNNDA5Ljg3NSA1NS40MDNWNzIuNjNoNTYuMjVWNTUuNDAzYzAtNS41NS00LjQwNy0xMC4wNDgtOS44NDQtMTAuMDQ4SDQxOS43MmMtNS40MzcgMC05Ljg0NCA0LjQ5OS05Ljg0NCAxMC4wNDh6TTQ2Ni4xMjUgMTIwVjg1LjU0OGgtNTYuMjVWMTIwSDM5M1Y0OC4yMjZoLjAxNWExNy4xNCAxNy4xNCAwIDAgMS0uMDE1LS43MThDMzkzIDM4LjM5MSA0MDAuMjQgMzEgNDA5LjE3MiAzMWMuMjM1IDAgLjQ3LjAwNS43MDMuMDE1VjMxaDU3LjY1NnYuMDE1YzguNjA2LjM3NiAxNS40NjkgNy42MTYgMTUuNDY5IDE2LjQ5MyAwIC4yNC0uMDA1LjQ4LS4wMTUuNzE4SDQ4M1YxMjBoLTE2Ljg3NXpNNjc3Ljg3NSA1NS40MDNWNzIuNjNoNTYuMjVWNTUuNDAzYzAtNS41NS00LjQwNy0xMC4wNDgtOS44NDQtMTAuMDQ4SDY4Ny43MmMtNS40MzcgMC05Ljg0NCA0LjQ5OS05Ljg0NCAxMC4wNDh6TTczNC4xMjUgMTIwVjg1LjU0OGgtNTYuMjVWMTIwSDY2MVY0OC4yMjZoLjAxNWExNy4xNCAxNy4xNCAwIDAgMS0uMDE1LS43MThDNjYxIDM4LjM5MSA2NjguMjQgMzEgNjc3LjE3MiAzMWMuMjM1IDAgLjQ3LjAwNS43MDMuMDE1VjMxaDU3LjY1NnYuMDE1YzguNjA2LjM3NiAxNS40NjkgNy42MTYgMTUuNDY5IDE2LjQ5MyAwIC4yNC0uMDA1LjQ4LS4wMTUuNzE4SDc1MVYxMjBoLTE2Ljg3NXpNNjAxLjEyNSA5OC40NTdWMzFINjE4djg5aC0xNi44NzV2LS4xNDlsLTU2LjI1LTY1Ljg4M1YxMjBINTI4VjMxaDE2Ljg3NXoiLz48L2c+PC9zdmc+" width="150" height="30" alt="Solana">
+            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="terminology.html"><strong aria-hidden="true">2.</strong> Terminology</a></li><li><a href="getting-started.html"><strong aria-hidden="true">3.</strong> Getting Started</a></li><li><ol class="section"><li><a href="webwallet.html"><strong aria-hidden="true">3.1.</strong> Example: Web Wallet</a></li></ol></li><li><a href="programs.html"><strong aria-hidden="true">4.</strong> Programming Model</a></li><li><ol class="section"><li><a href="tictactoe.html"><strong aria-hidden="true">4.1.</strong> Example: Tic-Tac-Toe</a></li><li><a href="drones.html"><strong aria-hidden="true">4.2.</strong> Drones</a></li></ol></li><li><a href="cluster.html"><strong aria-hidden="true">5.</strong> A Solana Cluster</a></li><li><ol class="section"><li><a href="synchronization.html"><strong aria-hidden="true">5.1.</strong> Synchronization</a></li><li><a href="leader-rotation.html"><strong aria-hidden="true">5.2.</strong> Leader Rotation</a></li><li><a href="fork-generation.html"><strong aria-hidden="true">5.3.</strong> Fork Generation</a></li></ol></li><li><a href="fullnode.html"><strong aria-hidden="true">6.</strong> Anatomy of a Fullnode</a></li><li><ol class="section"><li><a href="tpu.html"><strong aria-hidden="true">6.1.</strong> TPU</a></li><li><a href="tvu.html"><strong aria-hidden="true">6.2.</strong> TVU</a></li><li><a href="gossip.html"><strong aria-hidden="true">6.3.</strong> Gossip Service</a></li><li><a href="runtime.html"><strong aria-hidden="true">6.4.</strong> The Runtime</a></li></ol></li><li><a href="proposals.html"><strong aria-hidden="true">7.</strong> Proposed Architectural Changes</a></li><li><ol class="section"><li><a href="ledger-replication.html"><strong aria-hidden="true">7.1.</strong> Ledger Replication</a></li><li><a href="enclave.html"><strong aria-hidden="true">7.2.</strong> Secure Enclave</a></li><li><a href="staking-rewards.html"><strong aria-hidden="true">7.3.</strong> Staking Rewards</a></li><li><a href="fork-selection.html"><strong aria-hidden="true">7.4.</strong> Fork Selection</a></li><li><a href="entry-tree.html"><strong aria-hidden="true">7.5.</strong> Entry Tree</a></li></ol></li><li><a href="appendix.html"><strong aria-hidden="true">8.</strong> Appendix</a></li><li><ol class="section"><li><a href="jsonrpc-api.html"><strong aria-hidden="true">8.1.</strong> JSON RPC API</a></li><li><a href="javascript-api.html"><strong aria-hidden="true">8.2.</strong> JavaScript API</a></li><li><a href="wallet.html"><strong aria-hidden="true">8.3.</strong> solana-wallet CLI</a></li></ol></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            
+                            
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Solana: Blockchain Rebuilt for Scale</h1> 
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <a class="header" href="#what-is-solana" id="what-is-solana"><h1>What is Solana?</h1></a>
+<p>Solana is the name of an open source project that is implementing a new,
+high-performance, permissionless blockchain. Solana is also the name of a
+company headquartered in San Francisco that maintains the open source project.</p>
+<a class="header" href="#about-this-book" id="about-this-book"><h1>About this Book</h1></a>
+<p>This book describes the Solana open source project, a blockchain built from the
+ground up for scale. The book covers why it's useful, how to use it, how it
+works, and why it will continue to work long after the company Solana closes
+its doors. The goal of the Solana architecture is to demonstrate there exists a
+set of software algorithms that when used in combination to implement a
+blockchain, removes software as a performance bottleneck, allowing transaction
+throughput to scale proportionally with network bandwidth. The architecture
+goes on to satisfy all three desirable properties of a proper blockchain:
+it is scalable, secure and decentralized.</p>
+<p>The architecture describes a theoretical upper bound of 710 thousand
+transactions per second (tps) on a standard gigabit network and 28.4 million
+tps on 40 gigabit. Furthermore, the architecture supports safe, concurrent
+execution of programs authored in general purpose programming languages such as
+C or Rust.</p>
+<a class="header" href="#disclaimer" id="disclaimer"><h1>Disclaimer</h1></a>
+<p>All claims, content, designs, algorithms, estimates, roadmaps, specifications,
+and performance measurements described in this project are done with the
+author's best effort. It is up to the reader to check and validate their
+accuracy and truthfulness. Furthermore, nothing in this project constitutes a
+solicitation for investment.</p>
+<a class="header" href="#history-of-the-solana-codebase" id="history-of-the-solana-codebase"><h1>History of the Solana Codebase</h1></a>
+<p>In November of 2017, Anatoly Yakovenko published a whitepaper describing Proof
+of History, a technique for keeping time between computers that do not trust
+one another. From Anatoly's previous experience designing distributed systems
+at Qualcomm, Mesosphere and Dropbox, he knew that a reliable clock makes
+network synchronization very simple. When synchronization is simple the
+resulting network can be blazing fast, bound only by network bandwidth.</p>
+<p>Anatoly watched as blockchain systems without clocks, such as Bitcoin and
+Ethereum, struggled to scale beyond 15 transactions per second worldwide when
+centralized payment systems such as Visa required peaks of 65,000 tps. Without a
+clock, it was clear they'd never graduate to being the global payment system or
+global supercomputer most had dreamed them to be. When Anatoly solved the problem of
+getting computers that don’t trust each other to agree on time, he knew he had
+the key to bring 40 years of distributed systems research to the world of
+blockchain. The resulting cluster wouldn't be just 10 times faster, or a 100
+times, or a 1,000 times, but 10,000 times faster, right out of the gate!</p>
+<p>Anatoly's implementation began in a private codebase and was implemented in the
+C programming language. Greg Fitzgerald, who had previously worked with Anatoly
+at semiconductor giant Qualcomm Incorporated, encouraged him to reimplement the
+project in the Rust programming language. Greg had worked on the LLVM compiler
+infrastructure, which underlies both the Clang C/C++ compiler as well as the
+Rust compiler. Greg claimed that the language's safety guarantees would improve
+software productivity and that its lack of a garbage collector would allow
+programs to perform as well as those written in C.  Anatoly gave it a shot and
+just two weeks later, had migrated his entire codebase to Rust. Sold.  With
+plans to weave all the world's transactions together on a single, scalable
+blockchain, Anatoly called the project Loom.</p>
+<p>On February 13th of 2018, Greg began prototyping the first open source
+implementation of Anatoly's whitepaper. The project was published to GitHub
+under the name Silk in the loomprotocol organization. On February 28th, Greg
+made his first release, demonstrating 10 thousand signed transactions could be
+verified and processed in just over half a second. Shortly after, another
+former Qualcomm cohort, Stephen Akridge, demonstrated throughput could be
+massively improved by offloading signature verification to graphics processors.
+Anatoly recruited Greg, Stephen and three others to co-found a company, then
+called Loom.</p>
+<p>Around the same time, Ethereum-based project Loom Network sprung up and many
+people were confused about whether they were the same project. The Loom team decided it
+would rebrand. They chose the name Solana, a nod to a small beach town North of
+San Diego called Solana Beach, where Anatoly, Greg and Stephen lived and surfed
+for three years when they worked for Qualcomm. On March 28th, the team created
+the Solana Labs GitHub organization and renamed Greg's prototype Silk to
+Solana.</p>
+<p>In June of 2018, the team scaled up the technology to run on cloud-based
+networks and on July 19th, published a 50-node, permissioned, public testnet
+consistently supporting bursts of 250,000 transactions per second. In a later release in
+December, called v0.10 Pillbox, the team published a permissioned testnet
+running 150 nodes on a gigabit network and demonstrated soak tests processing
+an <em>average</em> of 200 thousand transactions per second with bursts over 500
+thousand. The project was also extended to support on-chain programs written in
+the C programming language and run concurrently in a safe execution environment
+called BPF.</p>
+<a class="header" href="#what-is-a-solana-cluster" id="what-is-a-solana-cluster"><h1>What is a Solana Cluster?</h1></a>
+<p>A cluster is a set of computers that work together and can be viewed from the
+outside as a single system. A Solana cluster is a set of independently owned
+computers working together (and sometimes against each other) to verify the
+output of untrusted, user-submitted programs. A Solana cluster can be utilized
+any time a user wants to preserve an immutable record of events in time or
+programmatic interpretations of those events. One use is to track which of the
+computers did meaningful work to keep the cluster running. Another use might be
+to track the possession of real-world assets. In each case, the cluster
+produces a record of events called the ledger. It will be preserved for the
+lifetime of the cluster. As long as someone somewhere in the world maintains a
+copy of the ledger, the output of its programs (which may contain a record of
+who possesses what) will forever be reproducible, independent of the
+organization that launched it.</p>
+<a class="header" href="#what-are-sols" id="what-are-sols"><h1>What are Sols?</h1></a>
+<p>A sol is the name of Solana's native token, which can be passed to nodes in a
+Solana cluster in exchange for running an on-chain program or validating its
+output. The Solana protocol defines that only 1 billion sols will ever exist,
+but that the system may perform micropayments of fractional sols, and that a sol
+may be split as many as 34 times. The fractional sol is called a <em>lamport</em>. It
+is named in honor of Solana's biggest technical influence, <a href="https://en.wikipedia.org/wiki/Leslie_Lamport">Leslie
+Lamport</a>. A lamport has a value
+of approximately 0.0000000000582 sol (2^-34).</p>
+<a class="header" href="#terminology" id="terminology"><h1>Terminology</h1></a>
+<p>The following terms are used throughout this book.</p>
+<a class="header" href="#account" id="account"><h4>account</h4></a>
+<p>A persistent file addressed by <a href="#public-key">public key</a> and with
+<a href="#lamport">lamports</a> tracking its lifetime.</p>
+<a class="header" href="#app" id="app"><h4>app</h4></a>
+<p>A front-end application that interacts with a Solana cluster.</p>
+<a class="header" href="#blob" id="blob"><h4>blob</h4></a>
+<p>A fraction of a <a href="#block">block</a>; the smallest unit sent between
+<a href="#fullnode">fullnodes</a>.</p>
+<a class="header" href="#block" id="block"><h4>block</h4></a>
+<p>A contiguous set of <a href="#entry">entries</a> on the ledger covered by a
+<a href="#ledger-vote">vote</a>.  The duration of a block is some cluster-configured
+number of <a href="#tick">ticks</a>.  Also called <a href="#voting-period">voting period</a>.</p>
+<a class="header" href="#block-height" id="block-height"><h4>block height</h4></a>
+<p>The number of <a href="#block">blocks</a> beneath the current block plus one. The <a href="#genesis-block">genesis
+block</a>, for example, has block height 1.</p>
+<a class="header" href="#bootstrap-leader" id="bootstrap-leader"><h4>bootstrap leader</h4></a>
+<p>The first <a href="#fullnode">fullnode</a> to take the <a href="#leader">leader</a> role.</p>
+<a class="header" href="#client" id="client"><h4>client</h4></a>
+<p>A <a href="#node">node</a> that utilizes the <a href="#cluster">cluster</a>.</p>
+<a class="header" href="#cluster" id="cluster"><h4>cluster</h4></a>
+<p>A set of <a href="#fullnode">fullnodes</a> maintaining a single <a href="#ledger">ledger</a>.</p>
+<a class="header" href="#confirmation" id="confirmation"><h4>confirmation</h4></a>
+<p>The wallclock duration between a <a href="#leader">leader</a> creating a <a href="#tick">tick
+entry</a> and recognizing a supermajority of <a href="#ledger-vote">ledger votes</a>
+with a ledger interpretation that matches the leader's.</p>
+<a class="header" href="#control-plane" id="control-plane"><h4>control plane</h4></a>
+<p>A gossip network connecting all <a href="#node">nodes</a> of a <a href="#cluster">cluster</a>.</p>
+<a class="header" href="#data-plane" id="data-plane"><h4>data plane</h4></a>
+<p>A multicast network used to efficiently validate <a href="#entry">entries</a> and gain
+consensus.</p>
+<a class="header" href="#drone" id="drone"><h4>drone</h4></a>
+<p>An off-chain service that acts as a custodian for a user's private key. It
+typically serves to validate and sign transactions.</p>
+<a class="header" href="#entry" id="entry"><h4>entry</h4></a>
+<p>An entry on the <a href="#ledger">ledger</a> either a <a href="#tick">tick</a> or a <a href="#transactions-entry">transactions
+entry</a>.</p>
+<a class="header" href="#epoch" id="epoch"><h4>epoch</h4></a>
+<p>The time, i.e. number of <a href="#slot">slots</a>, for which a <a href="#leader-schedule">leader
+schedule</a> is valid.</p>
+<a class="header" href="#fork" id="fork"><h4>fork</h4></a>
+<p>A <a href="#ledger">ledger</a> derived from common entries but then diverged.</p>
+<a class="header" href="#fullnode" id="fullnode"><h4>fullnode</h4></a>
+<p>A full participant in the <a href="#cluster">cluster</a> either a <a href="#leader">leader</a> or
+<a href="#validator">validator</a> node.</p>
+<a class="header" href="#fullnode-state" id="fullnode-state"><h4>fullnode state</h4></a>
+<p>The result of interpreting all programs on the ledger at a given <a href="#tick-height">tick
+height</a>. It includes at least the set of all <a href="#account">accounts</a>
+holding nonzero <a href="#native-tokens">native tokens</a>.</p>
+<a class="header" href="#genesis-block" id="genesis-block"><h4>genesis block</h4></a>
+<p>The first <a href="#block">block</a> of the <a href="#ledger">ledger</a>.</p>
+<a class="header" href="#hash" id="hash"><h4>hash</h4></a>
+<p>A digital fingerprint of a sequence of bytes.</p>
+<a class="header" href="#instruction" id="instruction"><h4>instruction</h4></a>
+<p>The smallest unit of a <a href="#program">program</a> that a <a href="#client">client</a> can include
+in a <a href="#instruction">transaction</a>.</p>
+<a class="header" href="#keypair" id="keypair"><h4>keypair</h4></a>
+<p>A <a href="#public-key">public key</a> and corresponding <a href="#secret-key">secret key</a>.</p>
+<a class="header" href="#lamport" id="lamport"><h4>lamport</h4></a>
+<p>A fractional <a href="#native-token">native token</a> with the value of approximately
+0.0000000000582 <a href="#sol">sol</a> (2^-34).</p>
+<a class="header" href="#loader" id="loader"><h4>loader</h4></a>
+<p>A <a href="#program">program</a> with the ability to interpret the binary encoding of
+other on-chain programs.</p>
+<a class="header" href="#leader" id="leader"><h4>leader</h4></a>
+<p>The role of a <a href="#fullnode">fullnode</a> when it is appending <a href="#entry">entries</a> to
+the <a href="#ledger">ledger</a>.</p>
+<a class="header" href="#leader-schedule" id="leader-schedule"><h4>leader schedule</h4></a>
+<p>A sequence of <a href="#fullnode">fullnode</a> <a href="#public-key">public keys</a>. The cluster
+uses the leader schedule to determine which fullnode is the <a href="#leader">leader</a>
+at any moment in time.</p>
+<a class="header" href="#ledger" id="ledger"><h4>ledger</h4></a>
+<p>A list of <a href="#entry">entries</a> containing <a href="#transaction">transactions</a> signed by
+<a href="#client">clients</a>.</p>
+<a class="header" href="#ledger-vote" id="ledger-vote"><h4>ledger vote</h4></a>
+<p>A <a href="#hash">hash</a> of the <a href="#fullnode-state">fullnode's state</a> at a given <a href="#tick-height">tick
+height</a>. It comprises a validator's affirmation that a
+<a href="#block">block</a> it has received has been verified, as well as a promise not to
+vote for a conflicting <a href="#block">block</a> (i.e. <a href="#fork">fork</a>) for a specific
+amount of time, the <a href="#lockout">lockout</a> period.</p>
+<a class="header" href="#light-client" id="light-client"><h4>light client</h4></a>
+<p>A type of <a href="#client">client</a> that can verify it's pointing to a valid
+<a href="#cluster">cluster</a>. It performs more ledger verification than a <a href="#thin-client">thin
+client</a> and less than a <a href="#fullnode">fullnode</a>.</p>
+<a class="header" href="#lockout" id="lockout"><h4>lockout</h4></a>
+<p>The duration of time for which a <a href="#fullnode">fullnode</a> is unable to
+<a href="#ledger-vote">vote</a> on another <a href="#fork">fork</a>.</p>
+<a class="header" href="#native-token" id="native-token"><h4>native token</h4></a>
+<p>The <a href="#token">token</a> used to track work done by <a href="#node">nodes</a> in a cluster.</p>
+<a class="header" href="#node" id="node"><h4>node</h4></a>
+<p>A computer particpating in a <a href="#cluster">cluster</a>.</p>
+<a class="header" href="#node-count" id="node-count"><h4>node count</h4></a>
+<p>The number of <a href="#fullnode">fullnodes</a> participating in a <a href="#cluster">cluster</a>.</p>
+<a class="header" href="#poh" id="poh"><h4>PoH</h4></a>
+<p>See <a href="#proof-of-history">Proof of History</a>.</p>
+<a class="header" href="#program" id="program"><h4>program</h4></a>
+<p>The code that interprets <a href="#instruction">instructions</a>.</p>
+<a class="header" href="#program-id" id="program-id"><h4>program ID</h4></a>
+<p>The public key of the <a href="#account">account</a> containing a <a href="#program">program</a>.</p>
+<a class="header" href="#proof-of-history" id="proof-of-history"><h4>Proof of History</h4></a>
+<p>A stack of proofs, each which proves that some data existed before the proof
+was created and that a precise duration of time passed before the previous
+proof. Like a <a href="#verifiable-delay-function">VDF</a>, a Proof of History can be
+verified in less time than it took to produce.</p>
+<a class="header" href="#public-key" id="public-key"><h4>public key</h4></a>
+<p>The public key of a <a href="#keypair">keypair</a>.</p>
+<a class="header" href="#runtime" id="runtime"><h4>runtime</h4></a>
+<p>The component of a <a href="#fullnode">fullnode</a> responsible for <a href="#program">program</a>
+execution.</p>
+<a class="header" href="#secret-key" id="secret-key"><h4>secret key</h4></a>
+<p>The private key of a <a href="#keypair">keypair</a>.</p>
+<a class="header" href="#slot" id="slot"><h4>slot</h4></a>
+<p>The time (i.e. number of <a href="#block">blocks</a>) for which a <a href="#leader">leader</a>
+ingests transactions and produces <a href="#entry">entries</a>.</p>
+<a class="header" href="#sol" id="sol"><h4>sol</h4></a>
+<p>The <a href="#native-token">native token</a> tracked by a <a href="#cluster">cluster</a> recognized
+by the company Solana.</p>
+<a class="header" href="#stake" id="stake"><h4>stake</h4></a>
+<p>Tokens forfeit to the <a href="#cluster">cluster</a> if malicious <a href="#fullnode">fullnode</a>
+behavior can be proven.</p>
+<a class="header" href="#thin-client" id="thin-client"><h4>thin client</h4></a>
+<p>A type of <a href="#client">client</a> that trusts it is communicating with a valid
+<a href="#cluster">cluster</a>.</p>
+<a class="header" href="#tick" id="tick"><h4>tick</h4></a>
+<p>A ledger <a href="#entry">entry</a> that estimates wallclock duration.</p>
+<a class="header" href="#tick-height" id="tick-height"><h4>tick height</h4></a>
+<p>The Nth <a href="#tick">tick</a> in the <a href="#ledger">ledger</a>.</p>
+<a class="header" href="#token" id="token"><h4>token</h4></a>
+<p>A scarce, fungible member of a set of tokens.</p>
+<a class="header" href="#tps" id="tps"><h4>tps</h4></a>
+<p><a href="#transaction">Transactions</a> per second.</p>
+<a class="header" href="#transaction" id="transaction"><h4>transaction</h4></a>
+<p>One or more <a href="#instruction">instructions</a> signed by the <a href="#client">client</a> and
+executed atomically.</p>
+<a class="header" href="#transactions-entry" id="transactions-entry"><h4>transactions entry</h4></a>
+<p>A set of <a href="#transaction">transactions</a> that may be executed in parallel.</p>
+<a class="header" href="#validator" id="validator"><h4>validator</h4></a>
+<p>The role of a <a href="#fullnode">fullnode</a> when it is validating the
+<a href="#leader">leader's</a> latest <a href="#entry">entries</a>.</p>
+<a class="header" href="#vdf" id="vdf"><h4>VDF</h4></a>
+<p>See <a href="#verifiable-delay-function">verifiable delay function</a>.</p>
+<a class="header" href="#verifiable-delay-function" id="verifiable-delay-function"><h4>verifiable delay function</h4></a>
+<p>A function that takes a fixed amount of time to execute that produces a proof
+that it ran, which can then be verified in less time than it took to produce.</p>
+<a class="header" href="#vote" id="vote"><h4>vote</h4></a>
+<p>See <a href="#ledger-vote">ledger vote</a>.</p>
+<a class="header" href="#voting-period" id="voting-period"><h4>voting period</h4></a>
+<p>The duration of a <a href="#block">block</a>.</p>
+<a class="header" href="#getting-started" id="getting-started"><h1>Getting Started</h1></a>
+<p>The Solana git repository contains all the scripts you might need to spin up your
+own local testnet. Depending on what you're looking to achieve, you may want to
+run a different variation, as the full-fledged, performance-enhanced
+multinode testnet is considerably more complex to set up than a Rust-only,
+singlenode testnode.  If you are looking to develop high-level features, such
+as experimenting with smart contracts, save yourself some setup headaches and
+stick to the Rust-only singlenode demo.  If you're doing performance optimization
+of the transaction pipeline, consider the enhanced singlenode demo. If you're
+doing consensus work, you'll need at least a Rust-only multinode demo. If you want
+to reproduce our TPS metrics, run the enhanced multinode demo.</p>
+<p>For all four variations, you'd need the latest Rust toolchain and the Solana
+source code:</p>
+<p>First, install Rust's package manager Cargo.</p>
+<pre><code class="language-bash">$ curl https://sh.rustup.rs -sSf | sh
+$ source $HOME/.cargo/env
+</code></pre>
+<p>Now checkout the code from github:</p>
+<pre><code class="language-bash">$ git clone https://github.com/solana-labs/solana.git
+$ cd solana
+</code></pre>
+<p>The demo code is sometimes broken between releases as we add new low-level
+features, so if this is your first time running the demo, you'll improve
+your odds of success if you check out the
+<a href="https://github.com/solana-labs/solana/releases">latest release</a>
+before proceeding:</p>
+<pre><code class="language-bash">$ TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
+$ git checkout $TAG
+</code></pre>
+<a class="header" href="#configuration-setup" id="configuration-setup"><h3>Configuration Setup</h3></a>
+<p>The network is initialized with a genesis ledger and fullnode configuration files.
+These files can be generated by running the following script.</p>
+<pre><code class="language-bash">$ ./multinode-demo/setup.sh
+</code></pre>
+<a class="header" href="#drone-1" id="drone-1"><h3>Drone</h3></a>
+<p>In order for the fullnodes and clients to work, we'll need to
+spin up a drone to give out some test tokens.  The drone delivers Milton
+Friedman-style &quot;air drops&quot; (free tokens to requesting clients) to be used in
+test transactions.</p>
+<p>Start the drone with:</p>
+<pre><code class="language-bash">$ ./multinode-demo/drone.sh
+</code></pre>
+<a class="header" href="#singlenode-testnet" id="singlenode-testnet"><h3>Singlenode Testnet</h3></a>
+<p>Before you start a fullnode, make sure you know the IP address of the machine you
+want to be the bootstrap leader for the demo, and make sure that udp ports 8000-10000 are
+open on all the machines you want to test with.</p>
+<p>Now start the bootstrap leader in a separate shell:</p>
+<pre><code class="language-bash">$ ./multinode-demo/bootstrap-leader.sh
+</code></pre>
+<p>Wait a few seconds for the server to initialize. It will print &quot;leader ready...&quot; when it's ready to
+receive transactions. The leader will request some tokens from the drone if it doesn't have any.
+The drone does not need to be running for subsequent leader starts.</p>
+<a class="header" href="#multinode-testnet" id="multinode-testnet"><h3>Multinode Testnet</h3></a>
+<p>To run a multinode testnet, after starting a leader node, spin up some
+additional full nodes in separate shells:</p>
+<pre><code class="language-bash">$ ./multinode-demo/fullnode-x.sh
+</code></pre>
+<p>To run a performance-enhanced full node on Linux,
+<a href="https://developer.nvidia.com/cuda-downloads">CUDA 10.0</a> must be installed on
+your system:</p>
+<pre><code class="language-bash">$ ./fetch-perf-libs.sh
+$ SOLANA_CUDA=1 ./multinode-demo/bootstrap-leader.sh
+$ SOLANA_CUDA=1 ./multinode-demo/fullnode-x.sh
+</code></pre>
+<a class="header" href="#testnet-client-demo" id="testnet-client-demo"><h3>Testnet Client Demo</h3></a>
+<p>Now that your singlenode or multinode testnet is up and running let's send it
+some transactions!</p>
+<p>In a separate shell start the client:</p>
+<pre><code class="language-bash">$ ./multinode-demo/client.sh # runs against localhost by default
+</code></pre>
+<p>What just happened? The client demo spins up several threads to send 500,000 transactions
+to the testnet as quickly as it can. The client then pings the testnet periodically to see
+how many transactions it processed in that time. Take note that the demo intentionally
+floods the network with UDP packets, such that the network will almost certainly drop a
+bunch of them. This ensures the testnet has an opportunity to reach 710k TPS. The client
+demo completes after it has convinced itself the testnet won't process any additional
+transactions. You should see several TPS measurements printed to the screen. In the
+multinode variation, you'll see TPS measurements for each validator node as well.</p>
+<a class="header" href="#testnet-debugging" id="testnet-debugging"><h3>Testnet Debugging</h3></a>
+<p>There are some useful debug messages in the code, you can enable them on a per-module and per-level
+basis.  Before running a leader or validator set the normal RUST_LOG environment variable.</p>
+<p>For example</p>
+<ul>
+<li>
+<p>To enable <code>info</code> everywhere and <code>debug</code> only in the solana::banking_stage module:</p>
+<pre><code class="language-bash">$ export RUST_LOG=solana=info,solana::banking_stage=debug
+</code></pre>
+</li>
+<li>
+<p>To enable BPF program logging:</p>
+<pre><code class="language-bash">$ export RUST_LOG=solana_bpf_loader=trace
+</code></pre>
+</li>
+</ul>
+<p>Generally we are using <code>debug</code> for infrequent debug messages, <code>trace</code> for potentially frequent
+messages and <code>info</code> for performance-related logging.</p>
+<p>You can also attach to a running process with GDB.  The leader's process is named
+<em>solana-fullnode</em>:</p>
+<pre><code class="language-bash">$ sudo gdb
+attach &lt;PID&gt;
+set logging on
+thread apply all bt
+</code></pre>
+<p>This will dump all the threads stack traces into gdb.txt</p>
+<a class="header" href="#public-testnet" id="public-testnet"><h2>Public Testnet</h2></a>
+<p>In this example the client connects to our public testnet. To run validators on the testnet you would need to open udp ports <code>8000-10000</code>.</p>
+<pre><code class="language-bash">$ ./multinode-demo/client.sh --network $(dig +short testnet.solana.com):8001 --duration 60
+</code></pre>
+<p>You can observe the effects of your client's transactions on our <a href="https://metrics.solana.com:3000/d/testnet/testnet-hud?orgId=2&amp;from=now-30m&amp;to=now&amp;refresh=5s&amp;var-testnet=testnet">dashboard</a></p>
+<a class="header" href="#linux-snap" id="linux-snap"><h2>Linux Snap</h2></a>
+<p>A Linux <a href="https://snapcraft.io/">Snap</a> is available, which can be used to easily
+get Solana running on supported Linux systems without building anything from
+source for evaluation.  Note that CUDA is not supported by the Snap so
+performance will be limited.</p>
+<p>The <code>edge</code> Snap channel is updated daily with the latest
+development from the <code>master</code> branch.  To install:</p>
+<pre><code class="language-bash">$ sudo snap install solana --edge --devmode
+</code></pre>
+<p>Once installed the usual Solana programs will be available as <code>solona.*</code> instead
+of <code>solana-*</code>.  For example, <code>solana.fullnode</code> instead of <code>solana-fullnode</code>.</p>
+<p>Update to the latest version at any time with:</p>
+<pre><code class="language-bash">$ snap info solana
+$ sudo snap refresh solana --devmode
+</code></pre>
+<a class="header" href="#daemon-support" id="daemon-support"><h3>Daemon Support</h3></a>
+<p>The snap supports running fullnodes and a drone as system daemons.</p>
+<p>Run <code>sudo snap get solana</code> to view the current daemon configuration.  To view
+daemon logs:</p>
+<ol>
+<li>Run <code>sudo snap logs -n=all solana</code> to view the daemon initialization log</li>
+<li>Runtime logging can be found under <code>/var/snap/solana/current/bootstrap-leader/</code>,
+<code>/var/snap/solana/current/fullnode/</code>, or <code>/var/snap/solana/current/drone/</code> depending
+on which <code>mode=</code> was selected.  Within each log directory the file <code>current</code>
+contains the latest log, and the files <code>*.s</code> (if present) contain older rotated
+logs.</li>
+</ol>
+<p>Disable the daemon at any time by running:</p>
+<pre><code class="language-bash">$ sudo snap set solana mode=
+</code></pre>
+<p>Runtime configuration files for the daemon can be found in
+<code>/var/snap/solana/current/config</code>.</p>
+<a class="header" href="#leader-daemon" id="leader-daemon"><h4>Leader Daemon</h4></a>
+<pre><code class="language-bash">$ sudo snap set solana mode=bootstrap-leader
+</code></pre>
+<p><code>rsync</code> must be configured and running on the leader.</p>
+<ol>
+<li>Ensure rsync is installed with <code>sudo apt-get -y install rsync</code></li>
+<li>Edit <code>/etc/rsyncd.conf</code> to include the following</li>
+</ol>
+<pre><code class="language-ini">[config]
+path = /var/snap/solana/current/config
+hosts allow = *
+read only = true
+</code></pre>
+<ol start="3">
+<li>Run <code>sudo systemctl enable rsync; sudo systemctl start rsync</code></li>
+<li>Test by running <code>rsync -Pzravv rsync://&lt;ip-address-of-leader&gt;/config solana-config</code> from another machine.  <strong>If the leader is running on a cloud
+provider it may be necessary to configure the Firewall rules to permit ingress
+to port tcp:873, tcp:9900 and the port range udp:8000-udp:10000</strong></li>
+</ol>
+<p>To run both the Leader and Drone:</p>
+<pre><code class="language-bash">$ sudo snap set solana mode=bootstrap-leader+drone
+
+</code></pre>
+<a class="header" href="#validator-daemon" id="validator-daemon"><h4>Validator daemon</h4></a>
+<pre><code class="language-bash">$ sudo snap set solana mode=fullnode
+
+</code></pre>
+<p>By default the node will attempt to connect to <strong>testnet.solana.com</strong>, override the
+cluster entrypoint IP address by running:</p>
+<pre><code class="language-bash">$ sudo snap set solana mode=fullnode entrypoint-ip=127.0.0.1 #&lt;-- change IP address
+</code></pre>
+<p>It's assumed that the node at the entrypoint IP will be running <code>rsync</code>
+configured as described in the previous <strong>Leader daemon</strong> section.</p>
+<a class="header" href="#example-app-web-wallet" id="example-app-web-wallet"><h1>Example app: Web Wallet</h1></a>
+<a class="header" href="#build-and-run-a-web-wallet-locally" id="build-and-run-a-web-wallet-locally"><h2>Build and run a web wallet locally</h2></a>
+<p>First fetch the example code:</p>
+<pre><code class="language-sh">$ git clone https://github.com/solana-labs/example-webwallet.git
+$ cd example-webwallet
+$ TAG=$(git describe --tags $(git rev-list --tags
+--max-count=1))
+$ git checkout $TAG
+</code></pre>
+<p>Next, follow the steps in the git repository's
+<a href="https://github.com/solana-labs/example-webwallet/blob/master/README.md">README</a>.</p>
+<a class="header" href="#programming-model" id="programming-model"><h1>Programming Model</h1></a>
+<p>A client <em>app</em> interacts with a Solana cluster by sending it <em>transactions</em>
+with one or more <em>instructions</em>. The Solana <em>runtime</em> passes those instructions
+to user-contributed <em>programs</em>. An instruction might, for example, tell a
+program to move <em>tokens</em> from one <em>account</em> to another or create an interactive
+contract that governs how tokens are moved. Instructions are executed
+atomically. If any instruction is invalid, any changes made within the
+transaction are discarded.</p>
+<a class="header" href="#deploying-programs-to-a-cluster" id="deploying-programs-to-a-cluster"><h2>Deploying Programs to a Cluster</h2></a>
+<p><img alt="SDK tools" src="img/sdk-tools.svg" class="center"/></p>
+<p>As shown in the diagram above a client creates a program and compiles it to an
+ELF shared object containing BPF bytecode and sends it to the Solana cluster.
+The cluster stores the program locally and makes it available to clients via a
+<em>program ID</em>. The program ID is a <em>public key</em> generated by the client and is
+used to reference the program in subsequent transactions.</p>
+<p>A program may be written in any programming language that can target the
+Berkley Packet Filter (BPF) safe execution environment. The Solana SDK offers
+the best support for C programs, which is compiled to BPF using the <a href="https://llvm.org">LLVM
+compiler infrastructure</a>. Alternatively, a client might
+choose to bypass LLVM and use Python, Lua or C++ to generate BPF directly via
+the <a href="https://github.com/iovisor/bcc">BPF Compiler Collection</a> (BCC).</p>
+<a class="header" href="#storing-state-between-transactions" id="storing-state-between-transactions"><h2>Storing State between Transactions</h2></a>
+<p>If the program needs to store state between transactions, it does so using
+<em>accounts</em>. Accounts are similar to files in operating systems such as Linux.
+Like a file, an account may hold arbitrary data and that data persists beyond
+the lifetime of a program. Also like a file, an account includes metadata that
+tells the runtime who is allowed to access the data and how. Unlike a file, the
+account includes metadata for the lifetime of the file. That lifetime is
+expressed in &quot;tokens&quot;, which is a number of fractional native tokens, called
+<em>lamports</em>. Accounts are held in validator memory and pay &quot;rent&quot; to stay there.
+Each fullnode periodically scan all accounts and collects rent. Any account
+that drops to zero lamports is purged.</p>
+<p>If an account is marked &quot;executable&quot;, it will only be used by a <em>loader</em> to run
+programs. For example, a BPF-compiled program is marked executable and loaded
+by the BPF loader. No program is allowed to modify the contents of an
+executable account.</p>
+<p>An account also includes &quot;owner&quot; metadata. The owner is a program ID. The
+runtime grants the program write access to the account if its ID matches the
+owner. If an account is not owned by a program, the program is permitted to
+read its data and credit the account.</p>
+<p>In the same way that a Linux user uses a path to look up a file, a Solana
+client uses public keys to look up accounts. To create an account, the client
+generates a <em>keypair</em> and registers its public key using the CreateAccount
+instruction. Once registered, transactions reference account keys to grant
+programs access to accounts. The runtime grants programs read access by
+default. To grant write access, the client must either assign the account to a
+program or sign the transaction using the keypair's <em>secret key</em>. Since only
+the holder of the secret key can produce valid signatures matching the
+account's public key, the runtime recognizes the signature as authorization to
+modify account data or debit the account.</p>
+<p>After the runtime executes each of the transaction's instructions, it uses the
+account metadata and transaction signatures to verify that none of the access
+rules were violated. If a program violates an access rule, the runtime discards
+all account changes made by all instructions and marks the transaction as
+failed.</p>
+<a class="header" href="#example-app-tic-tac-toe" id="example-app-tic-tac-toe"><h1>Example app: Tic-Tac-Toe</h1></a>
+<p><a href="https://solana-example-tictactoe.herokuapp.com/">Click here to play
+Tic-Tac-Toe</a> on the Solana
+testnet. Open the link and wait for another player to join, or open the link
+in a second browser tab to play against yourself. You will see that every
+move a player makes stores a transaction on the ledger.</p>
+<a class="header" href="#build-and-run-tic-tac-toe-locally" id="build-and-run-tic-tac-toe-locally"><h2>Build and run Tic-Tac-Toe locally</h2></a>
+<p>First fetch the latest release of the example code:</p>
+<pre><code class="language-sh">$ git clone https://github.com/solana-labs/example-tictactoe.git
+$ cd example-tictactoe
+$ TAG=$(git describe --tags $(git rev-list --tags
+--max-count=1))
+$ git checkout $TAG
+</code></pre>
+<p>Next, follow the steps in the git repository's
+<a href="https://github.com/solana-labs/example-tictactoe/blob/master/README.md">README</a>.</p>
+<a class="header" href="#getting-tokens-to-users" id="getting-tokens-to-users"><h2>Getting tokens to users</h2></a>
+<p>You may have noticed you interacted with the Solana cluster without first
+needing to aquire tokens to pay transaction fees. Under the hood, the web
+app creates a new ephemeral identity and sends a request to an off-chain
+service for a signed transation authorizes a user to start a new game.
+The service is called a <em>drone</em>. When the app sends the signed transaction
+to the Solana cluster, the drone's tokens are spent to pay the transaction
+fee and start the game. In a real world app, the drone might request the user
+watch an ad or pass a CAPTCHA before signing over its tokens.</p>
+<a class="header" href="#creating-signing-services-with-drones" id="creating-signing-services-with-drones"><h1>Creating Signing Services with Drones</h1></a>
+<p>This chapter defines an off-chain service called a <em>drone</em>, which acts as
+custodian of a user's private key. In its simplest form, it can be used to
+create <em>airdrop</em> transactions, a token transfer from the drone's account to a
+client's account.</p>
+<a class="header" href="#signing-service" id="signing-service"><h2>Signing Service</h2></a>
+<p>A drone is a simple signing service. It listens for requests to sign
+<em>transaction data</em>.  Once received, the drone validates the request however it
+sees fit. It may, for example, only accept transaction data with a
+<code>SystemInstruction::Move</code> instruction transferring only up to a certain amount
+of tokens. If the drone accepts the transaction, it returns an <code>Ok(Signature)</code>
+where <code>Signature</code> is a signature of the transaction data using the drone's
+private key. If it rejects the transaction data, it returns a <code>DroneError</code>
+describing why.</p>
+<a class="header" href="#examples" id="examples"><h2>Examples</h2></a>
+<a class="header" href="#granting-access-to-an-on-chain-game" id="granting-access-to-an-on-chain-game"><h3>Granting access to an on-chain game</h3></a>
+<p>Creator of on-chain game tic-tac-toe hosts a drone that responds to airdrop
+requests containing an <code>InitGame</code> instruction. The drone signs the transaction
+data in the request and returns it, thereby authorizing its account to pay the
+transaction fee and as well as seeding the game's account with enough tokens to
+play it. The user then creates a transaction for its transaction data and the
+drones signature and submits it to the Solana cluster. Each time the user
+interacts with the game, the game pays the user enough tokens to pay the next
+transaction fee to advance the game. At that point, the user may choose to keep
+the tokens instead of advancing the game. If the creator wants to defend
+against that case, they could require the user to return to the drone to sign
+each instruction.</p>
+<a class="header" href="#worldwide-airdrop-of-a-new-token" id="worldwide-airdrop-of-a-new-token"><h3>Worldwide airdrop of a new token</h3></a>
+<p>Creator of a new on-chain token (ERC-20 interface), may wish to do a worldwide
+airdrop to distribute its tokens to millions of users over just a few seconds.
+That drone cannot spend resources interacting with the Solana cluster. Instead,
+the drone should only verify the client is unique and human, and then return
+the signature. It may also want to listen to the Solana cluster for recent
+entry IDs to support client retries and to ensure the airdrop is targeting the
+desired cluster.</p>
+<a class="header" href="#attack-vectors" id="attack-vectors"><h2>Attack vectors</h2></a>
+<a class="header" href="#invalid-last_id" id="invalid-last_id"><h3>Invalid last_id</h3></a>
+<p>The drone may prefer its airdrops only target a particular Solana cluster.  To
+do that, it listens to the cluster for new entry IDs and ensure any requests
+reference a recent one.</p>
+<p>Note: to listen for new entry IDs assumes the drone is either a fullnode or a
+<em>light</em> client. At the time of this writing, light clients have not been
+implemented and no proposal describes them. This document assumes one of the
+following approaches be taken:</p>
+<ol>
+<li>Define and implement a light client</li>
+<li>Embed a fullnode</li>
+<li>Query the jsonrpc API for the latest last id at a rate slightly faster than
+ticks are produced.</li>
+</ol>
+<a class="header" href="#double-spends" id="double-spends"><h3>Double spends</h3></a>
+<p>A client may request multiple airdrops before the first has been submitted to
+the ledger. The client may do this maliciously or simply because it thinks the
+first request was dropped. The drone should not simply query the cluster to
+ensure the client has not already received an airdrop. Instead, it should use
+<code>last_id</code> to ensure the previous request is expired before signing another.
+Note that the Solana cluster will reject any transaction with a <code>last_id</code>
+beyond a certain <em>age</em>.</p>
+<a class="header" href="#denial-of-service" id="denial-of-service"><h3>Denial of Service</h3></a>
+<p>If the transaction data size is smaller than the size of the returned signature
+(or descriptive error), a single client can flood the network.  Considering
+that a simple <code>Move</code> operation requires two public keys (each 32 bytes) and a
+<code>fee</code> field, and that the returned signature is 64 bytes (and a byte to
+indicate <code>Ok</code>), consideration for this attack may not be required.</p>
+<p>In the current design, the drone accepts TCP connections. This allows clients
+to DoS the service by simply opening lots of idle connections. Switching to UDP
+may be preferred. The transaction data will be smaller than a UDP packet since
+the transaction sent to the Solana cluster is already pinned to using UDP.</p>
+<a class="header" href="#a-solana-cluster" id="a-solana-cluster"><h1>A Solana Cluster</h1></a>
+<p>A Solana cluster is a set of fullnodes working together to serve client
+transactions and maintain the integrity of the ledger. Many clusters may
+coexist. When two clusters share a common genesis block, they attempt to
+converge. Otherwise, they simply ignore the existence of the other.
+Transactions sent to the wrong one are quietly rejected. In this chapter, we'll
+discuss how a cluster is created, how nodes join the cluster, how they share
+the ledger, how they ensure the ledger is replicated, and how they cope with
+buggy and malicious nodes.</p>
+<a class="header" href="#creating-a-cluster" id="creating-a-cluster"><h2>Creating a Cluster</h2></a>
+<p>Before starting any fullnodes, one first needs to create a <em>genesis block</em>.
+The block contains entries referencing two public keys, a <em>mint</em> and a
+<em>bootstrap leader</em>. The fullnode holding the bootstrap leader's secret key is
+responsible for appending the first entries to the ledger. It initializes its
+internal state with the mint's account. That account will hold the number of
+native tokens defined by the genesis block. The second fullnode then contacts
+the bootstrap leader to register as a <em>validator</em> or <em>replicator</em>. Additional
+fullnodes then register with any registered member of the cluster.</p>
+<p>A validator receives all entries from the leader and submits votes confirming
+those entries are valid. After voting, the validator is expected to store those
+entries until replicator nodes submit proofs that they have stored copies of
+it. Once the validator observes a sufficient number of copies exist, it deletes
+its copy.</p>
+<a class="header" href="#joining-a-cluster" id="joining-a-cluster"><h2>Joining a Cluster</h2></a>
+<p>Fullnodes and replicators enter the cluster via registration messages sent to
+its <em>control plane</em>. The control plane is implemented using a <em>gossip</em>
+protocol, meaning that a node may register with any existing node, and expect
+its registration to propagate to all nodes in the cluster. The time it takes
+for all nodes to synchronize is proportional to the square of the number of
+nodes participating in the cluster. Algorithmically, that's considered very
+slow, but in exchange for that time, a node is assured that it eventually has
+all the same information as every other node, and that that information cannot
+be censored by any one node.</p>
+<a class="header" href="#sending-transactions-to-a-cluster" id="sending-transactions-to-a-cluster"><h2>Sending Transactions to a Cluster</h2></a>
+<p>Clients send transactions to any fullnode's Transaction Processing Unit (TPU)
+port. If the node is in the validator role, it forwards the transaction to the
+designated leader. If in the leader role, the node bundles incoming
+transactions, timestamps them creating an <em>entry</em>, and pushes them onto the
+cluster's <em>data plane</em>. Once on the data plane, the transactions are validated
+by validator nodes and replicated by replicator nodes, effectively appending
+them to the ledger.</p>
+<a class="header" href="#confirming-transactions" id="confirming-transactions"><h2>Confirming Transactions</h2></a>
+<p>A Solana cluster is capable of subsecond <em>confirmation</em> for up to 150 nodes
+with plans to scale up to hundreds of thousands of nodes. Once fully
+implemented, confirmation times are expected to increase only with the
+logarithm of the number of validators, where the logarithm's base is very high.
+If the base is one thousand, for example, it means that for the first thousand
+nodes, confirmation will be the duration of three network hops plus the time it
+takes the slowest validator of a supermajority to vote. For the next million
+nodes, confirmation increases by only one network hop.</p>
+<p>Solana defines confirmation as the duration of time from when the leader
+timestamps a new entry to the moment when it recognizes a supermajority of
+ledger votes.</p>
+<p>A gossip network is much too slow to achieve subsecond confirmation once the
+network grows beyond a certain size. The time it takes to send messages to all
+nodes is proportional to the square of the number of nodes. If a blockchain
+wants to achieve low confirmation and attempts to do it using a gossip network,
+it will be forced to centralize to just a handful of nodes.</p>
+<p>Scalable confirmation can be achieved using the follow combination of
+techniques:</p>
+<ol>
+<li>Timestamp transactions with a VDF sample and sign the timestamp.</li>
+<li>Split the transactions into batches, send each to separate nodes and have
+each node share its batch with its peers.</li>
+<li>Repeat the previous step recursively until all nodes have all batches.</li>
+</ol>
+<p>Solana rotates leaders at fixed intervals, called <em>slots</em>. Each leader may only
+produce entries during its allotted slot. The leader therefore timestamps
+transactions so that validators may lookup the public key of the designated
+leader. The leader then signs the timestamp so that a validator may verify the
+signature, proving the signer is owner of the designated leader's public key.</p>
+<p>Next, transactions are broken into batches so that a node can send transactions
+to multiple parties without making multiple copies. If, for example, the leader
+needed to send 60 transactions to 6 nodes, it would break that collection of 60
+into batches of 10 transactions and send one to each node. This allows the
+leader to put 60 transactions on the wire, not 60 transactions for each node.
+Each node then shares its batch with its peers. Once the node has collected all
+6 batches, it reconstructs the original set of 60 transactions.</p>
+<p>A batch of transactions can only be split so many times before it is so small
+that header information becomes the primary consumer of network bandwidth. At
+the time of this writing, the approach is scaling well up to about 150
+validators. To scale up to hundreds of thousands of validators, each node can
+apply the same technique as the leader node to another set of nodes of equal
+size. We call the technique <em>data plane fanout</em>, but it is not yet implemented.</p>
+<a class="header" href="#synchronization" id="synchronization"><h1>Synchronization</h1></a>
+<p>Fast, reliable synchronization is the biggest reason Solana is able to achieve
+such high throughput. Traditional blockchains synchronize on large chunks of
+transactions called blocks. By synchronizing on blocks, a transaction cannot be
+processed until a duration called &quot;block time&quot; has passed. In Proof of Work
+consensus, these block times need to be very large (~10 minutes) to minimize
+the odds of multiple fullnodes producing a new valid block at the same time.
+There's no such constraint in Proof of Stake consensus, but without reliable
+timestamps, a fullnode cannot determine the order of incoming blocks.  The
+popular workaround is to tag each block with a <a href="https://en.bitcoin.it/wiki/Block_timestamp">wallclock
+timestamp</a>. Because of clock drift
+and variance in network latencies, the timestamp is only accurate within an
+hour or two. To workaround the workaround, these systems lengthen block times
+to provide reasonable certainty that the median timestamp on each block is
+always increasing.</p>
+<p>Solana takes a very different approach, which it calls <em>Proof of History</em> or
+<em>PoH</em>. Leader nodes &quot;timestamp&quot; blocks with cryptographic proofs that some
+duration of time has passed since the last proof. All data hashed into the
+proof most certainly have occurred before the proof was generated. The node
+then shares the new block with validator nodes, which are able to verify those
+proofs. The blocks can arrive at validators in any order or even could be
+replayed years later. With such reliable synchronization guarantees, Solana is
+able to break blocks into smaller batches of transactions called <em>entries</em>.
+Entries are streamed to validators in realtime, before any notion of block
+consensus.</p>
+<p>Solana technically never sends a <em>block</em>, but uses the term to describe the
+sequence of entries that fullnodes vote on to achieve <em>confirmation</em>. In that
+way, Solana's confirmation times can be compared apples to apples to
+block-based systems. The current implementation sets block time to 800ms.</p>
+<p>What's happening under the hood is that entries are streamed to validators as
+quickly as a leader node can batch a set of valid transactions into an entry.
+Validators process those entries long before it is time to vote on their
+validity. By processing the transactions optimistically, there is effectively
+no delay between the time the last entry is received and the time when the node
+can vote. In the event consensus is <strong>not</strong> achieved, a node simply rolls back
+its state. This optimisic processing technique was introduced in 1981 and
+called <a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.65.4735">Optimistic Concurrency
+Control</a>.  It
+can be applied to blockchain architecture where a cluster votes on a hash that
+represents the full ledger up to some <em>block height</em>. In Solana, it is
+implemented trivially using the last entry's PoH hash.</p>
+<a class="header" href="#relationship-to-vdfs" id="relationship-to-vdfs"><h3>Relationship to VDFs</h3></a>
+<p>The Proof of History technique was first described for use in blockchain by
+Solana in November of 2017. In June of the following year, a similar technique
+was described at Stanford and called a <a href="https://eprint.iacr.org/2018/601.pdf">verifiable delay
+function</a> or <em>VDF</em>.</p>
+<p>A desirable property of a VDF is that verification time is very fast. Solana's
+approach to verifying its delay function is proportional to the time it took to
+create it. Split over a 4000 core GPU, it is sufficiently fast for Solana's
+needs, but if you asked the authors the paper cited above, they might tell you
+(<a href="https://github.com/solana-labs/solana/issues/388">and have</a>) that Solana's
+approach is algorithmically slow it shouldn't be called a VDF. We argue the
+term VDF should represent the category of verifiable delay functions and not
+just the subset with certain performance characteristics. Until that's
+resolved, Solana will likely continue using the term PoH for its
+application-specific VDF.</p>
+<p>Another difference between PoH and VDFs is that a VDF is used only for tracking
+duration. PoH's hash chain, on the other hand, includes hashes of any data the
+application observed.  That data is a double-edged sword. On one side, the data
+&quot;proves history&quot; - that the data most certainly existed before hashes after it.
+On the side, it means the application can manipulate the hash chain by changing
+<em>when</em> the data is hashed. The PoH chain therefore does not serve as a good
+source of randomness whereas a VDF without that data could. Solana's <a href="#leader-rotation">leader
+rotation algorithm</a>, for example, is derived only from the
+VDF <em>height</em> and not its hash at that height.</p>
+<a class="header" href="#relationship-to-consensus-mechanisms" id="relationship-to-consensus-mechanisms"><h3>Relationship to Consensus Mechanisms</h3></a>
+<p>Proof of History is not a consensus mechanism, but it is used to improve the
+performance of Solana's Proof of Stake consensus. It is also used to improve
+the performance of the data plane and replication protocols.</p>
+<a class="header" href="#more-on-proof-of-history" id="more-on-proof-of-history"><h3>More on Proof of History</h3></a>
+<ul>
+<li>
+<p><a href="https://medium.com/solana-labs/proof-of-history-explained-by-a-water-clock-e682183417b8">water clock
+analogy</a></p>
+</li>
+<li>
+<p><a href="https://medium.com/solana-labs/proof-of-history-a-clock-for-blockchain-cf47a61a9274">Proof of History
+overview</a></p>
+</li>
+</ul>
+<a class="header" href="#leader-rotation" id="leader-rotation"><h1>Leader Rotation</h1></a>
+<p>At any given moment, a cluster expects only one fullnode to produce ledger
+entries. By having only one leader at a time, all validators are able to replay
+identical copies of the ledger. The drawback of only one leader at a time,
+however, is that a malicious leader is cabable of censoring votes and
+transactions. Since censoring cannot be distinguished from the network dropping
+packets, the cluster cannot simply elect a single node to hold the leader role
+indefinitely. Instead, the cluster minimizes the influence of a malcioius
+leader by rotating which node takes the lead.</p>
+<p>Each validator selects the expected leader using the same algorithm, described
+below. When the validator receives a new signed ledger entry, it can be certain
+that entry was produced by the expected leader.</p>
+<a class="header" href="#leader-schedule-generation" id="leader-schedule-generation"><h2>Leader Schedule Generation</h2></a>
+<p>Leader schedule is generated using a predefined seed.  The process is as follows:</p>
+<ol>
+<li>Periodically use the PoH tick height (a monotonically increasing counter) to
+seed a stable pseudo-random algorithm.</li>
+<li>At that height, sample the bank for all the staked accounts with leader
+identities that have voted within a cluster-configured number of ticks. The
+sample is called the <em>active set</em>.</li>
+<li>Sort the active set by stake weight.</li>
+<li>Use the random seed to select nodes weighted by stake to create a
+stake-weighted ordering.</li>
+<li>This ordering becomes valid after a cluster-configured number of ticks.</li>
+</ol>
+<p>The seed that is selected is predictable but unbiasable.  There is no grinding
+attack to influence its outcome. The active set, however, can be biased by a
+leader by censoring validator votes. To reduce the likelihood of censorship,
+the active set is sampled many slots in advance, such that votes will have been
+collected by multiple leaders. If even one node is honest, the malicious
+leaders will not be able to use censorship to influence the leader schedule.</p>
+<a class="header" href="#appending-entries" id="appending-entries"><h2>Appending Entries</h2></a>
+<p>The lifetime of a leader schedule is called an <em>epoch</em>. The epoch is split into
+<em>slots</em>, where each slot has a duration of <code>T</code> PoH ticks.</p>
+<p>A leader transmits entries during its slot.  After <code>T</code> ticks, all the
+validators switch to the next scheduled leader. Validators must ignore entries
+sent outside a leader's assigned slot.</p>
+<p>All <code>T</code> ticks must be observed by the next leader for it to build its own
+entries on. If entries are not observed (leader is down) or entries are invalid
+(leader is buggy or malicious), the next leader must produce ticks to fill the
+previous leader's slot. Note that the next leader should do repair requests in
+parallel, and postpone sending ticks until it is confident other validators
+also failed to observe the previous leader's entries. If a leader incorrectly
+builds on its own ticks, the leader following it must replace all its ticks.</p>
+<a class="header" href="#fork-generation" id="fork-generation"><h1>Fork Generation</h1></a>
+<p>The chapter describes how forks naturally occur as a consequence of <a href="leader-rotation.html">leader
+rotation</a>.</p>
+<a class="header" href="#overview" id="overview"><h2>Overview</h2></a>
+<p>Nodes take turns being leader and generating the PoH that encodes state
+changes.  The cluster can tolerate loss of connection to any leader by
+synthesizing what the leader <strong><em>would</em></strong> have generated had it been connected
+but not ingesting any state changes.  The possible number of forks is thereby
+limited to a &quot;there/not-there&quot; skip list of forks that may arise on leader
+rotation slot boundaries.  At any given slot, only a single leader's
+transactions will be accepted.</p>
+<a class="header" href="#message-flow" id="message-flow"><h2>Message Flow</h2></a>
+<ol>
+<li>Transactions are ingested by the current leader.</li>
+<li>Leader filters valid transactions.</li>
+<li>Leader executes valid transactions updating its state.</li>
+<li>Leader packages transactions into entries based off its current PoH slot.</li>
+<li>Leader transmits the entries to validator nodes (in signed blobs)
+<ol>
+<li>The PoH stream includes ticks; empty entries that indicate liveness of
+the leader and the passage of time on the cluster.</li>
+<li>A leader's stream begins with the tick entries necessary complete the PoH
+back to the leaders most recently observed prior leader slot.</li>
+</ol>
+</li>
+<li>Validators retransmit entries to peers in their set and to further
+downstream nodes.</li>
+<li>Validators validate the transactions and execute them on their state.</li>
+<li>Validators compute the hash of the state.</li>
+<li>At specific times, i.e. specific PoH tick counts, validators transmit votes
+to the leader.
+<ol>
+<li>Votes are signatures of the hash of the computed state at that PoH tick
+count</li>
+<li>Votes are also propagated via gossip</li>
+</ol>
+</li>
+<li>Leader executes the votes as any other transaction and broadcasts them to
+the cluster.</li>
+<li>Validators observe their votes and all the votes from the cluster.</li>
+</ol>
+<a class="header" href="#partitions-forks" id="partitions-forks"><h2>Partitions, Forks</h2></a>
+<p>Forks can arise at PoH tick counts that correspond to a vote.  The next leader
+may not have observed the last vote slot and may start their slot with
+generated virtual PoH entries.  These empty ticks are generated by all nodes in
+the cluster at a cluster-configured rate for hashes/per/tick <code>Z</code>.</p>
+<p>There are only two possible versions of the PoH during a voting slot: PoH with
+<code>T</code> ticks and entries generated by the current leader, or PoH with just ticks.
+The &quot;just ticks&quot; version of the PoH can be thought of as a virtual ledger, one
+that all nodes in the cluster can derive from the last tick in the previous
+slot.</p>
+<p>Validators can ignore forks at other points (e.g. from the wrong leader), or
+slash the leader responsible for the fork.</p>
+<p>Validators vote based on a greedy choice to maximize their reward described in
+<a href="fork-selection.html">forks selection</a>.</p>
+<a class="header" href="#validators-view" id="validators-view"><h3>Validator's View</h3></a>
+<a class="header" href="#time-progression-the-diagram-below-represents-a-validators-view-of-the" id="time-progression-the-diagram-below-represents-a-validators-view-of-the"><h4>Time Progression The diagram below represents a validator's view of the</h4></a>
+<p>PoH stream with possible forks over time.  L1, L2, etc. are leader slot, and
+<code>E</code>s represent entries from that leader during that leader's slot.  The 'x's
+represent ticks only, and time flows downwards in the diagram.</p>
+<p><img alt="Fork generation" src="img/fork-generation.svg" class="center"/></p>
+<p>Note that an <code>E</code> appearing on 2 forks at the same slot is a slashable
+condition, so a validator observing <code>E3</code> and <code>E3'</code> can slash L3 and safely
+choose <code>x</code> for that slot.  Once a validator commits to a forks, other forks can
+be discarded below that tick count.  For any slot, validators need only
+consider a single &quot;has entries&quot; chain or a &quot;ticks only&quot; chain to be proposed by
+a leader.  But multiple virtual entries may overlap as they link back to the a
+previous slot.</p>
+<a class="header" href="#time-division" id="time-division"><h4>Time Division</h4></a>
+<p>It's useful to consider leader rotation over PoH tick count as time division of
+the job of encoding state for the cluster.  The following table presents the
+above tree of forks as a time-divided ledger.</p>
+<table><thead><tr><th>leader slot </th><th>  L1 </th><th> L2 </th><th> L3 </th><th> L4 </th><th> L5</th></tr></thead><tbody>
+<tr><td>data      </td><td>  E1</td><td> E2 </td><td> E3 </td><td> E4  </td><td> E5</td></tr>
+<tr><td>ticks since prev  </td><td> </td><td> </td><td> </td><td> x </td><td> xx</td></tr>
+</tbody></table>
+<p>Note that only data from leader L3 will be accepted during leader slot L3.
+Data from L3 may include &quot;catchup&quot; ticks back to a slot other than L2 if L3 did
+not observe L2's data.  L4 and L5's transmissions include the &quot;ticks to prev&quot;
+PoH entries.</p>
+<p>This arrangement of the network data streams permits nodes to save exactly this
+to the ledger for replay, restart, and checkpoints.</p>
+<a class="header" href="#leaders-view" id="leaders-view"><h3>Leader's View</h3></a>
+<p>When a new leader begins a slot, it must first transmit any PoH (ticks)
+required to link the new slot with the most recently observed and voted slot.
+The fork the leader proposes would link the current slot to a previous fork
+that the leader has voted on with virtual ticks.</p>
+<a class="header" href="#anatomy-of-a-fullnode" id="anatomy-of-a-fullnode"><h1>Anatomy of a Fullnode</h1></a>
+<p><img alt="Fullnode block diagrams" src="img/fullnode.svg" class="center"/></p>
+<a class="header" href="#pipelining" id="pipelining"><h2>Pipelining</h2></a>
+<p>The fullnodes make extensive use of an optimization common in CPU design,
+called <em>pipelining</em>.  Pipelining is the right tool for the job when there's a
+stream of input data that needs to be processed by a sequence of steps, and
+there's different hardware responsible for each. The quintessential example is
+using a washer and dryer to wash/dry/fold several loads of laundry. Washing
+must occur before drying and drying before folding, but each of the three
+operations is performed by a separate unit. To maximize efficiency, one creates
+a pipeline of <em>stages</em>. We'll call the washer one stage, the dryer another, and
+the folding process a third. To run the pipeline, one adds a second load of
+laundry to the washer just after the first load is added to the dryer.
+Likewise, the third load is added to the washer after the second is in the
+dryer and the first is being folded. In this way, one can make progress on
+three loads of laundry simultaneously. Given infinite loads, the pipeline will
+consistently complete a load at the rate of the slowest stage in the pipeline.</p>
+<a class="header" href="#pipelining-in-the-fullnode" id="pipelining-in-the-fullnode"><h2>Pipelining in the Fullnode</h2></a>
+<p>The fullnode contains two pipelined processes, one used in leader mode called
+the TPU and one used in validator mode called the TVU. In both cases, the
+hardware being pipelined is the same, the network input, the GPU cards, the CPU
+cores, writes to disk, and the network output.  What it does with that hardware
+is different.  The TPU exists to create ledger entries whereas the TVU exists
+to validate them.</p>
+<a class="header" href="#the-transaction-processing-unit" id="the-transaction-processing-unit"><h1>The Transaction Processing Unit</h1></a>
+<p><img alt="TPU Block Diagram" src="img/tpu.svg" class="center"/></p>
+<a class="header" href="#the-transaction-validation-unit" id="the-transaction-validation-unit"><h1>The Transaction Validation Unit</h1></a>
+<p><img alt="TVU Block Diagram" src="img/tvu.svg" class="center"/></p>
+<a class="header" href="#gossip-service" id="gossip-service"><h1>Gossip Service</h1></a>
+<p>The Gossip Service acts as a gateway to nodes in the control plane. Fullnodes
+use the service to ensure information is available to all other nodes in a cluster.
+The service broadcasts information using a gossip protocol.</p>
+<a class="header" href="#gossip-overview" id="gossip-overview"><h2>Gossip Overview</h2></a>
+<p>Nodes continuously share signed data objects among themselves in order to
+manage a cluster. For example, they share their contact information, ledger
+height, and votes.</p>
+<p>Every tenth of a second, each node sends a &quot;push&quot; message and/or a &quot;pull&quot;
+message.  Push and pull messages may elicit responses, and push messages may be
+forwarded on to others in the cluster.</p>
+<p>Gossip runs on a well-known UDP/IP port or a port in a well-known range.  Once
+a cluster is bootstrapped, nodes advertise to each other where to find their
+gossip endpoint (a socket address).</p>
+<a class="header" href="#gossip-records" id="gossip-records"><h2>Gossip Records</h2></a>
+<p>Records shared over gossip are arbitrary, but signed and versioned (with a
+timestamp) as needed to make sense to the node receiving them. If a node
+recieves two records from the same source, it it updates its own copy with the
+record with the most recent timestamp.</p>
+<a class="header" href="#gossip-service-interface" id="gossip-service-interface"><h2>Gossip Service Interface</h2></a>
+<a class="header" href="#push-message" id="push-message"><h3>Push Message</h3></a>
+<p>A node sends a push message to tells the cluster it has information to share.
+Nodes send push messages to <code>PUSH_FANOUT</code> push peers.</p>
+<p>Upon receiving a push message, a node examines the message for:</p>
+<ol>
+<li>
+<p>Duplication: if the message has been seen before, the node responds with
+<code>PushMessagePrune</code> and drops the message</p>
+</li>
+<li>
+<p>New data: if the message is new to the node</p>
+<ul>
+<li>Stores the new information with an updated version in its cluster info and
+purges any previous older value</li>
+<li>Stores the message in <code>pushed_once</code> (used for detecting duplicates,
+purged after <code>PUSH_MSG_TIMEOUT * 5</code> ms)</li>
+<li>Retransmits the messages to its own push peers</li>
+</ul>
+</li>
+<li>
+<p>Expiration: nodes drop push messages that are older than <code>PUSH_MSG_TIMEOUT</code></p>
+</li>
+</ol>
+<a class="header" href="#push-peers-prune-message" id="push-peers-prune-message"><h3>Push Peers, Prune Message</h3></a>
+<p>A nodes selects its push peers at random from the active set of known peers.
+The node keeps this selection for a relatively long time.  When a prune message
+is received, the node drops the push peer that sent the prune.  Prune is an
+indication that there is another, faster path to that node than direct push.</p>
+<p>The set of push peers is kept fresh by rotating a new node into the set every
+<code>PUSH_MSG_TIMEOUT/2</code> milliseconds.</p>
+<a class="header" href="#pull-message" id="pull-message"><h3>Pull Message</h3></a>
+<p>A node sends a pull message to ask the cluster if there is any new information.
+A pull message is sent to a single peer at random and comprises a Bloom filter
+that represents things it already has.  A node receiving a pull message
+iterates over its values and constructs a pull response of things that miss the
+filter and would fit in a message.</p>
+<p>A node constructs the pull Bloom filter by iterating over current values and
+recently purged values.</p>
+<p>A node handles items in a pull response the same way it handles new data in a
+push message.</p>
+<a class="header" href="#purging" id="purging"><h2>Purging</h2></a>
+<p>Nodes retain prior versions of values (those updated by a pull or push) and
+expired values (those older than <code>GOSSIP_PULL_CRDS_TIMEOUT_MS</code>) in
+<code>purged_values</code> (things I recently had).  Nodes purge <code>purged_values</code> that are
+older than <code>5 * GOSSIP_PULL_CRDS_TIMEOUT_MS</code>.</p>
+<a class="header" href="#the-runtime" id="the-runtime"><h1>The Runtime</h1></a>
+<p>The runtime is a concurrent transaction processor. Transactions specify their
+data dependencies upfront and dynamic memory allocation is explicit. By
+separating program code from the state it operates on, the runtime is able to
+choreograph concurrent access. Transactions accessing only credit-only
+accounts are executed in parallel whereas transactions accessing writable
+accounts are serialized.  The runtime interacts with the program through an
+entrypoint with a well-defined interface.  The userdata stored in an account is
+an opaque type, an array of bytes. The program has full control over its
+contents.</p>
+<p>The transaction structure specifies a list of public keys and signatures for
+those keys and a sequential list of instructions that will operate over the
+states associated with the account keys.  For the transaction to be committed
+all the instructions must execute successfully; if any abort the whole
+transaction fails to commit.</p>
+<a class="header" href="#account-structure" id="account-structure"><h3>Account Structure</h3></a>
+<p>Accounts maintain a token balance and program-specific memory.</p>
+<a class="header" href="#transaction-engine" id="transaction-engine"><h1>Transaction Engine</h1></a>
+<p>The engine maps public keys to accounts and routes them to the program's
+entrypoint.</p>
+<a class="header" href="#execution" id="execution"><h2>Execution</h2></a>
+<p>Transactions are batched and processed in a pipeline</p>
+<p><img alt="Runtime pipeline" src="img/runtime.svg" class="center"/></p>
+<p>At the <em>execute</em> stage, the loaded pages have no data dependencies, so all the
+programs can be executed in parallel.</p>
+<p>The runtime enforces the following rules:</p>
+<ol>
+<li>Only the <em>owner</em> program may modify the contents of an account.  This means
+that upon assignment userdata vector is guaranteed to be zero.</li>
+<li>Total balances on all the accounts is equal before and after execution of a
+transaction.</li>
+<li>After the transaction is executed, balances of credit-only accounts must be
+greater than or equal to the balances before the transaction.</li>
+<li>All instructions in the transaction executed atomically. If one fails, all
+account modifications are discarded.</li>
+</ol>
+<p>Execution of the program involves mapping the program's public key to an
+entrypoint which takes a pointer to the transaction, and an array of loaded
+pages.</p>
+<a class="header" href="#systemprogram-interface" id="systemprogram-interface"><h2>SystemProgram Interface</h2></a>
+<p>The interface is best described by the <code>Instruction::userdata</code> that the user
+encodes.</p>
+<ul>
+<li><code>CreateAccount</code> - This allows the user to create and assign an account to a
+Program.</li>
+<li><code>Assign</code> - allows the user to assign an existing account to a program.</li>
+<li><code>Move</code>  - moves tokens between accounts.</li>
+<li><code>Spawn</code> - spawns a new program from an account.</li>
+</ul>
+<a class="header" href="#notes" id="notes"><h2>Notes</h2></a>
+<ol>
+<li>There is no dynamic memory allocation.  Client's need to use <code>CreateAccount</code>
+instructions to create memory before passing it to another program.  This
+instruction can be composed into a single transaction with the call to the
+program itself.</li>
+<li>Runtime guarantees that when memory is assigned to the program it is zero
+initialized.</li>
+<li>Runtime guarantees that a program's code is the only thing that can modify
+memory that its assigned to</li>
+<li>Runtime guarantees that the program can only spend tokens that are in
+accounts that are assigned to it</li>
+<li>Runtime guarantees the balances belonging to accounts are balanced before
+and after the transaction</li>
+<li>Runtime guarantees that multiple instructions all executed successfully when
+a transaction is committed.</li>
+</ol>
+<a class="header" href="#future-work" id="future-work"><h1>Future Work</h1></a>
+<ul>
+<li><a href="https://github.com/solana-labs/solana/issues/1485">Continuations and Signals for long running
+Transactions</a></li>
+</ul>
+<a class="header" href="#proposed-architectural-changes" id="proposed-architectural-changes"><h1>Proposed Architectural Changes</h1></a>
+<p>The following architectural proposals have been accepted by the Solana team, but
+are not yet fully implemented. The proposals may be implemented as described,
+implemented differently as issues in the designs become evident, or not
+implemented at all. If implemented, the descriptions will be moved from this
+section to earlier chapters in a future version of this book.</p>
+<a class="header" href="#ledger-replication" id="ledger-replication"><h1>Ledger Replication</h1></a>
+<p>At full capacity on a 1gbps network solana will generate 4 petabytes of data
+per year.  To prevent the network from centralizing around full nodes that have
+to store the full data set this protocol proposes a way for mining nodes to
+provide storage capacity for pieces of the network.</p>
+<p>The basic idea to Proof of Replication is encrypting a dataset with a public
+symmetric key using CBC encryption, then hash the encrypted dataset. The main
+problem with the naive approach is that a dishonest storage node can stream the
+encryption and delete the data as its hashed. The simple solution is to force
+the hash to be done on the reverse of the encryption, or perhaps with a random
+order. This ensures that all the data is present during the generation of the
+proof and it also requires the validator to have the entirety of the encrypted
+data present for verification of every proof of every identity. So the space
+required to validate is <code>number_of_proofs * data_size</code></p>
+<a class="header" href="#terminology-1" id="terminology-1"><h2>Terminology</h2></a>
+<a class="header" href="#replicator" id="replicator"><h4>replicator</h4></a>
+<p>Storage mining client, stores some part of the ledger enumerated in blocks and
+submits storage proofs to the chain. Not a full-node.</p>
+<a class="header" href="#ledger-segment" id="ledger-segment"><h4>ledger segment</h4></a>
+<p>Portion of the ledger which is downloaded by the replicator where storage proof
+data is derived.</p>
+<a class="header" href="#cbc-block" id="cbc-block"><h4>CBC block</h4></a>
+<p>Smallest encrypted chunk of ledger, an encrypted ledger segment would be made of
+many CBC blocks. <code>ledger_segment_size / cbc_block_size</code> to be exact.</p>
+<a class="header" href="#storage-proof" id="storage-proof"><h4>storage proof</h4></a>
+<p>A set of sha hash state which is constructed by sampling the encrypted version
+of the stored ledger segment at certain offsets.</p>
+<a class="header" href="#fake-storage-proof" id="fake-storage-proof"><h4>fake storage proof</h4></a>
+<p>A proof which has the same format as a storage proof, but the sha state is
+actually from hashing a known ledger value which the storage client can reveal
+and is also easily verifiable by the network on-chain.</p>
+<a class="header" href="#storage-proof-confirmation" id="storage-proof-confirmation"><h4>storage proof confirmation</h4></a>
+<p>A transaction by a validator which indicates the set of real and fake proofs
+submitted by a storage miner. The transaction would contain a list of proof
+hash values and a bit which says if this hash is valid or fake.</p>
+<a class="header" href="#storage-proof-challenge" id="storage-proof-challenge"><h4>storage proof challenge</h4></a>
+<p>A transaction from a replicator that verifiably proves that a validator
+confirmed a fake proof.</p>
+<a class="header" href="#storage-proof-claim" id="storage-proof-claim"><h4>storage proof claim</h4></a>
+<p>A transaction from a validator which is after the timeout period given from the
+storage proof confirmation and which no successful challenges have been
+observed which rewards the parties of the storage proofs and confirmations.</p>
+<a class="header" href="#storage-validation-capacity" id="storage-validation-capacity"><h4>storage validation capacity</h4></a>
+<p>The number of keys and samples that a validator can verify each storage epoch.</p>
+<a class="header" href="#optimization-with-poh" id="optimization-with-poh"><h2>Optimization with PoH</h2></a>
+<p>Our improvement on this approach is to randomly sample the encrypted segments
+faster than it takes to encrypt, and record the hash of those samples into the
+PoH ledger. Thus the segments stay in the exact same order for every PoRep and
+verification can stream the data and verify all the proofs in a single batch.
+This way we can verify multiple proofs concurrently, each one on its own CUDA
+core. The total space required for verification is <code>1_ledger_segment + 2_cbc_blocks * number_of_identities</code> with core count of equal to
+<code>number_of_identities</code>. We use a 64-byte chacha CBC block size.</p>
+<a class="header" href="#network" id="network"><h2>Network</h2></a>
+<p>Validators for PoRep are the same validators that are verifying transactions.
+They have some stake that they have put up as collateral that ensures that
+their work is honest. If you can prove that a validator verified a fake PoRep,
+then the validators stake can be slashed.</p>
+<p>Replicators are specialized <em>light clients</em>. They download a part of the ledger
+and store it, and provide PoReps of storing the ledger. For each verified PoRep
+replicators earn a reward of sol from the mining pool.</p>
+<a class="header" href="#constraints" id="constraints"><h2>Constraints</h2></a>
+<p>We have the following constraints:</p>
+<ul>
+<li>Verification requires generating the CBC blocks. That requires space of 2
+blocks per identity, and 1 CUDA core per identity for the same dataset. So as
+many identities at once should be batched with as many proofs for those
+identities verified concurrently for the same dataset.</li>
+<li>Validators will randomly sample the set of storage proofs to the set that
+they can handle, and only the creators of those chosen proofs will be
+rewarded. The validator can run a benchmark whenever its hardware configuration
+changes to determine what rate it can validate storage proofs.</li>
+</ul>
+<a class="header" href="#validation-and-replication-protocol" id="validation-and-replication-protocol"><h2>Validation and Replication Protocol</h2></a>
+<a class="header" href="#constants" id="constants"><h3>Constants</h3></a>
+<ol>
+<li>NUM_STORAGE_ENTRIES: Number of entries in a segment of ledger data. The
+unit of storage for a replicator.</li>
+<li>NUM_KEY_ROTATION_TICKS: Number of ticks to save a PoH value and cause a
+key generation for the section of ledger just generated and the rotation of
+another key in the set.</li>
+<li>NUM_STORAGE_PROOFS: Number of storage proofs required for a storage proof
+claim to be successfully rewarded.</li>
+<li>RATIO_OF_FAKE_PROOFS: Ratio of fake proofs to real proofs that a storage
+mining proof claim has to contain to be valid for a reward.</li>
+<li>NUM_STORAGE_SAMPLES: Number of samples required for a storage mining
+proof.</li>
+<li>NUM_CHACHA_ROUNDS: Number of encryption rounds performed to generate
+encrypted state.</li>
+</ol>
+<a class="header" href="#validator-behavior" id="validator-behavior"><h3>Validator behavior</h3></a>
+<ol>
+<li>Validator joins the network and submits a storage validation capacity
+transaction which tells the network how many proofs it can process in a given
+period defined by NUM_KEY_ROTATION_TICKS.</li>
+<li>Every NUM_KEY_ROTATION_TICKS the validator stores the PoH value at that
+height.</li>
+<li>Every NUM_KEY_ROTATION_TICKS it also validates samples received from
+replicators. It signs the PoH hash at that point and uses the following
+algorithm with the signature as the input:
+<ul>
+<li>The low 5 bits of the first byte of the signature creates an index into
+another starting byte of the signature.</li>
+<li>The validator then looks at the set of storage proofs where the byte of
+the proof's sha state vector starting from the low byte matches exactly
+with the chosen byte(s) of the signature.</li>
+<li>If the set of proofs is larger than the validator can handle, then it
+increases to matching 2 bytes in the signature.</li>
+<li>Validator continues to increase the number of matching bytes until a
+workable set is found.</li>
+<li>It then creates a mask of valid proofs and fake proofs and sends it to
+the leader. This is a storage proof confirmation transaction.</li>
+</ul>
+</li>
+<li>The storage proof confirmation transaction is integrated into the ledger.</li>
+<li>After a lockout period of NUM_SECONDS_STORAGE_LOCKOUT seconds, the
+validator then submits a storage proof claim transaction which then causes the
+distribution of the storage reward if no challenges were seen for the proof to
+the validators and replicators party to the proofs.</li>
+<li>Validator responds to RPC interfaces for what the last storage epoch PoH
+value is and its entry_height.</li>
+</ol>
+<a class="header" href="#replicator-behavior" id="replicator-behavior"><h3>Replicator behavior</h3></a>
+<ol>
+<li>Since a replicator is somewhat of a light client and not downloading all the
+ledger data, they have to rely on other full nodes (validators) for
+information. Any given validator may or may not be malicious and give incorrect
+information, although there are not any obvious attack vectors that this could
+accomplish besides having the replicator do extra wasted work.  For many of the
+operations there are number of options depending on how paranoid a replicator
+is:
+<ul>
+<li>(a) replicator can ask a validator</li>
+<li>(b) replicator can ask multiple validators</li>
+<li>(c) replicator can subscribe to the full transaction stream and generate
+the information itself</li>
+<li>(d) replicator can subscribe to an abbreviated transaction stream to
+generate the information itself</li>
+</ul>
+</li>
+<li>A replicator obtains the PoH hash corresponding to the last key rotation
+along with its entry_height.</li>
+<li>The replicator signs the PoH hash with its keypair. That signature is the
+seed used to pick the segment to replicate and also the encryption key. The
+replicator mods the signature with the entry_height to get which segment to
+replicate.</li>
+<li>The replicator retrives the ledger by asking peer validators and
+replicators. See 6.5.</li>
+<li>The replicator then encrypts that segment with the key with chacha algorithm
+in CBC mode with NUM_CHACHA_ROUNDS of encryption.</li>
+<li>The replicator initializes a chacha rng with the signature from step 2 as
+the seed.</li>
+<li>The replicator generates NUM_STORAGE_SAMPLES samples in the range of the
+entry size and samples the encrypted segment with sha256 for 32-bytes at each
+offset value. Sampling the state should be faster than generating the encrypted
+segment.</li>
+<li>The replicator sends a PoRep proof transaction which contains its sha state
+at the end of the sampling operation, its seed and the samples it used to the
+current leader and it is put onto the ledger.</li>
+<li>The replicator then generates another set of offsets which it submits a fake
+proof with an incorrect sha state. It can be proven to be fake by providing the
+seed for the hash result.
+<ul>
+<li>A fake proof should consist of a replicator hash of a signature of a PoH
+value. That way when the replicator reveals the fake proof, it can be
+verified on chain.</li>
+</ul>
+</li>
+<li>The replicator monitors the ledger, if it sees a fake proof integrated, it
+creates a challenge transaction and submits it to the current leader. The
+transacation proves the validator incorrectly validated a fake storage proof.
+The replicator is rewarded and the validator's staking balance is slashed or
+frozen.</li>
+</ol>
+<a class="header" href="#finding-who-has-a-given-block-of-ledger" id="finding-who-has-a-given-block-of-ledger"><h3>Finding who has a given block of ledger</h3></a>
+<ol>
+<li>Validators monitor the transaction stream for storage mining proofs, and
+keep a mapping of ledger segments by entry_height to public keys. When it sees
+a storage mining proof it updates this mapping and provides an RPC interface
+which takes an entry_height and hands back a list of public keys.  The client
+then looks up in their cluster_info table to see which network address that
+corresponds to and sends a repair request to retrieve the necessary blocks of
+ledger.</li>
+<li>Validators would need to prune this list which it could do by periodically
+looking at the oldest entries in its mappings and doing a network query to see
+if the storage host is still serving the first entry.</li>
+</ol>
+<a class="header" href="#sybil-attacks" id="sybil-attacks"><h2>Sybil attacks</h2></a>
+<p>For any random seed, we force everyone to use a signature that is derived from
+a PoH hash. Everyone must use the same count, so the same PoH hash is signed by
+every participant. The signatures are then each cryptographically tied to the
+keypair, which prevents a leader from grinding on the resulting value for more
+than 1 identity.</p>
+<p>Since there are many more client identities then encryption identities, we need
+to split the reward for multiple clients, and prevent Sybil attacks from
+generating many clients to acquire the same block of data. To remain BFT we
+want to avoid a single human entity from storing all the replications of a
+single chunk of the ledger.</p>
+<p>Our solution to this is to force the clients to continue using the same
+identity. If the first round is used to acquire the same block for many client
+identities, the second round for the same client identities will force a
+redistribution of the signatures, and therefore PoRep identities and blocks.
+Thus to get a reward for replicators need to store the first block for free and
+the network can reward long lived client identities more than new ones.</p>
+<a class="header" href="#validator-attacks" id="validator-attacks"><h2>Validator attacks</h2></a>
+<ul>
+<li>If a validator approves fake proofs, replicator can easily out them by
+showing the initial state for the hash.</li>
+<li>If a validator marks real proofs as fake, no on-chain computation can be done
+to distinguish who is correct. Rewards would have to rely on the results from
+multiple validators in a stake-weighted fashion to catch bad actors and
+replicators from being locked out of the network.</li>
+<li>Validator stealing mining proof results for itself. The proofs are derived
+from a signature from a replicator, since the validator does not know the
+private key used to generate the encryption key, it cannot be the generator of
+the proof.</li>
+</ul>
+<a class="header" href="#reward-incentives" id="reward-incentives"><h2>Reward incentives</h2></a>
+<p>Fake proofs are easy to generate but difficult to verify. For this reason,
+PoRep proof transactions generated by replicators may require a higher fee than
+a normal transaction to represent the computational cost required by
+validators.</p>
+<p>Some percentage of fake proofs are also necessary to receive a reward from
+storage mining.</p>
+<a class="header" href="#notes-1" id="notes-1"><h2>Notes</h2></a>
+<ul>
+<li>We can reduce the costs of verification of PoRep by using PoH, and actually
+make it feasible to verify a large number of proofs for a global dataset.</li>
+<li>We can eliminate grinding by forcing everyone to sign the same PoH hash and
+use the signatures as the seed</li>
+<li>The game between validators and replicators is over random blocks and random
+encryption identities and random data samples. The goal of randomization is
+to prevent colluding groups from having overlap on data or validation.</li>
+<li>Replicator clients fish for lazy validators by submitting fake proofs that
+they can prove are fake.</li>
+<li>To defend against Sybil client identities that try to store the same block we
+force the clients to store for multiple rounds before receiving a reward.</li>
+<li>Validators should also get rewarded for validating submitted storage proofs
+as incentive for storing the ledger. They can only validate proofs if they
+are storing that slice of the ledger.</li>
+</ul>
+<a class="header" href="#signing-using-secure-enclave" id="signing-using-secure-enclave"><h1>Signing using Secure Enclave</h1></a>
+<p>This document defines the security mechanism of signing keys used by the
+fullnodes. Every node contains an asymmetric key that's used for signing
+and verifying the votes. The node signs the vote transactions using its private
+key. Other entities can verify the signature using the node's public key.</p>
+<p>The node's stake or its resources could be compromised if its private key is
+used to sign incorrect data (e.g. voting on multiple forks of the ledger). So,
+it's important to safeguard the private key.</p>
+<p>Secure Enclaves (such as SGX) provide a layer of memory and computation
+protection. An enclave can be used to generate an asymmetric key and keep the
+private key in its protected memory. It can expose an API that user (untrusted)
+code can use for signing the transactions.</p>
+<a class="header" href="#message-flow-1" id="message-flow-1"><h2>Message Flow</h2></a>
+<ol>
+<li>The node initializes the enclave at startup
+<ul>
+<li>The enclave generates an asymmetric key and returns the public key to the
+node</li>
+<li>The keypair is ephemeral. A new keypair is generated on node bootup. A
+new keypair might also be generated at runtime based on some TBD
+criteria.</li>
+<li>The enclave returns its attestation report to the node</li>
+</ul>
+</li>
+<li>The node performs attestation of the enclave (e.g using Intel's IAS APIs)
+<ul>
+<li>The node ensures that the Secure Enclave is running on a TPM and is
+signed by a trusted party</li>
+</ul>
+</li>
+<li>The owner of the node grants ephemeral key permission to use its stake. This
+process is TBD.</li>
+<li>The node's untrusted, non-enclave software calls trusted enclave software
+using its interface to sign transactions and other data.
+<ul>
+<li>In case of vote signing, the node needs to verify the PoH. The PoH
+verification is an integral part of signing. The enclave would be
+presented with some verifiable data that it'll check before signing the vote.</li>
+<li>The process of generating the verifiable data in untrusted space is TBD</li>
+</ul>
+</li>
+</ol>
+<a class="header" href="#poh-verification" id="poh-verification"><h2>PoH Verification</h2></a>
+<ol>
+<li>When the node votes on an en entry <code>X</code>, there's a lockout period <code>N</code>, for
+which it cannot vote on a fork that does not contain <code>X</code> in its history.</li>
+<li>Every time the node votes on the derivative of <code>X</code>, say <code>X+y</code>, the lockout
+period for <code>X</code> increases by a factor <code>F</code> (i.e. the duration node cannot vote on
+a fork that does not contain <code>X</code> increases).
+<ul>
+<li>The lockout period for <code>X+y</code> is still <code>N</code> until the node votes again.</li>
+</ul>
+</li>
+<li>The lockout period increment is capped (e.g. factor <code>F</code> applies maximum 32
+times).</li>
+<li>The signing enclave must not sign a vote that violates this policy. This
+means
+<ul>
+<li>Enclave is initialized with <code>N</code>, <code>F</code> and <code>Factor cap</code></li>
+<li>Enclave stores <code>Factor cap</code> number of entry IDs on which the node had
+previously voted</li>
+<li>The sign request contains the entry ID for the new vote</li>
+<li>Enclave verifies that new vote's entry ID is on the correct fork
+(following the rules #1 and #2 above)</li>
+</ul>
+</li>
+</ol>
+<a class="header" href="#ancestor-verification" id="ancestor-verification"><h2>Ancestor Verification</h2></a>
+<p>This is alternate, albeit, less certain approach to verifying voting fork.</p>
+<ol>
+<li>The validator maintains an active set of nodes in the cluster</li>
+<li>It observes the votes from the active set in the last voting period</li>
+<li>It stores the ancestor/last_tick at which each node voted</li>
+<li>It sends new vote request to vote-signing service
+<ul>
+<li>It includes previous votes from nodes in the active set, and their
+corresponding ancestors</li>
+</ul>
+</li>
+<li>The signer checks if the previous votes contains a vote from the validator,
+and the vote ancestor matches with majority of the nodes
+<ul>
+<li>It signs the new vote if the check is successful</li>
+<li>It asserts (raises an alarm of some sort) if the check is unsuccessful</li>
+</ul>
+</li>
+</ol>
+<p>The premise is that the validator can be spoofed at most once to vote on
+incorrect data. If someone hijacks the validator and submits a vote request for
+bogus data, that vote will not be included in the PoH (as it'll be rejected by
+the cluster). The next time the validator sends a request to sign the vote, the
+signing service will detect that validator's last vote is missing (as part of
+#5 above).</p>
+<a class="header" href="#fork-determination" id="fork-determination"><h2>Fork determination</h2></a>
+<p>Due to the fact that the enclave cannot process PoH, it has no direct knowledge
+of fork history of a submitted validator vote. Each enclave should be initiated
+with the current <em>active set</em> of public keys. A validator should submit its
+current vote along with the votes of the active set (including itself) that it
+observed in the slot of its previous vote. In this way, the enclave can surmise
+the votes accompanying the validator's previous vote and thus the fork being
+voted on. This is not possible for the validator's initial submitted vote, as
+it will not have a 'previous' slot to reference. To account for this, a short
+voting freeze should apply until the second vote is submitted containing the
+votes within the active set, along with it's own vote, at the height of the
+initial vote.</p>
+<a class="header" href="#enclave-configuration" id="enclave-configuration"><h2>Enclave configuration</h2></a>
+<p>A staking client should be configurable to prevent voting on inactive forks.
+This mechanism should use the client's known active set <code>N_active</code> along with a
+threshold vote <code>N_vote</code> and a threshold depth <code>N_depth</code> to determine whether or
+not to continue voting on a submitted fork. This configuration should take the
+form of a rule such that the client will only vote on a fork if it observes
+more than <code>N_vote</code> at <code>N_depth</code>. Practically, this represents the client from
+confirming that it has observed some probability of economic finality of the
+submitted fork at a depth where an additional vote would create a lockout for
+an undesirable amount of time if that fork turns out not to be live.</p>
+<a class="header" href="#signing-service-1" id="signing-service-1"><h2>Signing service</h2></a>
+<p>The signing service consists of a a JSON RPC server, and a request processor.
+At startup, it starts the RPC server at a configured port and waits for
+client/validator requests. It expects the following type of requests.</p>
+<ol>
+<li>Register a new validator node
+<ul>
+<li>The request contains validator's identity (public key)</li>
+<li>The request is signed with validator's private key</li>
+<li>The service will drop the request if signature of the request cannot be
+verified</li>
+<li>The service will create a new voting asymmetric key for the validator,
+and return the public key as a response</li>
+<li>If a validator retries to register, it'll return the public key from the
+pre-existing keypair</li>
+</ul>
+</li>
+<li>Sign a vote
+<ul>
+<li>The request contains voting transaction, and all verification data (as
+described in Ancestor Verification)</li>
+<li>The request is signed with validator's private key</li>
+<li>The service will drop the request if signature of the request cannot be
+verified</li>
+<li>The service will verify the voting data</li>
+<li>The service will return a signed transaction (or signature for the
+transaction)</li>
+</ul>
+</li>
+</ol>
+<p>The service could potentially have different variations, depending on the
+hardware platform capabilities. For example, if the hardware supports a secure
+enclave, the service can offload asymmetric key generation, and private key
+protection to the enclave. A less secure implementation of the service could
+simply carry the keypair in the process memory.</p>
+<a class="header" href="#validator-voting" id="validator-voting"><h2>Validator voting</h2></a>
+<p>A validator node, at startup, creates a new vote account and registers it with
+the cluster. This is done by submitting a new &quot;vote register&quot; transaction. The
+transaction contains validator's keypair, it's vote signing public key, and
+some additional information. The other nodes on the cluster process this
+transaction and include the new validator in the active set.</p>
+<p>Subsequently, the validator submits a &quot;new vote&quot; transaction on a voting event.
+This vote is signed with validator's voting private key.</p>
+<p>The validator code will change to interface with Signing service for &quot;vote
+register&quot; and &quot;new vote&quot; use cases.</p>
+<a class="header" href="#configuration" id="configuration"><h3>Configuration</h3></a>
+<p>The validator node will be configured with Signing service's network endpoint
+(IP/Port).</p>
+<a class="header" href="#register" id="register"><h3>Register</h3></a>
+<p>At startup, the validator will call Signing service using JSON RPC to register
+itself. The RPC call will return the voting public key for the validator node.
+The validator will create a new &quot;vote register&quot; transaction including this
+public key in it, and submit it to the cluster.</p>
+<a class="header" href="#collect-votes-for-last-period" id="collect-votes-for-last-period"><h3>Collect votes for last period</h3></a>
+<p>The validator will look up the votes submitted by all the nodes in the cluster
+for the last voting period. This information will be submitted to signing
+service with new vote signing request.</p>
+<a class="header" href="#new-vote-signing" id="new-vote-signing"><h3>New Vote Signing</h3></a>
+<p>The validator will create a &quot;new vote&quot; transaction and send it to the signing
+service using JSON RPC. The RPC request will also include the vote verification
+data. On success, RPC call will return the signature for the vote. On failure,
+RPC call will return the failure code.</p>
+<a class="header" href="#challenges" id="challenges"><h2>Challenges</h2></a>
+<ol>
+<li>The nodes are currently being configured with asymmetric keys that are
+generated and stored in PKCS8 files.</li>
+<li>The genesis block contains an entry that's signed with leader's private key.
+This entry is used to identify the primordial leader.</li>
+<li>Generation of verifiable data in untrusted space for PoH verification in the
+enclave.</li>
+<li>Need infrastructure for granting stake to an ephemeral key.</li>
+</ol>
+<a class="header" href="#staking-rewards" id="staking-rewards"><h1>Staking Rewards</h1></a>
+<p>Initial Proof of Stake (PoS) (i.e. using in-protocol asset, SOL, to provide
+secure consensus) design ideas outlined here. Solana will implement a proof of
+stake reward/security scheme for node validators in the cluster. The purpose is
+threefold:</p>
+<ul>
+<li>Align validator incentives with that of the greater cluster through
+skin-in-the-game deposits at risk</li>
+<li>Avoid 'nothing at stake' fork voting issues by implementing slashing rules
+aimed at promoting fork convergence</li>
+<li>Provide an avenue for validator rewards provided as a function of validator
+participation in the cluster.</li>
+</ul>
+<p>While many of the details of the specific implementation are currently under
+consideration and are expected to come into focus through specific modeling
+studies and parameter exploration on the Solana testnet, we outline here our
+current thinking on the main components of the PoS system. Much of this
+thinking is based on the current status of Casper FFG, with optimizations and
+specific attributes to be modified as is allowed by Solana's Proof of History
+(PoH) blockchain data structure.</p>
+<a class="header" href="#general-overview" id="general-overview"><h3>General Overview</h3></a>
+<p>Solana's ledger validation design is based on a rotating, stake-weighted
+randomly selected leader broadcasting transactions in a PoH data
+structure to validating nodes. These nodes, upon receiving the leader's
+broadcast, have the opportunity to vote on the current state and PoH height by
+signing a transaction into the PoH stream.</p>
+<p>To become a Solana validator, a fullnode must deposit/lock-up some amount
+of SOL in a contract. This SOL will not be accessible for a specific time
+period. The precise duration of the staking lockup period has not been
+determined. However we can consider three phases of this time for which
+specific parameters will be necessary:</p>
+<ul>
+<li><em>Warm-up period</em>: which SOL is deposited and inaccessible to the node,
+however PoH transaction validation has not begun. Most likely on the order of
+days to weeks</li>
+<li><em>Validation period</em>: a minimum duration for which the deposited SOL will be
+inaccessible, at risk of slashing (see slashing rules below) and earning
+rewards for the validator participation. Likely duration of months to a
+year.</li>
+<li><em>Cool-down period</em>: a duration of time following the submission of a
+'withdrawal' transaction. During this period validation responsibilities have
+been removed and the funds continue to be inaccessible. Accumulated rewards
+should be delivered at the end of this period, along with the return of the
+initial deposit.</li>
+</ul>
+<p>Solana's trustless sense of time and ordering provided by its PoH data
+structure, along with its
+<a href="https://www.youtube.com/watch?v=qt_gDRXHrHQ&amp;t=1s">avalanche</a> data broadcast
+and transmission design, should provide subsecond confirmation times that scale
+with the log of the number of nodes in the cluster. This means we shouldn't
+have to restrict the number of validating nodes with a prohibitive 'minimum
+deposits' and expect nodes to be able to become validators with nominal amounts
+of SOL staked. This should also render validation pools, a proposed solution
+for economic censorship imposed by minimum staking amounts currently described
+in Casper, unnecessary and remove the concern for needing to put slashable
+stake at risk while relying on others to play by the rules.</p>
+<a class="header" href="#stake-weighted-rewards" id="stake-weighted-rewards"><h3>Stake-weighted Rewards</h3></a>
+<p>Rewards are expected to be paid out to active validators as a function of
+validator activity and as a proportion of the percentage of SOL they have at
+stake out of the entirety of the staking pool.</p>
+<p>We expect to define a baseline annual validator payout/inflation rate based on
+the total SOL deposited. E.g. 10% annual interest on SOL deposited with X total
+SOL deposited as slashable on the cluster. This is the same design as currently
+proposed in Casper FFG which has additionally specifies how inflation rates
+adjust as a function of total ETH deposited. Specifically, Casper validator
+returns are proportional to the inverse square root of the total deposits and
+initial annual rates are estimated as:</p>
+<table><thead><tr><th align="right"> Deposit Size </th><th align="right"> Annual Validator Interest </th></tr></thead><tbody>
+<tr><td align="right"> 2.5M ETH     </td><td align="right"> 10.12%                    </td></tr>
+<tr><td align="right"> 10M ETH      </td><td align="right"> 5.00%                     </td></tr>
+<tr><td align="right"> 20M ETH      </td><td align="right"> 3.52%                     </td></tr>
+<tr><td align="right"> 40M ETH      </td><td align="right"> 2.48%                     </td></tr>
+</tbody></table>
+<p>This has the nice property of potentially incentivizing participation around a
+target deposit size. Incentivisation of specific participation rates more
+directly (rather than deposit size) may something also worth exploring.</p>
+<p>The specifics of the Solana validator reward scheme are to be worked out in
+parallel with a design for transaction fee assignment as well as our storage
+mining reward scheme.</p>
+<a class="header" href="#slashing-rules" id="slashing-rules"><h3>Slashing rules</h3></a>
+<p>Unlike Proof of Work (PoW) where off-chain capital expenses are already
+deployed at the time of block construction/voting, PoS systems require
+capital-at-risk to prevent a logical/optimal strategy of multiple chain voting.
+We intend to implement slashing rules which, if broken, result some amount of
+the offending validator's deposited stake to be removed from circulation. Given
+the ordering properties of the PoH data structure, we believe we can simplify
+our slashing rules to the level of a voting lockout time assigned per vote.</p>
+<p>I.e. Each vote has an associated lockout time (PoH duration) that represents a
+duration by any additional vote from that validator must be in a PoH that
+contains the original vote, or a portion of that validator's stake is
+slashable. This duration time is a function of the initial vote PoH count and
+all additional vote PoH counts.  It will likely take the form:</p>
+<p>Lockout<sub>i</sub>(PoH<sub>i</sub>, PoH<sub>j</sub>) = PoH<sub>j</sub> + K *
+exp((PoH<sub>j</sub> - PoH<sub>i</sub>) / K)</p>
+<p>Where PoH<sub>i</sub> is the height of the vote that the lockout is to be
+applied to and PoH<sub>j</sub> is the height of the current vote on the same
+fork. If the validator submits a vote on a different PoH fork on any
+PoH<sub>k</sub> where k &gt; j &gt; i and PoH<sub>k</sub> &lt; Lockout(PoH<sub>i</sub>,
+PoH<sub>j</sub>), then a portion of that validator's stake is at risk of being
+slashed.</p>
+<p>In addition to the functional form lockout described above, early
+implementation may be a numerical approximation based on a First In, First Out
+(FIFO) data structure and the following logic:</p>
+<ul>
+<li>FIFO queue holding 32 votes per active validator</li>
+<li>new votes are pushed on top of queue (<code>push_front</code>)</li>
+<li>expired votes are popped off top (<code>pop_front</code>)</li>
+<li>as votes are pushed into the queue, the lockout of each queued vote doubles</li>
+<li>votes are removed from back of queue if <code>queue.len() &gt; 32</code></li>
+<li>the earliest and latest height that has been removed from the back of the
+queue should be stored</li>
+</ul>
+<p>It is likely that a reward will be offered as a % of the slashed amount to any
+node that submits proof of this slashing condition being violated to the PoH.</p>
+<a class="header" href="#partial-slashing" id="partial-slashing"><h4>Partial Slashing</h4></a>
+<p>In the schema described so far, when a validator votes on a given PoH stream,
+they are committing themselves to that fork for a time determined by the vote
+lockout. An open question is whether validators will be hesitant to begin
+voting on an available fork if the penalties are perceived too harsh for an
+honest mistake or flipped bit.</p>
+<p>One way to address this concern would be a partial slashing design that results
+in a slashable amount as a function of either:</p>
+<ol>
+<li>the fraction of validators, out of the total validator pool, that were also
+slashed during the same time period (ala Casper)</li>
+<li>the amount of time since the vote was cast (e.g. a linearly increasing % of
+total deposited as slashable amount over time), or both.</li>
+</ol>
+<p>This is an area currently under exploration</p>
+<a class="header" href="#penalties" id="penalties"><h3>Penalties</h3></a>
+<p>As previously discussed, annual validator reward rates are to be specified as a
+function of total amount staked. The cluster rewards validators who are online
+and actively participating in the validation process throughout the entirety of
+their <em>validation period</em>. For validators that go offline/fail to validate
+transactions during this period, their annual reward is effectively reduced.</p>
+<p>Similarly, we may consider an algorithmic reduction in a validator's active
+amount staked amount in the case that they are offline. I.e. if a validator is
+inactive for some amount of time, either due to a partition or otherwise, the
+amount of their stake that is considered ‘active’ (eligible to earn rewards)
+may be reduced. This design would be structured to help long-lived partitions
+to eventually reach finality on their respective chains as the % of non-voting
+total stake is reduced over time until a super-majority can be achieved by the
+active validators in each partition. Similarly, upon re-engaging, the ‘active’
+amount staked will come back online at some defined rate. Different rates of
+stake reduction may be considered depending on the size of the partition/active
+set.</p>
+<a class="header" href="#fork-selection" id="fork-selection"><h1>Fork Selection</h1></a>
+<p>This article describes Solana's <em>Nakomoto Fork Selection</em> algorithm based on time
+locks. It satisfies the following properties:</p>
+<ul>
+<li>A voter can eventually recover from voting on a fork that doesn't become the
+fork with the desired network finality.</li>
+<li>If the voters share a common ancestor then they will converge to a fork
+containing that ancestor no matter how they are partitioned. The converged
+ancestor may not be the latest possible ancestor at the start of the fork.</li>
+<li>Rollback requires exponentially more time for older votes than for newer
+votes.</li>
+<li>Voters have the freedom to set a minimum network confirmation threshold
+before committing a vote to a higher lockout.  This allows each voter to make
+a trade-off between risk and reward. See <a href="#cost-of-rollback">cost of rollback</a>.</li>
+</ul>
+<a class="header" href="#time" id="time"><h2>Time</h2></a>
+<p>For networks like Solana, time can be the PoH hash count, which is a VDF that
+provides a source of time before consensus. Other networks adopting this
+approach would need to consider a global source of time.</p>
+<p>For Solana, time uniquely identifies a specific leader for fork generation.  At
+any given time only 1 leader, which can be computed from the ledger itself, can
+propose a fork.  For more details, see <a href="fork-generation.html">fork generation</a>
+and <a href="leader-rotation.html">leader rotation</a>.</p>
+<a class="header" href="#algorithm" id="algorithm"><h2>Algorithm</h2></a>
+<p>The basic idea to this approach is to stack consensus votes.  Each vote in the
+stack is a confirmation of a fork.  Each confirmed fork is an ancestor of the
+fork above it.  Each consensus vote has a <code>lockout</code> in units of time before the
+validator can submit a vote that does not contain the confirmed fork as an
+ancestor.</p>
+<p>When a vote is added to the stack, the lockouts of all the previous votes in
+the stack are doubled (more on this in <a href="#Rollback">Rollback</a>).  With each new
+vote, a voter commits the previous votes to an ever-increasing lockout.  At 32
+votes we can consider the vote to be at <code>max lockout</code> any votes with a lockout
+equal to or above <code>1&lt;&lt;32</code> are dequeued (FIFO).  Dequeuing a vote is the trigger
+for a reward.  If a vote expires before it is dequeued, it and all the votes
+above it are popped (LIFO) from the vote stack.  The voter needs to start
+rebuilding the stack from that point.</p>
+<a class="header" href="#rollback" id="rollback"><h3>Rollback</h3></a>
+<p>Before a vote is pushed to the stack, all the votes leading up to vote with a
+lower lock time than the new vote are popped.  After rollback lockouts are not
+doubled until the voter catches up to the rollback height of votes.</p>
+<p>For example, a vote stack with the following state:</p>
+<table><thead><tr><th align="right"> vote </th><th align="right"> vote time </th><th align="right"> lockout </th><th align="right"> lock expiration time </th></tr></thead><tbody>
+<tr><td align="right">    4 </td><td align="right">         4 </td><td align="right">      2  </td><td align="right">                    6 </td></tr>
+<tr><td align="right">    3 </td><td align="right">         3 </td><td align="right">      4  </td><td align="right">                    7 </td></tr>
+<tr><td align="right">    2 </td><td align="right">         2 </td><td align="right">      8  </td><td align="right">                   10 </td></tr>
+<tr><td align="right">    1 </td><td align="right">         1 </td><td align="right">      16 </td><td align="right">                   17 </td></tr>
+</tbody></table>
+<p><em>Vote 5</em> is at time 9, and the resulting state is</p>
+<table><thead><tr><th> vote </th><th> vote time </th><th> lockout </th><th> lock expiration time </th></tr></thead><tbody>
+<tr><td align="right">    5 </td><td align="right">         9 </td><td align="right">      2  </td><td align="right">                   11 </td></tr>
+<tr><td align="right">    2 </td><td align="right">         2 </td><td align="right">      8  </td><td align="right">                   10 </td></tr>
+<tr><td align="right">    1 </td><td align="right">         1 </td><td align="right">      16 </td><td align="right">                   17 </td></tr>
+</tbody></table>
+<p><em>Vote 6</em> is at time 10</p>
+<table><thead><tr><th> vote </th><th> vote time </th><th> lockout </th><th> lock expiration time </th></tr></thead><tbody>
+<tr><td align="right">    6 </td><td align="right">        10 </td><td align="right">       2 </td><td align="right">                   12 </td></tr>
+<tr><td align="right">    5 </td><td align="right">         9 </td><td align="right">       4 </td><td align="right">                   13 </td></tr>
+<tr><td align="right">    2 </td><td align="right">         2 </td><td align="right">       8 </td><td align="right">                   10 </td></tr>
+<tr><td align="right">    1 </td><td align="right">         1 </td><td align="right">      16 </td><td align="right">                   17 </td></tr>
+</tbody></table>
+<p>At time 10 the new votes caught up to the previous votes.  But <em>vote 2</em> expires
+at 10, so the when <em>vote 7</em> at time 11 is applied the votes including and above
+<em>vote 2</em> will be popped.</p>
+<table><thead><tr><th> vote </th><th> vote time </th><th> lockout </th><th> lock expiration time </th></tr></thead><tbody>
+<tr><td align="right">    7 </td><td align="right">        11 </td><td align="right">       2 </td><td align="right">                   13 </td></tr>
+<tr><td align="right">    1 </td><td align="right">         1 </td><td align="right">      16 </td><td align="right">                   17 </td></tr>
+</tbody></table>
+<p>The lockout for vote 1 will not increase from 16 until the stack contains 5
+votes.</p>
+<a class="header" href="#slashing-and-rewards" id="slashing-and-rewards"><h3>Slashing and Rewards</h3></a>
+<p>The purpose of the lockout is to force a voter to commit opportunity cost to a
+specific fork.  Voters that violate the lockouts and vote for a diverging fork
+within the lockout should be punished.  Slashing or simply freezing the voter
+from rewards for a long period of time can be used as punishment.</p>
+<p>Voters should be rewarded for selecting the fork that the rest of the network
+selected as often as possible.  This is well-aligned with generating a reward
+when the vote stack is full and the oldest vote needs to be dequeued.  Thus a
+reward should be generated for each successful dequeue.</p>
+<a class="header" href="#cost-of-rollback" id="cost-of-rollback"><h3>Cost of Rollback</h3></a>
+<p>Cost of rollback of <em>fork A</em> is defined as the cost in terms of lockout time to
+the validators to confirm any other fork that does not include <em>fork A</em> as an
+ancestor.</p>
+<p>The <strong>Economic Finality</strong> of <em>fork A</em> can be calculated as the loss of all the
+rewards from rollback of <em>fork A</em> and its descendants, plus the opportunity
+cost of reward due to the exponentially growing lockout of the votes that have
+confirmed <em>fork A</em>.</p>
+<a class="header" href="#thresholds" id="thresholds"><h3>Thresholds</h3></a>
+<p>Each voter can independently set a threshold of network commitment to a fork
+before that voter commits to a fork.  For example, at vote stack index 7, the
+lockout is 256 time units.  A voter may withhold votes and let votes 0-7 expire
+unless the vote at index 7 has at greater than 50% commitment in the network.
+This allows each voter to independently control how much risk to commit to a
+fork.  Committing to forks at a higher frequency would allow the voter to earn
+more rewards.</p>
+<a class="header" href="#algorithm-parameters" id="algorithm-parameters"><h3>Algorithm parameters</h3></a>
+<p>These parameters need to be tuned.</p>
+<ul>
+<li>Number of votes in the stack before dequeue occurs (32).</li>
+<li>Rate of growth for lockouts in the stack (2x).</li>
+<li>Starting default lockout (2).</li>
+<li>Threshold depth for minimum network commitment before committing to the fork
+(8).</li>
+<li>Minimum network commitment size at threshold depth (50%+).</li>
+</ul>
+<a class="header" href="#free-choice" id="free-choice"><h3>Free Choice</h3></a>
+<p>A &quot;Free Choice&quot; is an unenforcible voter action.  A voter that maximizes
+self-reward over all possible futures should behave in such a way that the
+system is stable, and the local greedy choice should result in a greedy choice
+over all possible futures.  A set of voter that are engaging in choices to
+disrupt the protocol should be bound by their stake weight to the denial of
+service.  Two options exits for voter:</p>
+<ul>
+<li>a voter can outrun previous voters in virtual generation and submit a
+concurrent fork</li>
+<li>a voter can withhold a vote to observe multiple forks before voting</li>
+</ul>
+<p>In both cases, the voters in the network have several forks to pick from
+concurrently, even though each fork represents a different height.  In both
+cases it is impossible for the protocol to detect if the voter behavior is
+intentional or not.</p>
+<a class="header" href="#greedy-choice-for-concurrent-forks" id="greedy-choice-for-concurrent-forks"><h3>Greedy Choice for Concurrent Forks</h3></a>
+<p>When evaluating multiple forks, each voter should pick the fork that will
+maximize economic finality for the network, or the latest fork if all are equal.</p>
+<a class="header" href="#entry-tree" id="entry-tree"><h1>Entry Tree</h1></a>
+<p>This document proposes a change to ledger and window to support Solana's <a href="fork-generation.html">fork
+generation</a> behavior.</p>
+<a class="header" href="#current-design" id="current-design"><h2>Current Design</h2></a>
+<a class="header" href="#functionality-of-window-and-ledger" id="functionality-of-window-and-ledger"><h3>Functionality of Window And Ledger</h3></a>
+<p>The basic responsibilities of the window and the ledger in a Solana fullnode
+are:</p>
+<ol>
+<li>Window: serve as a temporary, RAM-backed store of blobs of the PoH chain
+for reordering and assembly into contiguous blocks to be sent to the bank
+for verification.</li>
+<li>Window: serve as a RAM-backed repair facility for other validator nodes,
+which may query the network for as-yet unreceived blobs.</li>
+<li>Ledger: provide disk-based storage of the PoH chain in case of node
+restart.</li>
+<li>Ledger: provide disk-backed repair facility for when the (smaller)
+RAM-backed window doesn't cover the repair request.</li>
+</ol>
+<p>The window is at the front of a validator node's processing pipeline, blobs are
+received, cached, re-ordered before being deserialized into Entries, passed to
+the bank for verification, and finally on to the ledger, which is at the back
+of a validator node's pipeline.</p>
+<p>The window holds blobs (the over-the-air format, serialized Entries,
+one-per-blob).  The ledger holds serialized Entries without any blob
+information.</p>
+<a class="header" href="#limitations" id="limitations"><h3>Limitations</h3></a>
+<a class="header" href="#one-dimensional-key-space" id="one-dimensional-key-space"><h4>One-dimensional key space</h4></a>
+<p>The window and the ledger are indexed by ledger height, which is number of
+Entries ever generated in the PoH chain until the current blob.  This
+limitation prevents the window and the ledger from storing the overlapping
+histories possible in Solana's consensus protocol.</p>
+<a class="header" href="#limited-caching" id="limited-caching"><h4>Limited caching</h4></a>
+<p>The window is a circular buffer.  It cannot accept blobs that are farther in
+the future than the window is currently working.  If a blob arrives that is too
+far ahead, it is dropped and will subsequently need to be repaired, incurring
+further delay for the node.</p>
+<a class="header" href="#loss-of-blob-signatures" id="loss-of-blob-signatures"><h4>Loss of blob signatures</h4></a>
+<p>Because the blob signatures are stripped before being stored by the ledger,
+repair requests served from the ledger can't be verified to the original
+leader.</p>
+<a class="header" href="#rollback-and-checkpoint-switching-forks-separate-functions" id="rollback-and-checkpoint-switching-forks-separate-functions"><h4>Rollback and checkpoint, switching forks, separate functions</h4></a>
+<p>The window and the ledger can't handle replay of alternate forks.  Once a Blob
+has passed through the window, it's in the past.  The replay stage of a
+validator will need to roll back to a previous checkpoint and decode an
+alternate set of Blobs to the Bank.  The separated and one-way nature of window
+and ledger makes this hard.</p>
+<a class="header" href="#new-design" id="new-design"><h2>New Design</h2></a>
+<p>A unified window and ledger allows a validator to record every blob it observes
+on the network, in any order, as long as the blob is consistent with the
+network's leader schedule.</p>
+<p>Blobs are moved to a fork-able key space the tuple of <code>leader slot</code> + <code>blob index</code> (within the slot).  This permits the skip-list structure of the Solana
+protocol to be stored in its entirety, without a-priori choosing which fork to
+follow, which Entries to persist or when to persist them.</p>
+<p>Repair requests for recent blobs are served out of RAM or recent files and out
+of deeper storage for less recent blobs, as implemented by the store backing
+EntryTree.</p>
+<a class="header" href="#functionalities-of-entrytree" id="functionalities-of-entrytree"><h3>Functionalities of EntryTree</h3></a>
+<ol>
+<li>Persistence: the EntryTree lives in the front of the nodes verification
+pipeline, right behind network receive and signature verification.  If the
+blob received is consistent with the leader schedule (i.e. was signed by the
+leader for the indicated slot), it is immediately stored.</li>
+<li>Repair: repair is the same as window repair above, but able to serve any
+blob that's been received. EntryTree stores blobs with signatures,
+preserving the chain of origination.</li>
+<li>Forks: EntryTree supports random access of blobs, so can support a
+validator's need to rollback and replay from a Bank checkpoint.</li>
+<li>Restart: with proper pruning/culling, the EntryTree can be replayed by
+ordered enumeration of entries from slot 0.  The logic of the replay stage
+(i.e. dealing with forks) will have to be used for the most recent entries in
+the EntryTree.</li>
+</ol>
+<a class="header" href="#entrytree-design" id="entrytree-design"><h3>EntryTree Design</h3></a>
+<ol>
+<li>
+<p>Entries in the EntryTree are stored as key-value pairs, where the key is the concatenated
+slot index and blob index for an entry, and the value is the entry data. Note blob indexes are zero-based for each slot (i.e. they're slot-relative).</p>
+</li>
+<li>
+<p>The EntryTree maintains metadata for each slot, in the <code>SlotMeta</code> struct containing:</p>
+<ul>
+<li><code>slot_index</code> - The index of this slot</li>
+<li><code>num_blocks</code> - The number of blocks in the slot (used for chaining to a previous slot)</li>
+<li><code>consumed</code> - The highest blob index <code>n</code>, such that for all <code>m &lt; n</code>, there exists a blob in this slot with blob index equal to <code>n</code> (i.e. the highest consecutive blob index).</li>
+<li><code>received</code> - The highest received blob index for the slot</li>
+<li><code>next_slots</code> - A list of future slots this slot could chain to. Used when rebuilding
+the ledger to find possible fork points.</li>
+<li><code>consumed_ticks</code> - Tick height of the highest received blob (used to identify when a slot is full)</li>
+<li><code>is_trunk</code> - True iff every block from 0...slot forms a full sequence without any holes. We can derive is_trunk for each slot with the following rules. Let slot(n) be the slot with index <code>n</code>, and slot(n).contains_all_ticks() is true if the slot with index <code>n</code> has all the ticks expected for that slot. Let is_trunk(n) be the statement that &quot;the slot(n).is_trunk is true&quot;. Then:</li>
+</ul>
+<p>is_trunk(0)
+is_trunk(n+1) iff (is_trunk(n) and slot(n).contains_all_ticks()</p>
+</li>
+<li>
+<p>Chaining - When a blob for a new slot <code>x</code> arrives, we check the number of blocks (<code>num_blocks</code>) for that new slot (this information is encoded in the blob). We then know that this new slot chains to slot <code>x - num_blocks</code>.</p>
+</li>
+<li>
+<p>Subscriptions - The EntryTree records a set of slots that have been &quot;subscribed&quot; to. This means entries that chain to these slots will be sent on the EntryTree channel for consumption by the ReplayStage. See the <code>EntryTree APIs</code> for details.</p>
+</li>
+<li>
+<p>Update notifications - The EntryTree notifies listeners when slot(n).is_trunk is flipped from false to true for any <code>n</code>.</p>
+</li>
+</ol>
+<a class="header" href="#entrytree-apis" id="entrytree-apis"><h3>EntryTree APIs</h3></a>
+<p>The EntryTree offers a subscription based API that ReplayStage uses to ask for entries it's interested in. The entries will be sent on a channel exposed by the EntryTree. These subscription API's are as follows:</p>
+<ol>
+<li>
+<p><code>fn get_slots_since(slot_indexes: &amp;[u64]) -&gt; Vec&lt;SlotMeta&gt;</code>: Returns new slots connecting to any element of the list <code>slot_indexes</code>.</p>
+</li>
+<li>
+<p><code>fn get_slot_entries(slot_index: u64, entry_start_index: usize, max_entries: Option&lt;u64&gt;) -&gt; Vec&lt;Entry&gt;</code>: Returns the entry vector for the slot starting with <code>entry_start_index</code>, capping the result at <code>max</code> if <code>max_entries == Some(max)</code>, otherwise, no upper limit on the length of the return vector is imposed.</p>
+</li>
+</ol>
+<p>Note: Cumulatively, this means that the replay stage will now have to know when a slot is finished, and subscribe to the next slot it's interested in to get the next set of entries. Previously, the burden of chaining slots fell on the EntryTree.</p>
+<a class="header" href="#interfacing-with-bank" id="interfacing-with-bank"><h3>Interfacing with Bank</h3></a>
+<p>The bank exposes to replay stage:</p>
+<ol>
+<li>
+<p><code>prev_id</code>: which PoH chain it's working on as indicated by the id of the last
+entry it processed</p>
+</li>
+<li>
+<p><code>tick_height</code>: the ticks in the PoH chain currently being verified by this
+bank</p>
+</li>
+<li>
+<p><code>votes</code>: a stack of records that contain:</p>
+<ol>
+<li><code>prev_ids</code>: what anything after this vote must chain to in PoH</li>
+<li><code>tick_height</code>: the tick height at which this vote was cast</li>
+<li><code>lockout period</code>: how long a chain must be observed to be in the ledger to
+be able to be chained below this vote</li>
+</ol>
+</li>
+</ol>
+<p>Replay stage uses EntryTree APIs to find the longest chain of entries it can
+hang off a previous vote.  If that chain of entries does not hang off the
+latest vote, the replay stage rolls back the bank to that vote and replays the
+chain from there.</p>
+<a class="header" href="#pruning-entrytree" id="pruning-entrytree"><h3>Pruning EntryTree</h3></a>
+<p>Once EntryTree entries are old enough, representing all the possible forks
+becomes less useful, perhaps even problematic for replay upon restart.  Once a
+validator's votes have reached max lockout, however, any EntryTree contents
+that are not on the PoH chain for that vote for can be pruned, expunged.</p>
+<p>Replicator nodes will be responsible for storing really old ledger contents,
+and validators need only persist their bank periodically.</p>
+<a class="header" href="#appendix" id="appendix"><h1>Appendix</h1></a>
+<p>The following sections contain reference material you may find useful in your
+Solana journey.</p>
+<a class="header" href="#json-rpc-api" id="json-rpc-api"><h1>JSON RPC API</h1></a>
+<p>Solana nodes accept HTTP requests using the <a href="https://www.jsonrpc.org/specification">JSON-RPC 2.0</a> specification.</p>
+<p>To interact with a Solana node inside a JavaScript application, use the <a href="https://github.com/solana-labs/solana-web3.js">solana-web3.js</a> library, which gives a convenient interface for the RPC methods.</p>
+<a class="header" href="#rpc-http-endpoint" id="rpc-http-endpoint"><h2>RPC HTTP Endpoint</h2></a>
+<p><strong>Default port:</strong> 8899
+eg. http://localhost:8899, http://192.168.1.88:8899</p>
+<a class="header" href="#rpc-pubsub-websocket-endpoint" id="rpc-pubsub-websocket-endpoint"><h2>RPC PubSub WebSocket Endpoint</h2></a>
+<p><strong>Default port:</strong> 8900
+eg. ws://localhost:8900, http://192.168.1.88:8900</p>
+<a class="header" href="#methods" id="methods"><h2>Methods</h2></a>
+<ul>
+<li>
+<p><a href="#confirmtransaction">confirmTransaction</a></p>
+</li>
+<li>
+<p><a href="#getaccountinfo">getAccountInfo</a></p>
+</li>
+<li>
+<p><a href="#getbalance">getBalance</a></p>
+</li>
+<li>
+<p><a href="#getconfirmationTime">getConfirmationTime</a></p>
+</li>
+<li>
+<p><a href="#getlastid">getLastId</a></p>
+</li>
+<li>
+<p><a href="#getsignaturestatus">getSignatureStatus</a></p>
+</li>
+<li>
+<p><a href="#gettransactioncount">getTransactionCount</a></p>
+</li>
+<li>
+<p><a href="#requestairdrop">requestAirdrop</a></p>
+</li>
+<li>
+<p><a href="#sendtransaction">sendTransaction</a></p>
+</li>
+<li>
+<p><a href="#startsubscriptionchannel">startSubscriptionChannel</a></p>
+</li>
+<li>
+<p><a href="#subscription-websocket">Subscription Websocket</a></p>
+<ul>
+<li><a href="#accountsubscribe">accountSubscribe</a></li>
+<li><a href="#accountunsubscribe">accountUnsubscribe</a></li>
+<li><a href="#signaturesubscribe">signatureSubscribe</a></li>
+<li><a href="#signatureunsubscribe">signatureUnsubscribe</a></li>
+</ul>
+</li>
+</ul>
+<a class="header" href="#request-formatting" id="request-formatting"><h2>Request Formatting</h2></a>
+<p>To make a JSON-RPC request, send an HTTP POST request with a <code>Content-Type: application/json</code> header. The JSON request data should contain 4 fields:</p>
+<ul>
+<li><code>jsonrpc</code>, set to <code>&quot;2.0&quot;</code></li>
+<li><code>id</code>, a unique client-generated identifying integer</li>
+<li><code>method</code>, a string containing the method to be invoked</li>
+<li><code>params</code>, a JSON array of ordered parameter values</li>
+</ul>
+<p>Example using curl:</p>
+<pre><code class="language-bash">curl -X POST -H &quot;Content-Type: application/json&quot; -d '{&quot;jsonrpc&quot;:&quot;2.0&quot;, &quot;id&quot;:1, &quot;method&quot;:&quot;getBalance&quot;, &quot;params&quot;:[&quot;83astBRguLMdt2h5U1Tpdq5tjFoJ6noeGwaY3mDLVcri&quot;]}' 192.168.1.88:8899
+</code></pre>
+<p>The response output will be a JSON object with the following fields:</p>
+<ul>
+<li><code>jsonrpc</code>, matching the request specification</li>
+<li><code>id</code>, matching the request identifier</li>
+<li><code>result</code>, requested data or success confirmation</li>
+</ul>
+<p>Requests can be sent in batches by sending an array of JSON-RPC request objects as the data for a single POST.</p>
+<a class="header" href="#definitions" id="definitions"><h2>Definitions</h2></a>
+<ul>
+<li>Hash: A SHA-256 hash of a chunk of data.</li>
+<li>Pubkey: The public key of a Ed25519 key-pair.</li>
+<li>Signature: An Ed25519 signature of a chunk of data.</li>
+<li>Transaction: A Solana instruction signed by a client key-pair.</li>
+</ul>
+<a class="header" href="#json-rpc-api-reference" id="json-rpc-api-reference"><h2>JSON RPC API Reference</h2></a>
+<a class="header" href="#confirmtransaction" id="confirmtransaction"><h3>confirmTransaction</h3></a>
+<p>Returns a transaction receipt</p>
+<a class="header" href="#parameters" id="parameters"><h5>Parameters:</h5></a>
+<ul>
+<li><code>string</code> - Signature of Transaction to confirm, as base-58 encoded string</li>
+</ul>
+<a class="header" href="#results" id="results"><h5>Results:</h5></a>
+<ul>
+<li><code>boolean</code> - Transaction status, true if Transaction is confirmed</li>
+</ul>
+<a class="header" href="#example" id="example"><h5>Example:</h5></a>
+<pre><code class="language-bash">// Request
+curl -X POST -H &quot;Content-Type: application/json&quot; -d '{&quot;jsonrpc&quot;:&quot;2.0&quot;, &quot;id&quot;:1, &quot;method&quot;:&quot;confirmTransaction&quot;, &quot;params&quot;:[&quot;5VERv8NMvzbJMEkV8xnrLkEaWRtSz9CosKDYjCJjBRnbJLgp8uirBgmQpjKhoR4tjF3ZpRzrFmBV6UjKdiSZkQUW&quot;]}' http://localhost:8899
+
+// Result
+{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;result&quot;:true,&quot;id&quot;:1}
+</code></pre>
+<hr />
+<a class="header" href="#getbalance" id="getbalance"><h3>getBalance</h3></a>
+<p>Returns the balance of the account of provided Pubkey</p>
+<a class="header" href="#parameters-1" id="parameters-1"><h5>Parameters:</h5></a>
+<ul>
+<li><code>string</code> - Pubkey of account to query, as base-58 encoded string</li>
+</ul>
+<a class="header" href="#results-1" id="results-1"><h5>Results:</h5></a>
+<ul>
+<li><code>integer</code> - quantity, as a signed 64-bit integer</li>
+</ul>
+<a class="header" href="#example-1" id="example-1"><h5>Example:</h5></a>
+<pre><code class="language-bash">// Request
+curl -X POST -H &quot;Content-Type: application/json&quot; -d '{&quot;jsonrpc&quot;:&quot;2.0&quot;, &quot;id&quot;:1, &quot;method&quot;:&quot;getBalance&quot;, &quot;params&quot;:[&quot;83astBRguLMdt2h5U1Tpdq5tjFoJ6noeGwaY3mDLVcri&quot;]}' http://localhost:8899
+
+// Result
+{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;result&quot;:0,&quot;id&quot;:1}
+</code></pre>
+<hr />
+<a class="header" href="#getaccountinfo" id="getaccountinfo"><h3>getAccountInfo</h3></a>
+<p>Returns all information associated with the account of provided Pubkey</p>
+<a class="header" href="#parameters-2" id="parameters-2"><h5>Parameters:</h5></a>
+<ul>
+<li><code>string</code> - Pubkey of account to query, as base-58 encoded string</li>
+</ul>
+<a class="header" href="#results-2" id="results-2"><h5>Results:</h5></a>
+<p>The result field will be a JSON object with the following sub fields:</p>
+<ul>
+<li><code>tokens</code>, number of tokens assigned to this account, as a signed 64-bit integer</li>
+<li><code>owner</code>, array of 32 bytes representing the program this account has been assigned to</li>
+<li><code>userdata</code>, array of bytes representing any userdata associated with the account</li>
+<li><code>executable</code>, boolean indicating if the account contains a program (and is strictly read-only)</li>
+<li><code>loader</code>, array of 32 bytes representing the loader for this program (if <code>executable</code>), otherwise all</li>
+</ul>
+<a class="header" href="#example-2" id="example-2"><h5>Example:</h5></a>
+<pre><code class="language-bash">// Request
+curl -X POST -H &quot;Content-Type: application/json&quot; -d '{&quot;jsonrpc&quot;:&quot;2.0&quot;, &quot;id&quot;:1, &quot;method&quot;:&quot;getAccountInfo&quot;, &quot;params&quot;:[&quot;2gVkYWexTHR5Hb2aLeQN3tnngvWzisFKXDUPrgMHpdST&quot;]}' http://localhost:8899
+
+// Result
+{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;result&quot;:{&quot;executable&quot;:false,&quot;loader&quot;:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],&quot;owner&quot;:[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],&quot;tokens&quot;:1,&quot;userdata&quot;:[3,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,20,0,0,0,0,0,0,0,50,48,53,48,45,48,49,45,48,49,84,48,48,58,48,48,58,48,48,90,252,10,7,28,246,140,88,177,98,82,10,227,89,81,18,30,194,101,199,16,11,73,133,20,246,62,114,39,20,113,189,32,50,0,0,0,0,0,0,0,247,15,36,102,167,83,225,42,133,127,82,34,36,224,207,130,109,230,224,188,163,33,213,13,5,117,211,251,65,159,197,51,0,0,0,0,0,0]},&quot;id&quot;:1}
+</code></pre>
+<hr />
+<a class="header" href="#getlastid" id="getlastid"><h3>getLastId</h3></a>
+<p>Returns the last entry ID from the ledger</p>
+<a class="header" href="#parameters-3" id="parameters-3"><h5>Parameters:</h5></a>
+<p>None</p>
+<a class="header" href="#results-3" id="results-3"><h5>Results:</h5></a>
+<ul>
+<li><code>string</code> - the ID of last entry, a Hash as base-58 encoded string</li>
+</ul>
+<a class="header" href="#example-3" id="example-3"><h5>Example:</h5></a>
+<pre><code class="language-bash">// Request
+curl -X POST -H &quot;Content-Type: application/json&quot; -d '{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:1, &quot;method&quot;:&quot;getLastId&quot;}' http://localhost:8899
+
+// Result
+{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;result&quot;:&quot;GH7ome3EiwEr7tu9JuTh2dpYWBJK3z69Xm1ZE3MEE6JC&quot;,&quot;id&quot;:1}
+</code></pre>
+<hr />
+<a class="header" href="#getsignaturestatus" id="getsignaturestatus"><h3>getSignatureStatus</h3></a>
+<p>Returns the status of a given signature.  This method is similar to
+<a href="#confirmtransaction">confirmTransaction</a> but provides more resolution for error
+events.</p>
+<a class="header" href="#parameters-4" id="parameters-4"><h5>Parameters:</h5></a>
+<ul>
+<li><code>string</code> - Signature of Transaction to confirm, as base-58 encoded string</li>
+</ul>
+<a class="header" href="#results-4" id="results-4"><h5>Results:</h5></a>
+<ul>
+<li><code>string</code> - Transaction status:
+<ul>
+<li><code>Confirmed</code> - Transaction was successful</li>
+<li><code>SignatureNotFound</code> - Unknown transaction</li>
+<li><code>ProgramRuntimeError</code> - An error occurred in the program that processed this Transaction</li>
+<li><code>AccountInUse</code> - Another Transaction had a write lock one of the Accounts specified in this Transaction.  The Transaction may succeed if retried</li>
+<li><code>GenericFailure</code> - Some other error occurred.  <strong>Note</strong>: In the future new Transaction statuses may be added to this list.  It's safe to assume that all new statuses will be more specific error conditions that previously presented as <code>GenericFailure</code></li>
+</ul>
+</li>
+</ul>
+<a class="header" href="#example-4" id="example-4"><h5>Example:</h5></a>
+<pre><code class="language-bash">// Request
+curl -X POST -H &quot;Content-Type: application/json&quot; -d '{&quot;jsonrpc&quot;:&quot;2.0&quot;, &quot;id&quot;:1, &quot;method&quot;:&quot;getSignatureStatus&quot;, &quot;params&quot;:[&quot;5VERv8NMvzbJMEkV8xnrLkEaWRtSz9CosKDYjCJjBRnbJLgp8uirBgmQpjKhoR4tjF3ZpRzrFmBV6UjKdiSZkQUW&quot;]}' http://localhost:8899
+
+// Result
+{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;result&quot;:&quot;SignatureNotFound&quot;,&quot;id&quot;:1}
+</code></pre>
+<hr />
+<a class="header" href="#gettransactioncount" id="gettransactioncount"><h3>getTransactionCount</h3></a>
+<p>Returns the current Transaction count from the ledger</p>
+<a class="header" href="#parameters-5" id="parameters-5"><h5>Parameters:</h5></a>
+<p>None</p>
+<a class="header" href="#results-5" id="results-5"><h5>Results:</h5></a>
+<ul>
+<li><code>integer</code> - count, as unsigned 64-bit integer</li>
+</ul>
+<a class="header" href="#example-5" id="example-5"><h5>Example:</h5></a>
+<pre><code class="language-bash">// Request
+curl -X POST -H &quot;Content-Type: application/json&quot; -d '{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:1, &quot;method&quot;:&quot;getTransactionCount&quot;}' http://localhost:8899
+
+// Result
+{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;result&quot;:268,&quot;id&quot;:1}
+</code></pre>
+<hr />
+<a class="header" href="#getconfirmationtime" id="getconfirmationtime"><h3>getConfirmationTime</h3></a>
+<p>Returns the current cluster confirmation time in milliseconds</p>
+<a class="header" href="#parameters-6" id="parameters-6"><h5>Parameters:</h5></a>
+<p>None</p>
+<a class="header" href="#results-6" id="results-6"><h5>Results:</h5></a>
+<ul>
+<li><code>integer</code> - confirmation time in milliseconds, as unsigned 64-bit integer</li>
+</ul>
+<a class="header" href="#example-6" id="example-6"><h5>Example:</h5></a>
+<pre><code class="language-bash">// Request
+curl -X POST -H &quot;Content-Type: application/json&quot; -d '{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:1, &quot;method&quot;:&quot;getConfirmationTime&quot;}' http://localhost:8899
+
+// Result
+{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;result&quot;:500,&quot;id&quot;:1}
+</code></pre>
+<hr />
+<a class="header" href="#requestairdrop" id="requestairdrop"><h3>requestAirdrop</h3></a>
+<p>Requests an airdrop of tokens to a Pubkey</p>
+<a class="header" href="#parameters-7" id="parameters-7"><h5>Parameters:</h5></a>
+<ul>
+<li><code>string</code> - Pubkey of account to receive tokens, as base-58 encoded string</li>
+<li><code>integer</code> - token quantity, as a signed 64-bit integer</li>
+</ul>
+<a class="header" href="#results-7" id="results-7"><h5>Results:</h5></a>
+<ul>
+<li><code>string</code> - Transaction Signature of airdrop, as base-58 encoded string</li>
+</ul>
+<a class="header" href="#example-7" id="example-7"><h5>Example:</h5></a>
+<pre><code class="language-bash">// Request
+curl -X POST -H &quot;Content-Type: application/json&quot; -d '{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:1, &quot;method&quot;:&quot;requestAirdrop&quot;, &quot;params&quot;:[&quot;83astBRguLMdt2h5U1Tpdq5tjFoJ6noeGwaY3mDLVcri&quot;, 50]}' http://localhost:8899
+
+// Result
+{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;result&quot;:&quot;5VERv8NMvzbJMEkV8xnrLkEaWRtSz9CosKDYjCJjBRnbJLgp8uirBgmQpjKhoR4tjF3ZpRzrFmBV6UjKdiSZkQUW&quot;,&quot;id&quot;:1}
+</code></pre>
+<hr />
+<a class="header" href="#sendtransaction" id="sendtransaction"><h3>sendTransaction</h3></a>
+<p>Creates new transaction</p>
+<a class="header" href="#parameters-8" id="parameters-8"><h5>Parameters:</h5></a>
+<ul>
+<li><code>array</code> - array of octets containing a fully-signed Transaction</li>
+</ul>
+<a class="header" href="#results-8" id="results-8"><h5>Results:</h5></a>
+<ul>
+<li><code>string</code> - Transaction Signature, as base-58 encoded string</li>
+</ul>
+<a class="header" href="#example-8" id="example-8"><h5>Example:</h5></a>
+<pre><code class="language-bash">// Request
+curl -X POST -H &quot;Content-Type: application/json&quot; -d '{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:1, &quot;method&quot;:&quot;sendTransaction&quot;, &quot;params&quot;:[[61, 98, 55, 49, 15, 187, 41, 215, 176, 49, 234, 229, 228, 77, 129, 221, 239, 88, 145, 227, 81, 158, 223, 123, 14, 229, 235, 247, 191, 115, 199, 71, 121, 17, 32, 67, 63, 209, 239, 160, 161, 2, 94, 105, 48, 159, 235, 235, 93, 98, 172, 97, 63, 197, 160, 164, 192, 20, 92, 111, 57, 145, 251, 6, 40, 240, 124, 194, 149, 155, 16, 138, 31, 113, 119, 101, 212, 128, 103, 78, 191, 80, 182, 234, 216, 21, 121, 243, 35, 100, 122, 68, 47, 57, 13, 39, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0, 0, 0, 40, 240, 124, 194, 149, 155, 16, 138, 31, 113, 119, 101, 212, 128, 103, 78, 191, 80, 182, 234, 216, 21, 121, 243, 35, 100, 122, 68, 47, 57, 11, 12, 106, 49, 74, 226, 201, 16, 161, 192, 28, 84, 124, 97, 190, 201, 171, 186, 6, 18, 70, 142, 89, 185, 176, 154, 115, 61, 26, 163, 77, 1, 88, 98, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]}' http://localhost:8899
+
+// Result
+{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;result&quot;:&quot;2EBVM6cB8vAAD93Ktr6Vd8p67XPbQzCJX47MpReuiCXJAtcjaxpvWpcg9Ege1Nr5Tk3a2GFrByT7WPBjdsTycY9b&quot;,&quot;id&quot;:1}
+</code></pre>
+<hr />
+<a class="header" href="#subscription-websocket" id="subscription-websocket"><h3>Subscription Websocket</h3></a>
+<p>After connect to the RPC PubSub websocket at <code>ws://&lt;ADDRESS&gt;/</code>:</p>
+<ul>
+<li>Submit subscription requests to the websocket using the methods below</li>
+<li>Multiple subscriptions may be active at once</li>
+</ul>
+<hr />
+<a class="header" href="#accountsubscribe" id="accountsubscribe"><h3>accountSubscribe</h3></a>
+<p>Subscribe to an account to receive notifications when the userdata for a given account public key changes</p>
+<a class="header" href="#parameters-9" id="parameters-9"><h5>Parameters:</h5></a>
+<ul>
+<li><code>string</code> - account Pubkey, as base-58 encoded string</li>
+</ul>
+<a class="header" href="#results-9" id="results-9"><h5>Results:</h5></a>
+<ul>
+<li><code>integer</code> - Subscription id (needed to unsubscribe)</li>
+</ul>
+<a class="header" href="#example-9" id="example-9"><h5>Example:</h5></a>
+<pre><code class="language-bash">// Request
+{&quot;jsonrpc&quot;:&quot;2.0&quot;, &quot;id&quot;:1, &quot;method&quot;:&quot;accountSubscribe&quot;, &quot;params&quot;:[&quot;CM78CPUeXjn8o3yroDHxUtKsZZgoy4GPkPPXfouKNH12&quot;]}
+
+// Result
+{&quot;jsonrpc&quot;: &quot;2.0&quot;,&quot;result&quot;: 0,&quot;id&quot;: 1}
+</code></pre>
+<a class="header" href="#notification-format" id="notification-format"><h5>Notification Format:</h5></a>
+<pre><code class="language-bash">{&quot;jsonrpc&quot;: &quot;2.0&quot;,&quot;method&quot;: &quot;accountNotification&quot;, &quot;params&quot;: {&quot;result&quot;: {&quot;executable&quot;:false,&quot;loader&quot;:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],&quot;owner&quot;:[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],&quot;tokens&quot;:1,&quot;userdata&quot;:[3,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,20,0,0,0,0,0,0,0,50,48,53,48,45,48,49,45,48,49,84,48,48,58,48,48,58,48,48,90,252,10,7,28,246,140,88,177,98,82,10,227,89,81,18,30,194,101,199,16,11,73,133,20,246,62,114,39,20,113,189,32,50,0,0,0,0,0,0,0,247,15,36,102,167,83,225,42,133,127,82,34,36,224,207,130,109,230,224,188,163,33,213,13,5,117,211,251,65,159,197,51,0,0,0,0,0,0]},&quot;subscription&quot;:0}}
+</code></pre>
+<hr />
+<a class="header" href="#accountunsubscribe" id="accountunsubscribe"><h3>accountUnsubscribe</h3></a>
+<p>Unsubscribe from account userdata change notifications</p>
+<a class="header" href="#parameters-10" id="parameters-10"><h5>Parameters:</h5></a>
+<ul>
+<li><code>integer</code> - id of account Subscription to cancel</li>
+</ul>
+<a class="header" href="#results-10" id="results-10"><h5>Results:</h5></a>
+<ul>
+<li><code>bool</code> - unsubscribe success message</li>
+</ul>
+<a class="header" href="#example-10" id="example-10"><h5>Example:</h5></a>
+<pre><code class="language-bash">// Request
+{&quot;jsonrpc&quot;:&quot;2.0&quot;, &quot;id&quot;:1, &quot;method&quot;:&quot;accountUnsubscribe&quot;, &quot;params&quot;:[0]}
+
+// Result
+{&quot;jsonrpc&quot;: &quot;2.0&quot;,&quot;result&quot;: true,&quot;id&quot;: 1}
+</code></pre>
+<hr />
+<a class="header" href="#signaturesubscribe" id="signaturesubscribe"><h3>signatureSubscribe</h3></a>
+<p>Subscribe to a transaction signature to receive notification when the transaction is confirmed
+On <code>signatureNotification</code>, the subscription is automatically cancelled</p>
+<a class="header" href="#parameters-11" id="parameters-11"><h5>Parameters:</h5></a>
+<ul>
+<li><code>string</code> - Transaction Signature, as base-58 encoded string</li>
+</ul>
+<a class="header" href="#results-11" id="results-11"><h5>Results:</h5></a>
+<ul>
+<li><code>integer</code> - subscription id (needed to unsubscribe)</li>
+</ul>
+<a class="header" href="#example-11" id="example-11"><h5>Example:</h5></a>
+<pre><code class="language-bash">// Request
+{&quot;jsonrpc&quot;:&quot;2.0&quot;, &quot;id&quot;:1, &quot;method&quot;:&quot;signatureSubscribe&quot;, &quot;params&quot;:[&quot;2EBVM6cB8vAAD93Ktr6Vd8p67XPbQzCJX47MpReuiCXJAtcjaxpvWpcg9Ege1Nr5Tk3a2GFrByT7WPBjdsTycY9b&quot;]}
+
+// Result
+{&quot;jsonrpc&quot;: &quot;2.0&quot;,&quot;result&quot;: 0,&quot;id&quot;: 1}
+</code></pre>
+<a class="header" href="#notification-format-1" id="notification-format-1"><h5>Notification Format:</h5></a>
+<pre><code class="language-bash">{&quot;jsonrpc&quot;: &quot;2.0&quot;,&quot;method&quot;: &quot;signatureNotification&quot;, &quot;params&quot;: {&quot;result&quot;: &quot;Confirmed&quot;,&quot;subscription&quot;:0}}
+</code></pre>
+<hr />
+<a class="header" href="#signatureunsubscribe" id="signatureunsubscribe"><h3>signatureUnsubscribe</h3></a>
+<p>Unsubscribe from account userdata change notifications</p>
+<a class="header" href="#parameters-12" id="parameters-12"><h5>Parameters:</h5></a>
+<ul>
+<li><code>integer</code> - id of account subscription to cancel</li>
+</ul>
+<a class="header" href="#results-12" id="results-12"><h5>Results:</h5></a>
+<ul>
+<li><code>bool</code> - unsubscribe success message</li>
+</ul>
+<a class="header" href="#example-12" id="example-12"><h5>Example:</h5></a>
+<pre><code class="language-bash">// Request
+{&quot;jsonrpc&quot;:&quot;2.0&quot;, &quot;id&quot;:1, &quot;method&quot;:&quot;signatureUnsubscribe&quot;, &quot;params&quot;:[0]}
+
+// Result
+{&quot;jsonrpc&quot;: &quot;2.0&quot;,&quot;result&quot;: true,&quot;id&quot;: 1}
+</code></pre>
+<a class="header" href="#javascript-api" id="javascript-api"><h1>JavaScript API</h1></a>
+<p>See <a href="https://solana-labs.github.io/solana-web3.js/">solana-web3</a>.</p>
+<a class="header" href="#solana-wallet-cli" id="solana-wallet-cli"><h2>solana-wallet CLI</h2></a>
+<p>The <a href="https://crates.io/crates/solana">solana crate</a> is distributed with a command-line interface tool</p>
+<a class="header" href="#examples-1" id="examples-1"><h3>Examples</h3></a>
+<a class="header" href="#get-pubkey" id="get-pubkey"><h4>Get Pubkey</h4></a>
+<pre><code class="language-sh">// Command
+$ solana-wallet address
+
+// Return
+&lt;PUBKEY&gt;
+</code></pre>
+<a class="header" href="#airdrop-tokens" id="airdrop-tokens"><h4>Airdrop Tokens</h4></a>
+<pre><code class="language-sh">// Command
+$ solana-wallet airdrop 123
+
+// Return
+&quot;Your balance is: 123&quot;
+</code></pre>
+<a class="header" href="#get-balance" id="get-balance"><h4>Get Balance</h4></a>
+<pre><code class="language-sh">// Command
+$ solana-wallet balance
+
+// Return
+&quot;Your balance is: 123&quot;
+</code></pre>
+<a class="header" href="#confirm-transaction" id="confirm-transaction"><h4>Confirm Transaction</h4></a>
+<pre><code class="language-sh">// Command
+$ solana-wallet confirm &lt;TX_SIGNATURE&gt;
+
+// Return
+&quot;Confirmed&quot; / &quot;Not found&quot;
+</code></pre>
+<a class="header" href="#deploy-program" id="deploy-program"><h4>Deploy program</h4></a>
+<pre><code class="language-sh">// Command
+$ solana-wallet deploy &lt;PATH&gt;
+
+// Return
+&lt;PROGRAM_ID&gt;
+</code></pre>
+<a class="header" href="#unconditional-immediate-transfer" id="unconditional-immediate-transfer"><h4>Unconditional Immediate Transfer</h4></a>
+<pre><code class="language-sh">// Command
+$ solana-wallet pay &lt;PUBKEY&gt; 123
+
+// Return
+&lt;TX_SIGNATURE&gt;
+</code></pre>
+<a class="header" href="#post-dated-transfer" id="post-dated-transfer"><h4>Post-Dated Transfer</h4></a>
+<pre><code class="language-sh">// Command
+$ solana-wallet pay &lt;PUBKEY&gt; 123 \
+    --after 2018-12-24T23:59:00 --require-timestamp-from &lt;PUBKEY&gt;
+
+// Return
+{signature: &lt;TX_SIGNATURE&gt;, processId: &lt;PROCESS_ID&gt;}
+</code></pre>
+<p><em><code>require-timestamp-from</code> is optional. If not provided, the transaction will expect a timestamp signed by this wallet's secret key</em></p>
+<a class="header" href="#authorized-transfer" id="authorized-transfer"><h4>Authorized Transfer</h4></a>
+<p>A third party must send a signature to unlock the tokens.</p>
+<pre><code class="language-sh">// Command
+$ solana-wallet pay &lt;PUBKEY&gt; 123 \
+    --require-signature-from &lt;PUBKEY&gt;
+
+// Return
+{signature: &lt;TX_SIGNATURE&gt;, processId: &lt;PROCESS_ID&gt;}
+</code></pre>
+<a class="header" href="#post-dated-and-authorized-transfer" id="post-dated-and-authorized-transfer"><h4>Post-Dated and Authorized Transfer</h4></a>
+<pre><code class="language-sh">// Command
+$ solana-wallet pay &lt;PUBKEY&gt; 123 \
+    --after 2018-12-24T23:59 --require-timestamp-from &lt;PUBKEY&gt; \
+    --require-signature-from &lt;PUBKEY&gt;
+
+// Return
+{signature: &lt;TX_SIGNATURE&gt;, processId: &lt;PROCESS_ID&gt;}
+</code></pre>
+<a class="header" href="#multiple-witnesses" id="multiple-witnesses"><h4>Multiple Witnesses</h4></a>
+<pre><code class="language-sh">// Command
+$ solana-wallet pay &lt;PUBKEY&gt; 123 \
+    --require-signature-from &lt;PUBKEY&gt; \
+    --require-signature-from &lt;PUBKEY&gt;
+
+// Return
+{signature: &lt;TX_SIGNATURE&gt;, processId: &lt;PROCESS_ID&gt;}
+</code></pre>
+<a class="header" href="#cancelable-transfer" id="cancelable-transfer"><h4>Cancelable Transfer</h4></a>
+<pre><code class="language-sh">// Command
+$ solana-wallet pay &lt;PUBKEY&gt; 123 \
+    --require-signature-from &lt;PUBKEY&gt; \
+    --cancelable
+
+// Return
+{signature: &lt;TX_SIGNATURE&gt;, processId: &lt;PROCESS_ID&gt;}
+</code></pre>
+<a class="header" href="#cancel-transfer" id="cancel-transfer"><h4>Cancel Transfer</h4></a>
+<pre><code class="language-sh">// Command
+$ solana-wallet cancel &lt;PROCESS_ID&gt;
+
+// Return
+&lt;TX_SIGNATURE&gt;
+</code></pre>
+<a class="header" href="#send-signature" id="send-signature"><h4>Send Signature</h4></a>
+<pre><code class="language-sh">// Command
+$ solana-wallet send-signature &lt;PUBKEY&gt; &lt;PROCESS_ID&gt;
+
+// Return
+&lt;TX_SIGNATURE&gt;
+</code></pre>
+<a class="header" href="#indicate-elapsed-time" id="indicate-elapsed-time"><h4>Indicate Elapsed Time</h4></a>
+<p>Use the current system time:</p>
+<pre><code class="language-sh">// Command
+$ solana-wallet send-timestamp &lt;PUBKEY&gt; &lt;PROCESS_ID&gt;
+
+// Return
+&lt;TX_SIGNATURE&gt;
+</code></pre>
+<p>Or specify some other arbitrary timestamp:</p>
+<pre><code class="language-sh">// Command
+$ solana-wallet send-timestamp &lt;PUBKEY&gt; &lt;PROCESS_ID&gt; --date 2018-12-24T23:59:00
+
+// Return
+&lt;TX_SIGNATURE&gt;
+</code></pre>
+<a class="header" href="#usage" id="usage"><h3>Usage</h3></a>
+<pre><code class="language-manpage">solana-wallet 0.11.0
+
+USAGE:
+    solana-wallet [OPTIONS] [SUBCOMMAND]
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+OPTIONS:
+    -k, --keypair &lt;PATH&gt;         /path/to/id.json
+    -n, --network &lt;HOST:PORT&gt;    Rendezvous with the network at this gossip entry point; defaults to 127.0.0.1:8001
+        --proxy &lt;URL&gt;            Address of TLS proxy
+        --port &lt;NUM&gt;             Optional rpc-port configuration to connect to non-default nodes
+        --timeout &lt;SECS&gt;         Max seconds to wait to get necessary gossip from the network
+
+SUBCOMMANDS:
+    address                  Get your public key
+    airdrop                  Request a batch of tokens
+    balance                  Get your balance
+    cancel                   Cancel a transfer
+    confirm                  Confirm transaction by signature
+    deploy                   Deploy a program
+    get-transaction-count    Get current transaction count
+    help                     Prints this message or the help of the given subcommand(s)
+    pay                      Send a payment
+    send-signature           Send a signature to authorize a transfer
+    send-timestamp           Send a timestamp to unlock a transfer
+</code></pre>
+<pre><code class="language-manpage">solana-wallet-address 
+Get your public key
+
+USAGE:
+    solana-wallet address
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+</code></pre>
+<pre><code class="language-manpage">solana-wallet-airdrop 
+Request a batch of tokens
+
+USAGE:
+    solana-wallet airdrop &lt;NUM&gt;
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+ARGS:
+    &lt;NUM&gt;    The number of tokens to request
+</code></pre>
+<pre><code class="language-manpage">solana-wallet-balance 
+Get your balance
+
+USAGE:
+    solana-wallet balance
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+</code></pre>
+<pre><code class="language-manpage">solana-wallet-cancel 
+Cancel a transfer
+
+USAGE:
+    solana-wallet cancel &lt;PROCESS_ID&gt;
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+ARGS:
+    &lt;PROCESS_ID&gt;    The process id of the transfer to cancel
+</code></pre>
+<pre><code class="language-manpage">solana-wallet-confirm 
+Confirm transaction by signature
+
+USAGE:
+    solana-wallet confirm &lt;SIGNATURE&gt;
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+ARGS:
+    &lt;SIGNATURE&gt;    The transaction signature to confirm
+</code></pre>
+<pre><code class="language-manpage">solana-wallet-deploy 
+Deploy a program
+
+USAGE:
+    solana-wallet deploy &lt;PATH&gt;
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+ARGS:
+    &lt;PATH&gt;    /path/to/program.o
+</code></pre>
+<pre><code class="language-manpage">solana-wallet-get-transaction-count 
+Get current transaction count
+
+USAGE:
+    solana-wallet get-transaction-count
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+</code></pre>
+<pre><code class="language-manpage">solana-wallet-pay 
+Send a payment
+
+USAGE:
+    solana-wallet pay [FLAGS] [OPTIONS] &lt;PUBKEY&gt; &lt;NUM&gt;
+
+FLAGS:
+        --cancelable    
+    -h, --help          Prints help information
+    -V, --version       Prints version information
+
+OPTIONS:
+        --after &lt;DATETIME&gt;                      A timestamp after which transaction will execute
+        --require-timestamp-from &lt;PUBKEY&gt;       Require timestamp from this third party
+        --require-signature-from &lt;PUBKEY&gt;...    Any third party signatures required to unlock the tokens
+
+ARGS:
+    &lt;PUBKEY&gt;    The pubkey of recipient
+    &lt;NUM&gt;       The number of tokens to send
+</code></pre>
+<pre><code class="language-manpage">solana-wallet-send-signature 
+Send a signature to authorize a transfer
+
+USAGE:
+    solana-wallet send-signature &lt;PUBKEY&gt; &lt;PROCESS_ID&gt;
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+ARGS:
+    &lt;PUBKEY&gt;        The pubkey of recipient
+    &lt;PROCESS_ID&gt;    The process id of the transfer to authorize
+</code></pre>
+<pre><code class="language-manpage">solana-wallet-send-timestamp 
+Send a timestamp to unlock a transfer
+
+USAGE:
+    solana-wallet send-timestamp [OPTIONS] &lt;PUBKEY&gt; &lt;PROCESS_ID&gt;
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+OPTIONS:
+        --date &lt;DATETIME&gt;    Optional arbitrary timestamp to apply
+
+ARGS:
+    &lt;PUBKEY&gt;        The pubkey of recipient
+    &lt;PROCESS_ID&gt;    The process id of the transfer to unlock
+</code></pre>
+
+                    </main>
+                </div>
+            </div>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+        
+        
+
+    </body>
+</html>

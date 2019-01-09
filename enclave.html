@@ -1,0 +1,355 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Secure Enclave - Solana: Blockchain Rebuilt for Scale</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400|Poppins:300,400" rel="stylesheet">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">var path_to_root = "";</script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <img 
+                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3NTQiIGhlaWdodD0iMTUxIiB2aWV3Qm94PSIwIDAgNzU0IDE1MSI+PGcgZmlsbD0iI0ZGRiIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMjY4IDMxaDE2LjQxOXY3NC4yNTVIMzQ5TDMzNS41NjYgMTIwSDI2OHpNNjQuMDAyIDg0LjExM0gyOC4xMjV2LS4wMWMtLjIzNC4wMDctLjQ2OC4wMS0uNzAzLjAxLTE0LjM2OCAwLTI2LjAxNi0xMS44OS0yNi4wMTYtMjYuNTU3QzEuNDA2IDQyLjg5IDEzLjA1NCAzMSAyNy40MjIgMzFjLjIzNSAwIC40Ny4wMDMuNzAzLjAxVjMxSDkwTDcxLjcxOSA0OC4yMjZIMjcuNDA1Yy01LjAzOSAwLTkuMTI0IDQuMTc3LTkuMTI0IDkuMzMgMCA1LjE1NCA0LjA4NSA5LjMzMSA5LjEyNCA5LjMzMWgzOC42ODl2LjA4NkM3OS40NzUgNjguMDcgOTAgNzkuNTAyIDkwIDkzLjQ0MyA5MCAxMDguMTEgNzguMzUyIDEyMCA2My45ODQgMTIwYy0uNzEgMC0xLjQxMy0uMDI5LTIuMTA5LS4wODZWMTIwSDBsMTkuNjg4LTE3LjIyNmg0NC4zMTRjNS4wMzggMCA5LjEyMy00LjE3NyA5LjEyMy05LjMzIDAtNS4xNTQtNC4wODUtOS4zMzEtOS4xMjMtOS4zMzF6TTE1MC40NjkgMzEuMDE1VjMxaDU5LjA2MnYuMDE1YzguMzcyLjM2NiAxNS4wOTYgNy4yMyAxNS40NTQgMTUuNzc1SDIyNXY1NS45ODRoLS4wMTVjLjAxLjIzOC4wMTUuNDc3LjAxNS43MTggMCA4Ljg3Ny02Ljg2MyAxNi4xMTctMTUuNDY5IDE2LjQ5M1YxMjBIMTUwLjQ3di0uMDE1Yy04LjYwNi0uMzc2LTE1LjQ2OS03LjYxNi0xNS40NjktMTYuNDkzIDAtLjI0LjAwNS0uNDguMDE1LS43MThIMTM1VjQ2Ljc5aC4wMTVjLjM1OC04LjU0NiA3LjA4Mi0xNS40MSAxNS40NTQtMTUuNzc1ek0xNjEuNTQzIDQ2LjhjLTUuMjMzLjIzLTkuNDM1IDQuNTQ3LTkuNjU5IDkuOTIzaC0uMDA5djM1LjIxNmguMDFjLS4wMDcuMTUtLjAxLjMtLjAxLjQ1MSAwIDUuNTg0IDQuMjkgMTAuMTM4IDkuNjY4IDEwLjM3NXYuMDFoMzYuOTE0di0uMDFjNS4zNzgtLjIzNyA5LjY2OC00Ljc5MSA5LjY2OC0xMC4zNzUgMC0uMTUxLS4wMDMtLjMwMi0uMDEtLjQ1MWguMDFWNTYuNzIzaC0uMDFjLS4yMjMtNS4zNzYtNC40MjUtOS42OTMtOS42NTgtOS45MjN2LS4wMWgtMzYuOTE0di4wMXpNNDA5Ljg3NSA1NS40MDNWNzIuNjNoNTYuMjVWNTUuNDAzYzAtNS41NS00LjQwNy0xMC4wNDgtOS44NDQtMTAuMDQ4SDQxOS43MmMtNS40MzcgMC05Ljg0NCA0LjQ5OS05Ljg0NCAxMC4wNDh6TTQ2Ni4xMjUgMTIwVjg1LjU0OGgtNTYuMjVWMTIwSDM5M1Y0OC4yMjZoLjAxNWExNy4xNCAxNy4xNCAwIDAgMS0uMDE1LS43MThDMzkzIDM4LjM5MSA0MDAuMjQgMzEgNDA5LjE3MiAzMWMuMjM1IDAgLjQ3LjAwNS43MDMuMDE1VjMxaDU3LjY1NnYuMDE1YzguNjA2LjM3NiAxNS40NjkgNy42MTYgMTUuNDY5IDE2LjQ5MyAwIC4yNC0uMDA1LjQ4LS4wMTUuNzE4SDQ4M1YxMjBoLTE2Ljg3NXpNNjc3Ljg3NSA1NS40MDNWNzIuNjNoNTYuMjVWNTUuNDAzYzAtNS41NS00LjQwNy0xMC4wNDgtOS44NDQtMTAuMDQ4SDY4Ny43MmMtNS40MzcgMC05Ljg0NCA0LjQ5OS05Ljg0NCAxMC4wNDh6TTczNC4xMjUgMTIwVjg1LjU0OGgtNTYuMjVWMTIwSDY2MVY0OC4yMjZoLjAxNWExNy4xNCAxNy4xNCAwIDAgMS0uMDE1LS43MThDNjYxIDM4LjM5MSA2NjguMjQgMzEgNjc3LjE3MiAzMWMuMjM1IDAgLjQ3LjAwNS43MDMuMDE1VjMxaDU3LjY1NnYuMDE1YzguNjA2LjM3NiAxNS40NjkgNy42MTYgMTUuNDY5IDE2LjQ5MyAwIC4yNC0uMDA1LjQ4LS4wMTUuNzE4SDc1MVYxMjBoLTE2Ljg3NXpNNjAxLjEyNSA5OC40NTdWMzFINjE4djg5aC0xNi44NzV2LS4xNDlsLTU2LjI1LTY1Ljg4M1YxMjBINTI4VjMxaDE2Ljg3NXoiLz48L2c+PC9zdmc+" width="150" height="30" alt="Solana">
+            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="terminology.html"><strong aria-hidden="true">2.</strong> Terminology</a></li><li><a href="getting-started.html"><strong aria-hidden="true">3.</strong> Getting Started</a></li><li><ol class="section"><li><a href="webwallet.html"><strong aria-hidden="true">3.1.</strong> Example: Web Wallet</a></li></ol></li><li><a href="programs.html"><strong aria-hidden="true">4.</strong> Programming Model</a></li><li><ol class="section"><li><a href="tictactoe.html"><strong aria-hidden="true">4.1.</strong> Example: Tic-Tac-Toe</a></li><li><a href="drones.html"><strong aria-hidden="true">4.2.</strong> Drones</a></li></ol></li><li><a href="cluster.html"><strong aria-hidden="true">5.</strong> A Solana Cluster</a></li><li><ol class="section"><li><a href="synchronization.html"><strong aria-hidden="true">5.1.</strong> Synchronization</a></li><li><a href="leader-rotation.html"><strong aria-hidden="true">5.2.</strong> Leader Rotation</a></li><li><a href="fork-generation.html"><strong aria-hidden="true">5.3.</strong> Fork Generation</a></li></ol></li><li><a href="fullnode.html"><strong aria-hidden="true">6.</strong> Anatomy of a Fullnode</a></li><li><ol class="section"><li><a href="tpu.html"><strong aria-hidden="true">6.1.</strong> TPU</a></li><li><a href="tvu.html"><strong aria-hidden="true">6.2.</strong> TVU</a></li><li><a href="gossip.html"><strong aria-hidden="true">6.3.</strong> Gossip Service</a></li><li><a href="runtime.html"><strong aria-hidden="true">6.4.</strong> The Runtime</a></li></ol></li><li><a href="proposals.html"><strong aria-hidden="true">7.</strong> Proposed Architectural Changes</a></li><li><ol class="section"><li><a href="ledger-replication.html"><strong aria-hidden="true">7.1.</strong> Ledger Replication</a></li><li><a href="enclave.html" class="active"><strong aria-hidden="true">7.2.</strong> Secure Enclave</a></li><li><a href="staking-rewards.html"><strong aria-hidden="true">7.3.</strong> Staking Rewards</a></li><li><a href="fork-selection.html"><strong aria-hidden="true">7.4.</strong> Fork Selection</a></li><li><a href="entry-tree.html"><strong aria-hidden="true">7.5.</strong> Entry Tree</a></li></ol></li><li><a href="appendix.html"><strong aria-hidden="true">8.</strong> Appendix</a></li><li><ol class="section"><li><a href="jsonrpc-api.html"><strong aria-hidden="true">8.1.</strong> JSON RPC API</a></li><li><a href="javascript-api.html"><strong aria-hidden="true">8.2.</strong> JavaScript API</a></li><li><a href="wallet.html"><strong aria-hidden="true">8.3.</strong> solana-wallet CLI</a></li></ol></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            
+                            
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Solana: Blockchain Rebuilt for Scale</h1> 
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <a class="header" href="#signing-using-secure-enclave" id="signing-using-secure-enclave"><h1>Signing using Secure Enclave</h1></a>
+<p>This document defines the security mechanism of signing keys used by the
+fullnodes. Every node contains an asymmetric key that's used for signing
+and verifying the votes. The node signs the vote transactions using its private
+key. Other entities can verify the signature using the node's public key.</p>
+<p>The node's stake or its resources could be compromised if its private key is
+used to sign incorrect data (e.g. voting on multiple forks of the ledger). So,
+it's important to safeguard the private key.</p>
+<p>Secure Enclaves (such as SGX) provide a layer of memory and computation
+protection. An enclave can be used to generate an asymmetric key and keep the
+private key in its protected memory. It can expose an API that user (untrusted)
+code can use for signing the transactions.</p>
+<a class="header" href="#message-flow" id="message-flow"><h2>Message Flow</h2></a>
+<ol>
+<li>The node initializes the enclave at startup
+<ul>
+<li>The enclave generates an asymmetric key and returns the public key to the
+node</li>
+<li>The keypair is ephemeral. A new keypair is generated on node bootup. A
+new keypair might also be generated at runtime based on some TBD
+criteria.</li>
+<li>The enclave returns its attestation report to the node</li>
+</ul>
+</li>
+<li>The node performs attestation of the enclave (e.g using Intel's IAS APIs)
+<ul>
+<li>The node ensures that the Secure Enclave is running on a TPM and is
+signed by a trusted party</li>
+</ul>
+</li>
+<li>The owner of the node grants ephemeral key permission to use its stake. This
+process is TBD.</li>
+<li>The node's untrusted, non-enclave software calls trusted enclave software
+using its interface to sign transactions and other data.
+<ul>
+<li>In case of vote signing, the node needs to verify the PoH. The PoH
+verification is an integral part of signing. The enclave would be
+presented with some verifiable data that it'll check before signing the vote.</li>
+<li>The process of generating the verifiable data in untrusted space is TBD</li>
+</ul>
+</li>
+</ol>
+<a class="header" href="#poh-verification" id="poh-verification"><h2>PoH Verification</h2></a>
+<ol>
+<li>When the node votes on an en entry <code>X</code>, there's a lockout period <code>N</code>, for
+which it cannot vote on a fork that does not contain <code>X</code> in its history.</li>
+<li>Every time the node votes on the derivative of <code>X</code>, say <code>X+y</code>, the lockout
+period for <code>X</code> increases by a factor <code>F</code> (i.e. the duration node cannot vote on
+a fork that does not contain <code>X</code> increases).
+<ul>
+<li>The lockout period for <code>X+y</code> is still <code>N</code> until the node votes again.</li>
+</ul>
+</li>
+<li>The lockout period increment is capped (e.g. factor <code>F</code> applies maximum 32
+times).</li>
+<li>The signing enclave must not sign a vote that violates this policy. This
+means
+<ul>
+<li>Enclave is initialized with <code>N</code>, <code>F</code> and <code>Factor cap</code></li>
+<li>Enclave stores <code>Factor cap</code> number of entry IDs on which the node had
+previously voted</li>
+<li>The sign request contains the entry ID for the new vote</li>
+<li>Enclave verifies that new vote's entry ID is on the correct fork
+(following the rules #1 and #2 above)</li>
+</ul>
+</li>
+</ol>
+<a class="header" href="#ancestor-verification" id="ancestor-verification"><h2>Ancestor Verification</h2></a>
+<p>This is alternate, albeit, less certain approach to verifying voting fork.</p>
+<ol>
+<li>The validator maintains an active set of nodes in the cluster</li>
+<li>It observes the votes from the active set in the last voting period</li>
+<li>It stores the ancestor/last_tick at which each node voted</li>
+<li>It sends new vote request to vote-signing service
+<ul>
+<li>It includes previous votes from nodes in the active set, and their
+corresponding ancestors</li>
+</ul>
+</li>
+<li>The signer checks if the previous votes contains a vote from the validator,
+and the vote ancestor matches with majority of the nodes
+<ul>
+<li>It signs the new vote if the check is successful</li>
+<li>It asserts (raises an alarm of some sort) if the check is unsuccessful</li>
+</ul>
+</li>
+</ol>
+<p>The premise is that the validator can be spoofed at most once to vote on
+incorrect data. If someone hijacks the validator and submits a vote request for
+bogus data, that vote will not be included in the PoH (as it'll be rejected by
+the cluster). The next time the validator sends a request to sign the vote, the
+signing service will detect that validator's last vote is missing (as part of
+#5 above).</p>
+<a class="header" href="#fork-determination" id="fork-determination"><h2>Fork determination</h2></a>
+<p>Due to the fact that the enclave cannot process PoH, it has no direct knowledge
+of fork history of a submitted validator vote. Each enclave should be initiated
+with the current <em>active set</em> of public keys. A validator should submit its
+current vote along with the votes of the active set (including itself) that it
+observed in the slot of its previous vote. In this way, the enclave can surmise
+the votes accompanying the validator's previous vote and thus the fork being
+voted on. This is not possible for the validator's initial submitted vote, as
+it will not have a 'previous' slot to reference. To account for this, a short
+voting freeze should apply until the second vote is submitted containing the
+votes within the active set, along with it's own vote, at the height of the
+initial vote.</p>
+<a class="header" href="#enclave-configuration" id="enclave-configuration"><h2>Enclave configuration</h2></a>
+<p>A staking client should be configurable to prevent voting on inactive forks.
+This mechanism should use the client's known active set <code>N_active</code> along with a
+threshold vote <code>N_vote</code> and a threshold depth <code>N_depth</code> to determine whether or
+not to continue voting on a submitted fork. This configuration should take the
+form of a rule such that the client will only vote on a fork if it observes
+more than <code>N_vote</code> at <code>N_depth</code>. Practically, this represents the client from
+confirming that it has observed some probability of economic finality of the
+submitted fork at a depth where an additional vote would create a lockout for
+an undesirable amount of time if that fork turns out not to be live.</p>
+<a class="header" href="#signing-service" id="signing-service"><h2>Signing service</h2></a>
+<p>The signing service consists of a a JSON RPC server, and a request processor.
+At startup, it starts the RPC server at a configured port and waits for
+client/validator requests. It expects the following type of requests.</p>
+<ol>
+<li>Register a new validator node
+<ul>
+<li>The request contains validator's identity (public key)</li>
+<li>The request is signed with validator's private key</li>
+<li>The service will drop the request if signature of the request cannot be
+verified</li>
+<li>The service will create a new voting asymmetric key for the validator,
+and return the public key as a response</li>
+<li>If a validator retries to register, it'll return the public key from the
+pre-existing keypair</li>
+</ul>
+</li>
+<li>Sign a vote
+<ul>
+<li>The request contains voting transaction, and all verification data (as
+described in Ancestor Verification)</li>
+<li>The request is signed with validator's private key</li>
+<li>The service will drop the request if signature of the request cannot be
+verified</li>
+<li>The service will verify the voting data</li>
+<li>The service will return a signed transaction (or signature for the
+transaction)</li>
+</ul>
+</li>
+</ol>
+<p>The service could potentially have different variations, depending on the
+hardware platform capabilities. For example, if the hardware supports a secure
+enclave, the service can offload asymmetric key generation, and private key
+protection to the enclave. A less secure implementation of the service could
+simply carry the keypair in the process memory.</p>
+<a class="header" href="#validator-voting" id="validator-voting"><h2>Validator voting</h2></a>
+<p>A validator node, at startup, creates a new vote account and registers it with
+the cluster. This is done by submitting a new &quot;vote register&quot; transaction. The
+transaction contains validator's keypair, it's vote signing public key, and
+some additional information. The other nodes on the cluster process this
+transaction and include the new validator in the active set.</p>
+<p>Subsequently, the validator submits a &quot;new vote&quot; transaction on a voting event.
+This vote is signed with validator's voting private key.</p>
+<p>The validator code will change to interface with Signing service for &quot;vote
+register&quot; and &quot;new vote&quot; use cases.</p>
+<a class="header" href="#configuration" id="configuration"><h3>Configuration</h3></a>
+<p>The validator node will be configured with Signing service's network endpoint
+(IP/Port).</p>
+<a class="header" href="#register" id="register"><h3>Register</h3></a>
+<p>At startup, the validator will call Signing service using JSON RPC to register
+itself. The RPC call will return the voting public key for the validator node.
+The validator will create a new &quot;vote register&quot; transaction including this
+public key in it, and submit it to the cluster.</p>
+<a class="header" href="#collect-votes-for-last-period" id="collect-votes-for-last-period"><h3>Collect votes for last period</h3></a>
+<p>The validator will look up the votes submitted by all the nodes in the cluster
+for the last voting period. This information will be submitted to signing
+service with new vote signing request.</p>
+<a class="header" href="#new-vote-signing" id="new-vote-signing"><h3>New Vote Signing</h3></a>
+<p>The validator will create a &quot;new vote&quot; transaction and send it to the signing
+service using JSON RPC. The RPC request will also include the vote verification
+data. On success, RPC call will return the signature for the vote. On failure,
+RPC call will return the failure code.</p>
+<a class="header" href="#challenges" id="challenges"><h2>Challenges</h2></a>
+<ol>
+<li>The nodes are currently being configured with asymmetric keys that are
+generated and stored in PKCS8 files.</li>
+<li>The genesis block contains an entry that's signed with leader's private key.
+This entry is used to identify the primordial leader.</li>
+<li>Generation of verifiable data in untrusted space for PoH verification in the
+enclave.</li>
+<li>Need infrastructure for granting stake to an ephemeral key.</li>
+</ol>
+
+                    </main>
+                </div>
+            </div>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

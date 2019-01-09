@@ -1,0 +1,317 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Terminology - Solana: Blockchain Rebuilt for Scale</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400|Poppins:300,400" rel="stylesheet">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">var path_to_root = "";</script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <img 
+                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3NTQiIGhlaWdodD0iMTUxIiB2aWV3Qm94PSIwIDAgNzU0IDE1MSI+PGcgZmlsbD0iI0ZGRiIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMjY4IDMxaDE2LjQxOXY3NC4yNTVIMzQ5TDMzNS41NjYgMTIwSDI2OHpNNjQuMDAyIDg0LjExM0gyOC4xMjV2LS4wMWMtLjIzNC4wMDctLjQ2OC4wMS0uNzAzLjAxLTE0LjM2OCAwLTI2LjAxNi0xMS44OS0yNi4wMTYtMjYuNTU3QzEuNDA2IDQyLjg5IDEzLjA1NCAzMSAyNy40MjIgMzFjLjIzNSAwIC40Ny4wMDMuNzAzLjAxVjMxSDkwTDcxLjcxOSA0OC4yMjZIMjcuNDA1Yy01LjAzOSAwLTkuMTI0IDQuMTc3LTkuMTI0IDkuMzMgMCA1LjE1NCA0LjA4NSA5LjMzMSA5LjEyNCA5LjMzMWgzOC42ODl2LjA4NkM3OS40NzUgNjguMDcgOTAgNzkuNTAyIDkwIDkzLjQ0MyA5MCAxMDguMTEgNzguMzUyIDEyMCA2My45ODQgMTIwYy0uNzEgMC0xLjQxMy0uMDI5LTIuMTA5LS4wODZWMTIwSDBsMTkuNjg4LTE3LjIyNmg0NC4zMTRjNS4wMzggMCA5LjEyMy00LjE3NyA5LjEyMy05LjMzIDAtNS4xNTQtNC4wODUtOS4zMzEtOS4xMjMtOS4zMzF6TTE1MC40NjkgMzEuMDE1VjMxaDU5LjA2MnYuMDE1YzguMzcyLjM2NiAxNS4wOTYgNy4yMyAxNS40NTQgMTUuNzc1SDIyNXY1NS45ODRoLS4wMTVjLjAxLjIzOC4wMTUuNDc3LjAxNS43MTggMCA4Ljg3Ny02Ljg2MyAxNi4xMTctMTUuNDY5IDE2LjQ5M1YxMjBIMTUwLjQ3di0uMDE1Yy04LjYwNi0uMzc2LTE1LjQ2OS03LjYxNi0xNS40NjktMTYuNDkzIDAtLjI0LjAwNS0uNDguMDE1LS43MThIMTM1VjQ2Ljc5aC4wMTVjLjM1OC04LjU0NiA3LjA4Mi0xNS40MSAxNS40NTQtMTUuNzc1ek0xNjEuNTQzIDQ2LjhjLTUuMjMzLjIzLTkuNDM1IDQuNTQ3LTkuNjU5IDkuOTIzaC0uMDA5djM1LjIxNmguMDFjLS4wMDcuMTUtLjAxLjMtLjAxLjQ1MSAwIDUuNTg0IDQuMjkgMTAuMTM4IDkuNjY4IDEwLjM3NXYuMDFoMzYuOTE0di0uMDFjNS4zNzgtLjIzNyA5LjY2OC00Ljc5MSA5LjY2OC0xMC4zNzUgMC0uMTUxLS4wMDMtLjMwMi0uMDEtLjQ1MWguMDFWNTYuNzIzaC0uMDFjLS4yMjMtNS4zNzYtNC40MjUtOS42OTMtOS42NTgtOS45MjN2LS4wMWgtMzYuOTE0di4wMXpNNDA5Ljg3NSA1NS40MDNWNzIuNjNoNTYuMjVWNTUuNDAzYzAtNS41NS00LjQwNy0xMC4wNDgtOS44NDQtMTAuMDQ4SDQxOS43MmMtNS40MzcgMC05Ljg0NCA0LjQ5OS05Ljg0NCAxMC4wNDh6TTQ2Ni4xMjUgMTIwVjg1LjU0OGgtNTYuMjVWMTIwSDM5M1Y0OC4yMjZoLjAxNWExNy4xNCAxNy4xNCAwIDAgMS0uMDE1LS43MThDMzkzIDM4LjM5MSA0MDAuMjQgMzEgNDA5LjE3MiAzMWMuMjM1IDAgLjQ3LjAwNS43MDMuMDE1VjMxaDU3LjY1NnYuMDE1YzguNjA2LjM3NiAxNS40NjkgNy42MTYgMTUuNDY5IDE2LjQ5MyAwIC4yNC0uMDA1LjQ4LS4wMTUuNzE4SDQ4M1YxMjBoLTE2Ljg3NXpNNjc3Ljg3NSA1NS40MDNWNzIuNjNoNTYuMjVWNTUuNDAzYzAtNS41NS00LjQwNy0xMC4wNDgtOS44NDQtMTAuMDQ4SDY4Ny43MmMtNS40MzcgMC05Ljg0NCA0LjQ5OS05Ljg0NCAxMC4wNDh6TTczNC4xMjUgMTIwVjg1LjU0OGgtNTYuMjVWMTIwSDY2MVY0OC4yMjZoLjAxNWExNy4xNCAxNy4xNCAwIDAgMS0uMDE1LS43MThDNjYxIDM4LjM5MSA2NjguMjQgMzEgNjc3LjE3MiAzMWMuMjM1IDAgLjQ3LjAwNS43MDMuMDE1VjMxaDU3LjY1NnYuMDE1YzguNjA2LjM3NiAxNS40NjkgNy42MTYgMTUuNDY5IDE2LjQ5MyAwIC4yNC0uMDA1LjQ4LS4wMTUuNzE4SDc1MVYxMjBoLTE2Ljg3NXpNNjAxLjEyNSA5OC40NTdWMzFINjE4djg5aC0xNi44NzV2LS4xNDlsLTU2LjI1LTY1Ljg4M1YxMjBINTI4VjMxaDE2Ljg3NXoiLz48L2c+PC9zdmc+" width="150" height="30" alt="Solana">
+            <ol class="chapter"><li><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="terminology.html" class="active"><strong aria-hidden="true">2.</strong> Terminology</a></li><li><a href="getting-started.html"><strong aria-hidden="true">3.</strong> Getting Started</a></li><li><ol class="section"><li><a href="webwallet.html"><strong aria-hidden="true">3.1.</strong> Example: Web Wallet</a></li></ol></li><li><a href="programs.html"><strong aria-hidden="true">4.</strong> Programming Model</a></li><li><ol class="section"><li><a href="tictactoe.html"><strong aria-hidden="true">4.1.</strong> Example: Tic-Tac-Toe</a></li><li><a href="drones.html"><strong aria-hidden="true">4.2.</strong> Drones</a></li></ol></li><li><a href="cluster.html"><strong aria-hidden="true">5.</strong> A Solana Cluster</a></li><li><ol class="section"><li><a href="synchronization.html"><strong aria-hidden="true">5.1.</strong> Synchronization</a></li><li><a href="leader-rotation.html"><strong aria-hidden="true">5.2.</strong> Leader Rotation</a></li><li><a href="fork-generation.html"><strong aria-hidden="true">5.3.</strong> Fork Generation</a></li></ol></li><li><a href="fullnode.html"><strong aria-hidden="true">6.</strong> Anatomy of a Fullnode</a></li><li><ol class="section"><li><a href="tpu.html"><strong aria-hidden="true">6.1.</strong> TPU</a></li><li><a href="tvu.html"><strong aria-hidden="true">6.2.</strong> TVU</a></li><li><a href="gossip.html"><strong aria-hidden="true">6.3.</strong> Gossip Service</a></li><li><a href="runtime.html"><strong aria-hidden="true">6.4.</strong> The Runtime</a></li></ol></li><li><a href="proposals.html"><strong aria-hidden="true">7.</strong> Proposed Architectural Changes</a></li><li><ol class="section"><li><a href="ledger-replication.html"><strong aria-hidden="true">7.1.</strong> Ledger Replication</a></li><li><a href="enclave.html"><strong aria-hidden="true">7.2.</strong> Secure Enclave</a></li><li><a href="staking-rewards.html"><strong aria-hidden="true">7.3.</strong> Staking Rewards</a></li><li><a href="fork-selection.html"><strong aria-hidden="true">7.4.</strong> Fork Selection</a></li><li><a href="entry-tree.html"><strong aria-hidden="true">7.5.</strong> Entry Tree</a></li></ol></li><li><a href="appendix.html"><strong aria-hidden="true">8.</strong> Appendix</a></li><li><ol class="section"><li><a href="jsonrpc-api.html"><strong aria-hidden="true">8.1.</strong> JSON RPC API</a></li><li><a href="javascript-api.html"><strong aria-hidden="true">8.2.</strong> JavaScript API</a></li><li><a href="wallet.html"><strong aria-hidden="true">8.3.</strong> solana-wallet CLI</a></li></ol></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            
+                            
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Solana: Blockchain Rebuilt for Scale</h1> 
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <a class="header" href="#terminology" id="terminology"><h1>Terminology</h1></a>
+<p>The following terms are used throughout this book.</p>
+<a class="header" href="#account" id="account"><h4>account</h4></a>
+<p>A persistent file addressed by <a href="#public-key">public key</a> and with
+<a href="#lamport">lamports</a> tracking its lifetime.</p>
+<a class="header" href="#app" id="app"><h4>app</h4></a>
+<p>A front-end application that interacts with a Solana cluster.</p>
+<a class="header" href="#blob" id="blob"><h4>blob</h4></a>
+<p>A fraction of a <a href="#block">block</a>; the smallest unit sent between
+<a href="#fullnode">fullnodes</a>.</p>
+<a class="header" href="#block" id="block"><h4>block</h4></a>
+<p>A contiguous set of <a href="#entry">entries</a> on the ledger covered by a
+<a href="#ledger-vote">vote</a>.  The duration of a block is some cluster-configured
+number of <a href="#tick">ticks</a>.  Also called <a href="#voting-period">voting period</a>.</p>
+<a class="header" href="#block-height" id="block-height"><h4>block height</h4></a>
+<p>The number of <a href="#block">blocks</a> beneath the current block plus one. The <a href="#genesis-block">genesis
+block</a>, for example, has block height 1.</p>
+<a class="header" href="#bootstrap-leader" id="bootstrap-leader"><h4>bootstrap leader</h4></a>
+<p>The first <a href="#fullnode">fullnode</a> to take the <a href="#leader">leader</a> role.</p>
+<a class="header" href="#client" id="client"><h4>client</h4></a>
+<p>A <a href="#node">node</a> that utilizes the <a href="#cluster">cluster</a>.</p>
+<a class="header" href="#cluster" id="cluster"><h4>cluster</h4></a>
+<p>A set of <a href="#fullnode">fullnodes</a> maintaining a single <a href="#ledger">ledger</a>.</p>
+<a class="header" href="#confirmation" id="confirmation"><h4>confirmation</h4></a>
+<p>The wallclock duration between a <a href="#leader">leader</a> creating a <a href="#tick">tick
+entry</a> and recognizing a supermajority of <a href="#ledger-vote">ledger votes</a>
+with a ledger interpretation that matches the leader's.</p>
+<a class="header" href="#control-plane" id="control-plane"><h4>control plane</h4></a>
+<p>A gossip network connecting all <a href="#node">nodes</a> of a <a href="#cluster">cluster</a>.</p>
+<a class="header" href="#data-plane" id="data-plane"><h4>data plane</h4></a>
+<p>A multicast network used to efficiently validate <a href="#entry">entries</a> and gain
+consensus.</p>
+<a class="header" href="#drone" id="drone"><h4>drone</h4></a>
+<p>An off-chain service that acts as a custodian for a user's private key. It
+typically serves to validate and sign transactions.</p>
+<a class="header" href="#entry" id="entry"><h4>entry</h4></a>
+<p>An entry on the <a href="#ledger">ledger</a> either a <a href="#tick">tick</a> or a <a href="#transactions-entry">transactions
+entry</a>.</p>
+<a class="header" href="#epoch" id="epoch"><h4>epoch</h4></a>
+<p>The time, i.e. number of <a href="#slot">slots</a>, for which a <a href="#leader-schedule">leader
+schedule</a> is valid.</p>
+<a class="header" href="#fork" id="fork"><h4>fork</h4></a>
+<p>A <a href="#ledger">ledger</a> derived from common entries but then diverged.</p>
+<a class="header" href="#fullnode" id="fullnode"><h4>fullnode</h4></a>
+<p>A full participant in the <a href="#cluster">cluster</a> either a <a href="#leader">leader</a> or
+<a href="#validator">validator</a> node.</p>
+<a class="header" href="#fullnode-state" id="fullnode-state"><h4>fullnode state</h4></a>
+<p>The result of interpreting all programs on the ledger at a given <a href="#tick-height">tick
+height</a>. It includes at least the set of all <a href="#account">accounts</a>
+holding nonzero <a href="#native-tokens">native tokens</a>.</p>
+<a class="header" href="#genesis-block" id="genesis-block"><h4>genesis block</h4></a>
+<p>The first <a href="#block">block</a> of the <a href="#ledger">ledger</a>.</p>
+<a class="header" href="#hash" id="hash"><h4>hash</h4></a>
+<p>A digital fingerprint of a sequence of bytes.</p>
+<a class="header" href="#instruction" id="instruction"><h4>instruction</h4></a>
+<p>The smallest unit of a <a href="#program">program</a> that a <a href="#client">client</a> can include
+in a <a href="#instruction">transaction</a>.</p>
+<a class="header" href="#keypair" id="keypair"><h4>keypair</h4></a>
+<p>A <a href="#public-key">public key</a> and corresponding <a href="#secret-key">secret key</a>.</p>
+<a class="header" href="#lamport" id="lamport"><h4>lamport</h4></a>
+<p>A fractional <a href="#native-token">native token</a> with the value of approximately
+0.0000000000582 <a href="#sol">sol</a> (2^-34).</p>
+<a class="header" href="#loader" id="loader"><h4>loader</h4></a>
+<p>A <a href="#program">program</a> with the ability to interpret the binary encoding of
+other on-chain programs.</p>
+<a class="header" href="#leader" id="leader"><h4>leader</h4></a>
+<p>The role of a <a href="#fullnode">fullnode</a> when it is appending <a href="#entry">entries</a> to
+the <a href="#ledger">ledger</a>.</p>
+<a class="header" href="#leader-schedule" id="leader-schedule"><h4>leader schedule</h4></a>
+<p>A sequence of <a href="#fullnode">fullnode</a> <a href="#public-key">public keys</a>. The cluster
+uses the leader schedule to determine which fullnode is the <a href="#leader">leader</a>
+at any moment in time.</p>
+<a class="header" href="#ledger" id="ledger"><h4>ledger</h4></a>
+<p>A list of <a href="#entry">entries</a> containing <a href="#transaction">transactions</a> signed by
+<a href="#client">clients</a>.</p>
+<a class="header" href="#ledger-vote" id="ledger-vote"><h4>ledger vote</h4></a>
+<p>A <a href="#hash">hash</a> of the <a href="#fullnode-state">fullnode's state</a> at a given <a href="#tick-height">tick
+height</a>. It comprises a validator's affirmation that a
+<a href="#block">block</a> it has received has been verified, as well as a promise not to
+vote for a conflicting <a href="#block">block</a> (i.e. <a href="#fork">fork</a>) for a specific
+amount of time, the <a href="#lockout">lockout</a> period.</p>
+<a class="header" href="#light-client" id="light-client"><h4>light client</h4></a>
+<p>A type of <a href="#client">client</a> that can verify it's pointing to a valid
+<a href="#cluster">cluster</a>. It performs more ledger verification than a <a href="#thin-client">thin
+client</a> and less than a <a href="#fullnode">fullnode</a>.</p>
+<a class="header" href="#lockout" id="lockout"><h4>lockout</h4></a>
+<p>The duration of time for which a <a href="#fullnode">fullnode</a> is unable to
+<a href="#ledger-vote">vote</a> on another <a href="#fork">fork</a>.</p>
+<a class="header" href="#native-token" id="native-token"><h4>native token</h4></a>
+<p>The <a href="#token">token</a> used to track work done by <a href="#node">nodes</a> in a cluster.</p>
+<a class="header" href="#node" id="node"><h4>node</h4></a>
+<p>A computer particpating in a <a href="#cluster">cluster</a>.</p>
+<a class="header" href="#node-count" id="node-count"><h4>node count</h4></a>
+<p>The number of <a href="#fullnode">fullnodes</a> participating in a <a href="#cluster">cluster</a>.</p>
+<a class="header" href="#poh" id="poh"><h4>PoH</h4></a>
+<p>See <a href="#proof-of-history">Proof of History</a>.</p>
+<a class="header" href="#program" id="program"><h4>program</h4></a>
+<p>The code that interprets <a href="#instruction">instructions</a>.</p>
+<a class="header" href="#program-id" id="program-id"><h4>program ID</h4></a>
+<p>The public key of the <a href="#account">account</a> containing a <a href="#program">program</a>.</p>
+<a class="header" href="#proof-of-history" id="proof-of-history"><h4>Proof of History</h4></a>
+<p>A stack of proofs, each which proves that some data existed before the proof
+was created and that a precise duration of time passed before the previous
+proof. Like a <a href="#verifiable-delay-function">VDF</a>, a Proof of History can be
+verified in less time than it took to produce.</p>
+<a class="header" href="#public-key" id="public-key"><h4>public key</h4></a>
+<p>The public key of a <a href="#keypair">keypair</a>.</p>
+<a class="header" href="#runtime" id="runtime"><h4>runtime</h4></a>
+<p>The component of a <a href="#fullnode">fullnode</a> responsible for <a href="#program">program</a>
+execution.</p>
+<a class="header" href="#secret-key" id="secret-key"><h4>secret key</h4></a>
+<p>The private key of a <a href="#keypair">keypair</a>.</p>
+<a class="header" href="#slot" id="slot"><h4>slot</h4></a>
+<p>The time (i.e. number of <a href="#block">blocks</a>) for which a <a href="#leader">leader</a>
+ingests transactions and produces <a href="#entry">entries</a>.</p>
+<a class="header" href="#sol" id="sol"><h4>sol</h4></a>
+<p>The <a href="#native-token">native token</a> tracked by a <a href="#cluster">cluster</a> recognized
+by the company Solana.</p>
+<a class="header" href="#stake" id="stake"><h4>stake</h4></a>
+<p>Tokens forfeit to the <a href="#cluster">cluster</a> if malicious <a href="#fullnode">fullnode</a>
+behavior can be proven.</p>
+<a class="header" href="#thin-client" id="thin-client"><h4>thin client</h4></a>
+<p>A type of <a href="#client">client</a> that trusts it is communicating with a valid
+<a href="#cluster">cluster</a>.</p>
+<a class="header" href="#tick" id="tick"><h4>tick</h4></a>
+<p>A ledger <a href="#entry">entry</a> that estimates wallclock duration.</p>
+<a class="header" href="#tick-height" id="tick-height"><h4>tick height</h4></a>
+<p>The Nth <a href="#tick">tick</a> in the <a href="#ledger">ledger</a>.</p>
+<a class="header" href="#token" id="token"><h4>token</h4></a>
+<p>A scarce, fungible member of a set of tokens.</p>
+<a class="header" href="#tps" id="tps"><h4>tps</h4></a>
+<p><a href="#transaction">Transactions</a> per second.</p>
+<a class="header" href="#transaction" id="transaction"><h4>transaction</h4></a>
+<p>One or more <a href="#instruction">instructions</a> signed by the <a href="#client">client</a> and
+executed atomically.</p>
+<a class="header" href="#transactions-entry" id="transactions-entry"><h4>transactions entry</h4></a>
+<p>A set of <a href="#transaction">transactions</a> that may be executed in parallel.</p>
+<a class="header" href="#validator" id="validator"><h4>validator</h4></a>
+<p>The role of a <a href="#fullnode">fullnode</a> when it is validating the
+<a href="#leader">leader's</a> latest <a href="#entry">entries</a>.</p>
+<a class="header" href="#vdf" id="vdf"><h4>VDF</h4></a>
+<p>See <a href="#verifiable-delay-function">verifiable delay function</a>.</p>
+<a class="header" href="#verifiable-delay-function" id="verifiable-delay-function"><h4>verifiable delay function</h4></a>
+<p>A function that takes a fixed amount of time to execute that produces a proof
+that it ran, which can then be verified in less time than it took to produce.</p>
+<a class="header" href="#vote" id="vote"><h4>vote</h4></a>
+<p>See <a href="#ledger-vote">ledger vote</a>.</p>
+<a class="header" href="#voting-period" id="voting-period"><h4>voting period</h4></a>
+<p>The duration of a <a href="#block">block</a>.</p>
+
+                    </main>
+                </div>
+            </div>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
