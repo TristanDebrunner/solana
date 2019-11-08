@@ -6,7 +6,7 @@ use crate::{
     snapshot_utils,
 };
 use log::*;
-use solana_sdk::genesis_config::GenesisConfig;
+use solana_sdk::{clock::Slot, genesis_config::GenesisConfig};
 use std::{fs, sync::Arc};
 
 pub fn load(
@@ -15,7 +15,15 @@ pub fn load(
     account_paths: Option<String>,
     snapshot_config: Option<&SnapshotConfig>,
     process_options: ProcessOptions,
-) -> Result<(BankForks, Vec<BankForksInfo>, LeaderScheduleCache), BlocktreeProcessorError> {
+) -> Result<
+    (
+        BankForks,
+        Vec<BankForksInfo>,
+        LeaderScheduleCache,
+        Option<Slot>,
+    ),
+    BlocktreeProcessorError,
+> {
     if let Some(snapshot_config) = snapshot_config.as_ref() {
         info!(
             "Initializing snapshot path: {:?}",
@@ -39,12 +47,22 @@ pub fn load(
             )
             .expect("Load from snapshot failed");
 
+            let snapshotted_root = Some(deserialized_bank.slot());
+
             return blocktree_processor::process_blocktree_from_root(
                 genesis_config,
                 blocktree,
                 Arc::new(deserialized_bank),
                 &process_options,
-            );
+            )
+            .map(|(bank_forks, bank_forks_info, leader_schedule)| {
+                (
+                    bank_forks,
+                    bank_forks_info,
+                    leader_schedule,
+                    snapshotted_root,
+                )
+            });
         } else {
             info!("Snapshot package does not exist: {:?}", tar);
         }
@@ -59,4 +77,7 @@ pub fn load(
         account_paths,
         process_options,
     )
+    .map(|(bank_forks, bank_forks_info, leader_schedule)| {
+        (bank_forks, bank_forks_info, leader_schedule, None)
+    })
 }

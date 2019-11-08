@@ -29,7 +29,7 @@ use solana_sdk::{
     timing::{self, duration_as_ms},
     transaction::Transaction,
 };
-use solana_vote_api::vote_instruction;
+use solana_vote_api::{vote_instruction, vote_state::MAX_LOCKOUT_HISTORY};
 use std::{
     collections::HashMap,
     collections::HashSet,
@@ -42,6 +42,8 @@ use std::{
 };
 
 pub const MAX_ENTRY_RECV_PER_ITER: usize = 512;
+
+const MIN_SNAPSHOT_CONFIRMATION_STAKE_FRAC: f64 = 2f64 / 3f64;
 
 // Implement a destructor for the ReplayStage thread to signal it exited
 // even on panics
@@ -161,6 +163,7 @@ impl ReplayStage {
         slot_full_senders: Vec<Sender<(u64, Pubkey)>>,
         snapshot_package_sender: Option<SnapshotPackageSender>,
         block_commitment_cache: Arc<RwLock<BlockCommitmentCache>>,
+        snapshots_root: Option<Slot>,
     ) -> (Self, Receiver<Vec<Arc<Bank>>>)
     where
         T: 'static + KeypairUtil + Send + Sync,
@@ -177,6 +180,7 @@ impl ReplayStage {
         let leader_schedule_cache = leader_schedule_cache.clone();
         let vote_account = *vote_account;
         let voting_keypair = voting_keypair.cloned();
+        let block_commitment_cache_ = block_commitment_cache.clone();
 
         let (lockouts_sender, commitment_service) =
             AggregateCommitmentService::new(exit, block_commitment_cache);
@@ -245,8 +249,10 @@ impl ReplayStage {
                             &leader_schedule_cache,
                             &root_bank_sender,
                             total_staked,
+                            &block_commitment_cache_,
                             &lockouts_sender,
                             &snapshot_package_sender,
+                            snapshots_root,
                         )?;
 
                         Self::reset_poh_recorder(
@@ -488,8 +494,10 @@ impl ReplayStage {
         leader_schedule_cache: &Arc<LeaderScheduleCache>,
         root_bank_sender: &Sender<Vec<Arc<Bank>>>,
         total_staked: u64,
+        block_commitment_cache: &Arc<RwLock<BlockCommitmentCache>>,
         lockouts_sender: &Sender<CommitmentAggregationData>,
         snapshot_package_sender: &Option<SnapshotPackageSender>,
+        snapshots_root: Option<Slot>,
     ) -> Result<()>
     where
         T: 'static + KeypairUtil + Send + Sync,
@@ -531,6 +539,13 @@ impl ReplayStage {
         }
         Self::update_commitment_cache(bank.clone(), total_staked, lockouts_sender);
 
+        // If the snapshot the validator started from is not confirmed, do not send votes to the cluster
+        if let Some(slot) = snapshots_root {
+            if !Self::check_snapshot_confirmation(slot, block_commitment_cache) {
+                return Ok(());
+            }
+        }
+
         if let Some(ref voting_keypair) = voting_keypair {
             let node_keypair = cluster_info.read().unwrap().keypair.clone();
 
@@ -560,6 +575,32 @@ impl ReplayStage {
         if let Err(e) = lockouts_sender.send(CommitmentAggregationData::new(bank, total_staked)) {
             trace!("lockouts_sender failed: {:?}", e);
         }
+    }
+
+    fn check_snapshot_confirmation(
+        snapshots_root: Slot,
+        block_commitment_cache: &Arc<RwLock<BlockCommitmentCache>>,
+    ) -> bool {
+        let block_commitment_cache = block_commitment_cache.read().unwrap();
+        let commitment =
+            if let Some(c) = block_commitment_cache.get_block_commitment(snapshots_root) {
+                c
+            } else {
+                warn!(
+                    "No commitment found for snapshot's root slot: {}",
+                    snapshots_root
+                );
+                return false;
+            };
+        let min_stake =
+            block_commitment_cache.total_stake() as f64 * MIN_SNAPSHOT_CONFIRMATION_STAKE_FRAC;
+
+        for i in 1..MAX_LOCKOUT_HISTORY {
+            if (commitment.get_confirmation_stake(i) as f64) < min_stake {
+                return false;
+            };
+        }
+        true
     }
 
     fn reset_poh_recorder(

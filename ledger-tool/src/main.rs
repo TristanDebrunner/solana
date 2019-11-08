@@ -574,7 +574,7 @@ fn main() {
                 snapshot_config.as_ref(),
                 process_options,
             ) {
-                Ok((bank_forks, bank_forks_info, _leader_schedule_cache)) => {
+                Ok((bank_forks, bank_forks_info, _leader_schedule_cache, _snapshots_root)) => {
                     println!("Ok");
 
                     if let Some(dot_file) = arg_matches.value_of("graph_forks") {

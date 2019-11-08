@@ -25,7 +25,7 @@ impl BlockCommitment {
         self.commitment[confirmation_count - 1] += stake;
     }
 
-    pub fn get_confirmation_stake(&mut self, confirmation_count: usize) -> u64 {
+    pub fn get_confirmation_stake(&self, confirmation_count: usize) -> u64 {
         assert!(confirmation_count > 0 && confirmation_count <= MAX_LOCKOUT_HISTORY);
         self.commitment[confirmation_count - 1]
     }

@@ -19,6 +19,7 @@ use crossbeam_channel::unbounded;
 use solana_ledger::bank_forks::BankForks;
 use solana_ledger::blocktree::{Blocktree, CompletedSlotsReceiver};
 use solana_ledger::leader_schedule_cache::LeaderScheduleCache;
+use solana_sdk::clock::Slot;
 use solana_sdk::pubkey::Pubkey;
 use solana_sdk::signature::{Keypair, KeypairUtil};
 use std::net::UdpSocket;
@@ -73,6 +74,7 @@ impl Tvu {
         completed_slots_receiver: CompletedSlotsReceiver,
         block_commitment_cache: Arc<RwLock<BlockCommitmentCache>>,
         sigverify_disabled: bool,
+        snapshots_root: Option<Slot>,
     ) -> Self
     where
         T: 'static + KeypairUtil + Sync + Send,
@@ -161,6 +163,7 @@ impl Tvu {
             vec![blockstream_slot_sender, ledger_cleanup_slot_sender],
             snapshot_package_sender,
             block_commitment_cache,
+            snapshots_root,
         );
 
         let blockstream_service = if let Some(blockstream_unix_socket) = blockstream_unix_socket {
@@ -295,6 +298,7 @@ pub mod tests {
             completed_slots_receiver,
             block_commitment_cache,
             false,
+            None,
         );
         exit.store(true, Ordering::Relaxed);
         tvu.join().unwrap();

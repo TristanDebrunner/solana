@@ -166,6 +166,7 @@ impl Validator {
             completed_slots_receiver,
             leader_schedule_cache,
             poh_config,
+            snapshots_root,
         ) = new_banks_from_blocktree(
             config.expected_genesis_hash,
             ledger_path,
@@ -342,6 +343,7 @@ impl Validator {
             completed_slots_receiver,
             block_commitment_cache,
             config.dev_sigverify_disabled,
+            snapshots_root,
         );
 
         if config.dev_sigverify_disabled {
@@ -425,6 +427,7 @@ pub fn new_banks_from_blocktree(
     CompletedSlotsReceiver,
     LeaderScheduleCache,
     PohConfig,
+    Option<Slot>,
 ) {
     let genesis_config = GenesisConfig::load(blocktree_path).unwrap_or_else(|err| {
         error!("Failed to load genesis from {:?}: {}", blocktree_path, err);
@@ -453,17 +456,18 @@ pub fn new_banks_from_blocktree(
         ..blocktree_processor::ProcessOptions::default()
     };
 
-    let (mut bank_forks, bank_forks_info, leader_schedule_cache) = bank_forks_utils::load(
-        &genesis_config,
-        &blocktree,
-        account_paths,
-        snapshot_config.as_ref(),
-        process_options,
-    )
-    .unwrap_or_else(|err| {
-        error!("Failed to load ledger: {:?}", err);
-        std::process::exit(1);
-    });
+    let (mut bank_forks, bank_forks_info, leader_schedule_cache, snapshots_root) =
+        bank_forks_utils::load(
+            &genesis_config,
+            &blocktree,
+            account_paths,
+            snapshot_config.as_ref(),
+            process_options,
+        )
+        .unwrap_or_else(|err| {
+            error!("Failed to load ledger: {:?}", err);
+            std::process::exit(1);
+        });
 
     bank_forks.set_snapshot_config(snapshot_config);
 
@@ -476,6 +480,7 @@ pub fn new_banks_from_blocktree(
         completed_slots_receiver,
         leader_schedule_cache,
         genesis_config.poh_config,
+        snapshots_root,
     )
 }
 
